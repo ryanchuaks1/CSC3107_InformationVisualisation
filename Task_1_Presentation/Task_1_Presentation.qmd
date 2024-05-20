@@ -1,0 +1,119 @@
+---
+title: "Project Task 1 Presentation"
+author: "P2 Group 4"
+format: revealjs
+---
+
+```{r}
+#| label: required-packages
+#| message: false
+
+library(tidyverse)
+library(gt)
+library(knitr)
+```
+
+
+## Introduction
+
+Greenhouse Gases ($CO_2$) data visualisation:
+
+![](./figures/Visualisation_Graph.png){fig-align="center"}
+
+<em>Data source: [theGuardian.com](https://www.theguardian.com/environment/datablog/ng-interactive/2022/oct/03/tracking-australias-progress-on-the-climate-crisis-and-the-consequences-of-global-heating) </em>
+
+# Critical Analysis
+
+## What data are visualized?
+
+$CO_2$ emissions by country (x-axis)
+
+- Bigger Circles = Larger Emissions
+- Red Circles = Increase in Emissions
+- Blue Circles = Decrease in Emissions
+
+
+## What does the visualization aim to communicate? {.smaller}
+
+The visualization aims to communicate the $CO_2$ emissions by country, and the changes in emissions over time through 2 methods:
+
+1. Circle Size (Larger Circle = Larger Emissions)
+2. Circle Color (Red = Increase, Blue = Decrease)
+
+## What aspects of the visualization do you appreciate?
+
+The use of shape size and color to represent the increase/decrease in emissions:
+
+- **Clear Trend Display**: Shows a clear trend of how greenhouse gas emissions have changed over time for a selection of countries.
+- **Color Coding**: Differentiates between increases and decreases using color coding.
+
+## What aspects do you find problematic?
+
+::: {.nonincremental}
+- **Limited Country Selection**
+- **Unspecified Greenhouse Gases**
+- **Visual Clutter**
+- **Lack of Contextual Information**
+- **No Trend Lines**
+:::
+
+::: {.notes}
+- **Limited Country Selection**: Only includes a selection of countries, not all.
+- **Unspecified Greenhouse Gases**: Does not specify which other greenhouse gases are included in the CO2 equivalent mentioned in the title.
+- **Visual Clutter**: Sequential bubbles create visual clutter, especially for countries with larger changes, making it hard to distinguish individual years and magnitudes.
+- **Lack of Contextual Information**: Only shows percentage changes without absolute emission values, making it difficult to gauge the actual impact.
+- **No Trend Lines**: Absence of trend lines makes it difficult to see overall trends for each country over the years.
+:::
+
+
+## How can the visualization be improved?
+
+- **Line Graph with Trend Lines**: Using a line graph with trend lines for each country can help show the overall trend over the years more clearly. Each line could be color-coded to indicate the average trend (increasing or decreasing). 
+- **World Map Representation**: Use a world map to show the changes in emissions by country.
+
+## Are the data publicly available, or are there suitable surrogate data? {.smaller}
+
+::: {.panel-tabset}
+
+### Original Data View
+
+```{r}
+#| label: original-data
+
+emissions <- read_csv("dataset/total-ghg-emissions.csv")
+
+# Select random 5 rows
+emissions |>
+  slice_sample(n = 5) |>
+  gt() |>
+  tab_header(title = "Original Data") |>
+  fmt_number(
+    columns = "Annual greenhouse gas emissions in CO₂ equivalents",
+    decimals = 0,
+    use_seps = TRUE
+  ) |>
+
+  # Footnote
+  tab_footnote(
+    footnote = md("Gas emissions in kilogram $CO_2$ equivalents."),
+    locations = cells_column_labels(columns = "Annual greenhouse gas emissions in CO₂ equivalents")
+  ) |>
+  # Source
+  tab_source_note(
+    source_note = md("Data source: [ourworldindata.org](https://ourworldindata.org/greenhouse-gas-emissions)")
+  ) |>
+  tab_options(
+    table.width = "100%",
+    table.font.size = "70%"
+  )
+```
+
+### Another Dataset (If any)
+
+<!-- 
+
+Add more datasets to the presentation (If any). 
+
+-->
+:::
+
