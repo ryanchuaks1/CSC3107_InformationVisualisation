@@ -109,6 +109,45 @@ emissions |>
 ```
 
 ### Another Dataset (If any)
+```{r}
+#| label: alternative-data
+
+alternate_emissions <- read_csv("dataset/Annual_Greenhouse_Gas_(GHG)_Air_Emissions_Accounts.csv")
+
+# Select random 5 rows
+alternate_emissions <-
+  alternate_emissions |>
+  select(Country, Industry, Gas_Type, F2010, F2011, F2012, F2013, F2014, F2015, F2016, F2017, F2018, F2019, F2020, F2021, F2022)
+
+alternate_emissions <-
+  alternate_emissions |>
+  pivot_longer(cols = starts_with("F"), names_to = "Year", values_to = "Emissions") |>
+  slice_sample(n = 5) |>
+  gt() |>
+  tab_header(title = "Alternative Data") |>
+  fmt_number(
+    columns = "Emissions",
+    decimals = 1,
+    use_seps = TRUE
+  ) |>
+  tab_footnote(
+    footnote = md("***Note*** - Million metric tons of $CO_2$ equivalent."),
+    locations = cells_column_labels(columns = "Emissions")
+  ) |>
+  tab_footnote(
+    footnote = md("***Note*** - Data only span across year 2010 to 2022."),
+    locations = cells_title()
+  ) |>
+  tab_source_note(
+    source_note = md("Data source: [climatedata.imf.org/](https://climatedata.imf.org/datasets/c8579761f19740dfbe4418b205654ddf_0/explore)")
+  ) |>
+  tab_options(
+    table.width = "100%",
+    table.font.size = "70%"
+  )
+
+alternate_emissions
+```
 
 <!-- 
 
