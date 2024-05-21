@@ -1,0 +1,78 @@
+---
+title: "Visualizing Greenhouse Gas Emissions in the world"
+subtitle: "Data Preparation done by *Team Bisque*"
+format: html
+author: "
+  Ryan Chua - 2201421<br>
+  Loo Siong Yu - 2201255<br>
+  Chua Kang Le - 2201161<br>
+  Phua Tiffany - 2202698<br>
+  Woon Jun Wei - 2200624<br>
+  Ong Si Hui - 2201945"
+---
+
+# Introduction
+
+This Quarto document contains the data engineering required to reconstruct and improve the plot made by [World Resources Institute](https://www.wri.org/insights/4-charts-explain-greenhouse-gas-emissions-countries-and-sectors), shown in @fig-oldvs, showing the top 10 Green House Gases (GHG) emitters in the world.
+
+The code below requires the following packages:
+```{r}
+#| label: library
+#| message: false
+
+library(tidyverse)
+library(readxl)
+library(knitr)
+library(gt)
+```
+
+```{r}
+#| label: fig-oldvs
+#| echo: false
+#| fig.cap: "Visualization of The Top 10 GHG Emitters Contribute Over Two-Thirds of Global Emissions."
+
+include_graphics("images/old_visualization.jpg")
+```
+
+# Data Exploration
+
+Firstly, lets take a look at the raw data provided
+
+```{r}
+#| label: explore-raw
+#| message: false
+
+ghg_raw <- read_csv("data/historical_emissions.csv")
+gt_preview(ghg_raw)
+```
+
+From the preview, lets check how many unique Countries, Sectors, Gases and Unit are there in the dataset
+
+```{r}
+#| label: explore-unique
+#| message: false
+
+ghg_raw |>
+  summarize(
+    n_distinct(Country),
+  )
+ghg_raw |>
+  summarize(
+    n_distinct(Sector),
+    n_distinct(Gas),
+    n_distinct(Unit)
+  )
+```
+
+Since there is only 1 distinct `Sector`, `Gas` and `Unit` type, we can drop those columns along with the `Source` column as it is not needed for our analysis. The unit MtCO₂e stands for "million metric tons of carbon dioxide equivalent."
+
+Next, we will take a look at another source, where the data is slightly more updated, up to 2022.
+
+```{r}
+#| label: explore-raw2
+#| message: false
+
+ghg_raw2 <- read_csv("data/historical_emissions_source2.csv")
+gt_preview(ghg_raw2)
+```
+
