@@ -24,6 +24,11 @@ library(tidyverse)
 library(readxl)
 library(knitr)
 library(gt)
+library(dplyr)
+
+# Graphical Visualisation
+library(ggplot2)
+library(maps)
 ```
 
 ```{r}
@@ -67,6 +72,29 @@ ghg_raw |>
 ```
 
 Since there is only 1 distinct `Sector`, `Gas` and `Unit` type, we can drop those columns along with the `Source` column as it is not needed for our analysis. The unit MtCO₂e stands for "million metric tons of carbon dioxide equivalent."
+
+```{r}
+ghg_raw <-
+  ghg_raw |>
+  select(-c(Sector, Gas, Unit, "Data source"))
+
+gt_preview(ghg_raw)
+```
+
+Then we pivot the data long to make it easier to work with
+
+```{r}
+ghg_raw <-
+  ghg_raw |>
+  pivot_longer(
+    cols = 3:33, names_to = "Year", values_to = "Emissions",
+    values_transform = list(Emissions = as.numeric)
+  )
+
+gt_preview(ghg_raw)
+```
+
+
 
 ## Source 2 (Alternative Source) {#source2}
 
@@ -125,3 +153,102 @@ From this we can tell that this data source not only have the countries, but it 
 We can potentially merge Source 1 and 2 together to get a more complete dataset, and then explore Source 3 for more detailed analysis/different angles.
 
 
+# Sample Visualisations with ggplot
+
+## Source 1 (Main Source) {#source1_viz}
+
+Lets start by visualizing the data from the main source with a heatmap
+
+```{r}
+#| label: source1-heatmap
+
+# Select the countries largest overall 10 emitters and display their emissions over the years in a heatmap
+ghg_raw |>
+  filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
+  ggplot(aes(x = Year, y = Country, fill = Emissions)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient(low = "white", high = "red") +
+  scale_x_discrete(expand = c(0, 0)) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    subtitle = "Emissions Over The Years",
+    x = "Year",
+    y = "Country",
+    fill = "Emissions (MtCO₂e)"
+  )
+```
+
+World Map view of the all GHG emitters
+
+```{r}
+#| label: source1-worldmap
+
+world <- map_data("world")
+
+ghg_data <- ghg_raw |>
+  # Filter top 10
+  # filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
+
+  # Combine (sum) all the emissions for each country
+  group_by(Country) |>
+  summarize(Emissions = sum(Emissions)) |>
+  # Ensure the region column matches the map data
+  mutate(region = Country)
+
+# Join the map data with the emissions data
+world_map <- left_join(world, ghg_data, by = c("region" = "Country"))
+
+# Plot the world map
+ggplot(world_map, aes(x = long, y = lat, group = group, fill = Emissions)) +
+  geom_polygon(color = "black") +
+  scale_fill_gradient(low = "white", high = "red", na.value = "gray") +
+  coord_fixed(1.3) +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "right"
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    subtitle = "Emissions in 2020",
+    fill = "Emissions (MtCO₂e)"
+  )
+```
+
+Simple Line graph with trend line
+
+```{r}
+#| label: source1-line
+
+ghg_raw %>%
+  filter(Country %in% c("China", "United States", "India")) |>
+  ggplot(aes(x = Year, y = Emissions, color = Country, shape = Country)) +
+  geom_point() + # Scatterplot
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "GHG Emissions Over the Years",
+    subtitle = "For Top 3 Emitting Countries",
+    x = "Year",
+    y = "Emissions (MtCO₂e)",
+    color = "Country",
+    shape = "Country"
+  )
+```
