@@ -30,11 +30,14 @@ The Top 10 GHG Emitters by Country and Sector
 
 - **Data Type**: Greenhouse Gas Emissions ($MtCO_2e$ - Million Metric Tons of $CO_2$ **Equivalent**)
 - **Countries**: Top 10 countries with the highest emissions (highlighted)
+- **Sectors**: Percentage of the sectors contributing under the country's emissions
 - **Years**: 1990 to 2019
 
 ## What does the visualization aim to communicate? {.smaller}
 
 The visualization aims to communicate the change in greenhouse gas emissions over time for a selection of countries. It highlights the top 10 countries with the highest emissions from 1990 to 2019.
+
+At the same time, it illustrates sectors with percentage on their emissions' contributions.
 
 ## What aspects of the visualization do you appreciate?
 
