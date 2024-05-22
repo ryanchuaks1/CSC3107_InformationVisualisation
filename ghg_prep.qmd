@@ -39,7 +39,7 @@ library(maps)
 include_graphics("images/old_visualization.jpg")
 ```
 
-# Data Exploration
+# Data Exploration and Preparation
 
 ## Source 1 (Main Source) {#source1}
 
@@ -98,7 +98,7 @@ gt_preview(ghg_raw)
 
 ## Source 2 (Alternative Source) {#source2}
 
-Next, we will take a look at another source, where the data is slightly more updated, up to 2022.[ourworldindata.org](https://ourworldindata.org/greenhouse-gas-emissions)
+Next, we will take a look at another source, where the data is slightly more updated, up to 2022. [ourworldindata.org](https://ourworldindata.org/greenhouse-gas-emissions)
 
 ```{r}
 #| label: explore-raw2
@@ -230,7 +230,7 @@ Simple Line graph with trend line
 ```{r}
 #| label: source1-line
 
-ghg_raw %>%
+ghg_raw |>
   filter(Country %in% c("China", "United States", "India")) |>
   ggplot(aes(x = Year, y = Emissions, color = Country, shape = Country)) +
   geom_point() + # Scatterplot
@@ -248,6 +248,63 @@ ghg_raw %>%
     subtitle = "For Top 3 Emitting Countries",
     x = "Year",
     y = "Emissions (MtCO₂e)",
+    color = "Country",
+    shape = "Country"
+  )
+```
+
+Lets compare that against Energy generation type per country
+[Source](https://climatedata.imf.org/datasets/0bfab7fb7e0e4050b82bba40cd7a1bd5/explore)
+
+First, we format the data into each country and their energy generation per year
+
+```{r}
+#| label: source4-raw
+#| message: false
+
+expenditure <- read_csv("data/energy_transition.csv")
+
+expenditure <-
+  expenditure |>
+  filter(Indicator %in% "Electricity Generation") |>
+  mutate(across(F2000:F2022, ~replace_na(., 0))) |>
+  group_by(Country, ISO3) |>
+  summarize(across(F2000:F2021, sum), .groups = "drop")
+
+gt_preview(expenditure)
+```
+
+Then we plot the data
+
+```{r}
+#| label: source4-line1
+#| message: false
+
+expenditure <-
+  expenditure |>
+  filter(ISO3 %in% c("CHN", "USA", "IND")) |>
+  rename_with(~str_replace(., "F", ""))|>
+  pivot_longer(cols = 3:24, names_to = "Year", values_to = "Energy")
+
+expenditure$Year <- as.numeric(as.character(expenditure$Year))
+gt_preview(expenditure)
+
+
+ggplot(expenditure, aes(x = Year, y = Energy, color = Country)) +
+  geom_line(linewidth=1) + # Line graph
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "Energy Generated Over the Years",
+    subtitle = "For Top 3 Emitting Countries",
+    x = "Year",
+    y = "Energy Generated (GWh)",
     color = "Country",
     shape = "Country"
   )

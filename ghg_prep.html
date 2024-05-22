@@ -134,8 +134,8 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 </div>
 </div>
 </section>
-<section id="data-exploration" class="level1">
-<h1>Data Exploration</h1>
+<section id="data-exploration-and-preparation" class="level1">
+<h1>Data Exploration and Preparation</h1>
 <section id="source1" class="level2">
 <h2 class="anchored" data-anchor-id="source1">Source 1 (Main Source)</h2>
 <p>Firstly, lets take a look at the raw data provided from <a href="https://www.climatewatchdata.org/ghg-emissions">climatewatchdata.org</a></p>
@@ -144,23 +144,23 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ufslszwzaq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ufslszwzaq table {
+<div id="miesoiggta" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#miesoiggta table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ufslszwzaq thead, #ufslszwzaq tbody, #ufslszwzaq tfoot, #ufslszwzaq tr, #ufslszwzaq td, #ufslszwzaq th {
+#miesoiggta thead, #miesoiggta tbody, #miesoiggta tfoot, #miesoiggta tr, #miesoiggta td, #miesoiggta th {
   border-style: none;
 }
 
-#ufslszwzaq p {
+#miesoiggta p {
   margin: 0;
   padding: 0;
 }
 
-#ufslszwzaq .gt_table {
+#miesoiggta .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -186,12 +186,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_caption {
+#miesoiggta .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ufslszwzaq .gt_title {
+#miesoiggta .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -203,7 +203,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#ufslszwzaq .gt_subtitle {
+#miesoiggta .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -215,7 +215,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#ufslszwzaq .gt_heading {
+#miesoiggta .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -227,13 +227,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_bottom_border {
+#miesoiggta .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_col_headings {
+#miesoiggta .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -248,7 +248,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_col_heading {
+#miesoiggta .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -268,7 +268,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#ufslszwzaq .gt_column_spanner_outer {
+#miesoiggta .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -280,15 +280,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#ufslszwzaq .gt_column_spanner_outer:first-child {
+#miesoiggta .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ufslszwzaq .gt_column_spanner_outer:last-child {
+#miesoiggta .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ufslszwzaq .gt_column_spanner {
+#miesoiggta .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -300,11 +300,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#ufslszwzaq .gt_spanner_row {
+#miesoiggta .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ufslszwzaq .gt_group_heading {
+#miesoiggta .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -330,7 +330,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#ufslszwzaq .gt_empty_group_heading {
+#miesoiggta .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -345,15 +345,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#ufslszwzaq .gt_from_md > :first-child {
+#miesoiggta .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ufslszwzaq .gt_from_md > :last-child {
+#miesoiggta .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ufslszwzaq .gt_row {
+#miesoiggta .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -372,7 +372,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#ufslszwzaq .gt_stub {
+#miesoiggta .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -385,7 +385,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ufslszwzaq .gt_stub_row_group {
+#miesoiggta .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -399,15 +399,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#ufslszwzaq .gt_row_group_first td {
+#miesoiggta .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ufslszwzaq .gt_row_group_first th {
+#miesoiggta .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ufslszwzaq .gt_summary_row {
+#miesoiggta .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -417,16 +417,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ufslszwzaq .gt_first_summary_row {
+#miesoiggta .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_first_summary_row.thick {
+#miesoiggta .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ufslszwzaq .gt_last_summary_row {
+#miesoiggta .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -436,7 +436,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_grand_summary_row {
+#miesoiggta .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -446,7 +446,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ufslszwzaq .gt_first_grand_summary_row {
+#miesoiggta .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -456,7 +456,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_last_grand_summary_row_top {
+#miesoiggta .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -466,11 +466,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_striped {
+#miesoiggta .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ufslszwzaq .gt_table_body {
+#miesoiggta .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -479,7 +479,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_footnotes {
+#miesoiggta .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -493,7 +493,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_footnote {
+#miesoiggta .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -502,7 +502,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ufslszwzaq .gt_sourcenotes {
+#miesoiggta .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -516,7 +516,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ufslszwzaq .gt_sourcenote {
+#miesoiggta .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -524,63 +524,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ufslszwzaq .gt_left {
+#miesoiggta .gt_left {
   text-align: left;
 }
 
-#ufslszwzaq .gt_center {
+#miesoiggta .gt_center {
   text-align: center;
 }
 
-#ufslszwzaq .gt_right {
+#miesoiggta .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ufslszwzaq .gt_font_normal {
+#miesoiggta .gt_font_normal {
   font-weight: normal;
 }
 
-#ufslszwzaq .gt_font_bold {
+#miesoiggta .gt_font_bold {
   font-weight: bold;
 }
 
-#ufslszwzaq .gt_font_italic {
+#miesoiggta .gt_font_italic {
   font-style: italic;
 }
 
-#ufslszwzaq .gt_super {
+#miesoiggta .gt_super {
   font-size: 65%;
 }
 
-#ufslszwzaq .gt_footnote_marks {
+#miesoiggta .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ufslszwzaq .gt_asterisk {
+#miesoiggta .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ufslszwzaq .gt_indent_1 {
+#miesoiggta .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ufslszwzaq .gt_indent_2 {
+#miesoiggta .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ufslszwzaq .gt_indent_3 {
+#miesoiggta .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ufslszwzaq .gt_indent_4 {
+#miesoiggta .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ufslszwzaq .gt_indent_5 {
+#miesoiggta .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -950,23 +950,23 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ltevbsryfx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ltevbsryfx table {
+<div id="pejdoeckba" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pejdoeckba table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ltevbsryfx thead, #ltevbsryfx tbody, #ltevbsryfx tfoot, #ltevbsryfx tr, #ltevbsryfx td, #ltevbsryfx th {
+#pejdoeckba thead, #pejdoeckba tbody, #pejdoeckba tfoot, #pejdoeckba tr, #pejdoeckba td, #pejdoeckba th {
   border-style: none;
 }
 
-#ltevbsryfx p {
+#pejdoeckba p {
   margin: 0;
   padding: 0;
 }
 
-#ltevbsryfx .gt_table {
+#pejdoeckba .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -992,12 +992,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_caption {
+#pejdoeckba .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ltevbsryfx .gt_title {
+#pejdoeckba .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1009,7 +1009,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#ltevbsryfx .gt_subtitle {
+#pejdoeckba .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1021,7 +1021,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#ltevbsryfx .gt_heading {
+#pejdoeckba .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1033,13 +1033,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_bottom_border {
+#pejdoeckba .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_col_headings {
+#pejdoeckba .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1054,7 +1054,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_col_heading {
+#pejdoeckba .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1074,7 +1074,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#ltevbsryfx .gt_column_spanner_outer {
+#pejdoeckba .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1086,15 +1086,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#ltevbsryfx .gt_column_spanner_outer:first-child {
+#pejdoeckba .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ltevbsryfx .gt_column_spanner_outer:last-child {
+#pejdoeckba .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ltevbsryfx .gt_column_spanner {
+#pejdoeckba .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1106,11 +1106,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#ltevbsryfx .gt_spanner_row {
+#pejdoeckba .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ltevbsryfx .gt_group_heading {
+#pejdoeckba .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1136,7 +1136,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#ltevbsryfx .gt_empty_group_heading {
+#pejdoeckba .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1151,15 +1151,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#ltevbsryfx .gt_from_md > :first-child {
+#pejdoeckba .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ltevbsryfx .gt_from_md > :last-child {
+#pejdoeckba .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ltevbsryfx .gt_row {
+#pejdoeckba .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1178,7 +1178,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#ltevbsryfx .gt_stub {
+#pejdoeckba .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1191,7 +1191,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ltevbsryfx .gt_stub_row_group {
+#pejdoeckba .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1205,15 +1205,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#ltevbsryfx .gt_row_group_first td {
+#pejdoeckba .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ltevbsryfx .gt_row_group_first th {
+#pejdoeckba .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ltevbsryfx .gt_summary_row {
+#pejdoeckba .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1223,16 +1223,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ltevbsryfx .gt_first_summary_row {
+#pejdoeckba .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_first_summary_row.thick {
+#pejdoeckba .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ltevbsryfx .gt_last_summary_row {
+#pejdoeckba .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1242,7 +1242,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_grand_summary_row {
+#pejdoeckba .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1252,7 +1252,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ltevbsryfx .gt_first_grand_summary_row {
+#pejdoeckba .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1262,7 +1262,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_last_grand_summary_row_top {
+#pejdoeckba .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1272,11 +1272,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_striped {
+#pejdoeckba .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ltevbsryfx .gt_table_body {
+#pejdoeckba .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1285,7 +1285,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_footnotes {
+#pejdoeckba .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1299,7 +1299,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_footnote {
+#pejdoeckba .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1308,7 +1308,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ltevbsryfx .gt_sourcenotes {
+#pejdoeckba .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1322,7 +1322,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#ltevbsryfx .gt_sourcenote {
+#pejdoeckba .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1330,63 +1330,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#ltevbsryfx .gt_left {
+#pejdoeckba .gt_left {
   text-align: left;
 }
 
-#ltevbsryfx .gt_center {
+#pejdoeckba .gt_center {
   text-align: center;
 }
 
-#ltevbsryfx .gt_right {
+#pejdoeckba .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ltevbsryfx .gt_font_normal {
+#pejdoeckba .gt_font_normal {
   font-weight: normal;
 }
 
-#ltevbsryfx .gt_font_bold {
+#pejdoeckba .gt_font_bold {
   font-weight: bold;
 }
 
-#ltevbsryfx .gt_font_italic {
+#pejdoeckba .gt_font_italic {
   font-style: italic;
 }
 
-#ltevbsryfx .gt_super {
+#pejdoeckba .gt_super {
   font-size: 65%;
 }
 
-#ltevbsryfx .gt_footnote_marks {
+#pejdoeckba .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ltevbsryfx .gt_asterisk {
+#pejdoeckba .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ltevbsryfx .gt_indent_1 {
+#pejdoeckba .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ltevbsryfx .gt_indent_2 {
+#pejdoeckba .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ltevbsryfx .gt_indent_3 {
+#pejdoeckba .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ltevbsryfx .gt_indent_4 {
+#pejdoeckba .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ltevbsryfx .gt_indent_5 {
+#pejdoeckba .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1704,23 +1704,23 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="qnvztkkhfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qnvztkkhfi table {
+<div id="srpqpcsefk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#srpqpcsefk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qnvztkkhfi thead, #qnvztkkhfi tbody, #qnvztkkhfi tfoot, #qnvztkkhfi tr, #qnvztkkhfi td, #qnvztkkhfi th {
+#srpqpcsefk thead, #srpqpcsefk tbody, #srpqpcsefk tfoot, #srpqpcsefk tr, #srpqpcsefk td, #srpqpcsefk th {
   border-style: none;
 }
 
-#qnvztkkhfi p {
+#srpqpcsefk p {
   margin: 0;
   padding: 0;
 }
 
-#qnvztkkhfi .gt_table {
+#srpqpcsefk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1746,12 +1746,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_caption {
+#srpqpcsefk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qnvztkkhfi .gt_title {
+#srpqpcsefk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1763,7 +1763,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#qnvztkkhfi .gt_subtitle {
+#srpqpcsefk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1775,7 +1775,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#qnvztkkhfi .gt_heading {
+#srpqpcsefk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1787,13 +1787,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_bottom_border {
+#srpqpcsefk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_col_headings {
+#srpqpcsefk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1808,7 +1808,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_col_heading {
+#srpqpcsefk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1828,7 +1828,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#qnvztkkhfi .gt_column_spanner_outer {
+#srpqpcsefk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1840,15 +1840,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#qnvztkkhfi .gt_column_spanner_outer:first-child {
+#srpqpcsefk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qnvztkkhfi .gt_column_spanner_outer:last-child {
+#srpqpcsefk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qnvztkkhfi .gt_column_spanner {
+#srpqpcsefk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1860,11 +1860,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#qnvztkkhfi .gt_spanner_row {
+#srpqpcsefk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qnvztkkhfi .gt_group_heading {
+#srpqpcsefk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1890,7 +1890,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#qnvztkkhfi .gt_empty_group_heading {
+#srpqpcsefk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1905,15 +1905,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#qnvztkkhfi .gt_from_md > :first-child {
+#srpqpcsefk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qnvztkkhfi .gt_from_md > :last-child {
+#srpqpcsefk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qnvztkkhfi .gt_row {
+#srpqpcsefk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1932,7 +1932,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#qnvztkkhfi .gt_stub {
+#srpqpcsefk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1945,7 +1945,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#qnvztkkhfi .gt_stub_row_group {
+#srpqpcsefk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1959,15 +1959,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#qnvztkkhfi .gt_row_group_first td {
+#srpqpcsefk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qnvztkkhfi .gt_row_group_first th {
+#srpqpcsefk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qnvztkkhfi .gt_summary_row {
+#srpqpcsefk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1977,16 +1977,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#qnvztkkhfi .gt_first_summary_row {
+#srpqpcsefk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_first_summary_row.thick {
+#srpqpcsefk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qnvztkkhfi .gt_last_summary_row {
+#srpqpcsefk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1996,7 +1996,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_grand_summary_row {
+#srpqpcsefk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2006,7 +2006,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#qnvztkkhfi .gt_first_grand_summary_row {
+#srpqpcsefk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2016,7 +2016,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_last_grand_summary_row_top {
+#srpqpcsefk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2026,11 +2026,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_striped {
+#srpqpcsefk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qnvztkkhfi .gt_table_body {
+#srpqpcsefk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2039,7 +2039,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_footnotes {
+#srpqpcsefk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2053,7 +2053,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_footnote {
+#srpqpcsefk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2062,7 +2062,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#qnvztkkhfi .gt_sourcenotes {
+#srpqpcsefk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2076,7 +2076,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#qnvztkkhfi .gt_sourcenote {
+#srpqpcsefk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2084,63 +2084,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#qnvztkkhfi .gt_left {
+#srpqpcsefk .gt_left {
   text-align: left;
 }
 
-#qnvztkkhfi .gt_center {
+#srpqpcsefk .gt_center {
   text-align: center;
 }
 
-#qnvztkkhfi .gt_right {
+#srpqpcsefk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qnvztkkhfi .gt_font_normal {
+#srpqpcsefk .gt_font_normal {
   font-weight: normal;
 }
 
-#qnvztkkhfi .gt_font_bold {
+#srpqpcsefk .gt_font_bold {
   font-weight: bold;
 }
 
-#qnvztkkhfi .gt_font_italic {
+#srpqpcsefk .gt_font_italic {
   font-style: italic;
 }
 
-#qnvztkkhfi .gt_super {
+#srpqpcsefk .gt_super {
   font-size: 65%;
 }
 
-#qnvztkkhfi .gt_footnote_marks {
+#srpqpcsefk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qnvztkkhfi .gt_asterisk {
+#srpqpcsefk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qnvztkkhfi .gt_indent_1 {
+#srpqpcsefk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qnvztkkhfi .gt_indent_2 {
+#srpqpcsefk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qnvztkkhfi .gt_indent_3 {
+#srpqpcsefk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qnvztkkhfi .gt_indent_4 {
+#srpqpcsefk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qnvztkkhfi .gt_indent_5 {
+#srpqpcsefk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2215,29 +2215,29 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 </section>
 <section id="source2" class="level2">
 <h2 class="anchored" data-anchor-id="source2">Source 2 (Alternative Source)</h2>
-<p>Next, we will take a look at another source, where the data is slightly more updated, up to 2022.<a href="https://ourworldindata.org/greenhouse-gas-emissions">ourworldindata.org</a></p>
+<p>Next, we will take a look at another source, where the data is slightly more updated, up to 2022. <a href="https://ourworldindata.org/greenhouse-gas-emissions">ourworldindata.org</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ghg_raw2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/historical_emissions_source2.csv"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="hmckhmlfpf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hmckhmlfpf table {
+<div id="hkvfvfxdqj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hkvfvfxdqj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hmckhmlfpf thead, #hmckhmlfpf tbody, #hmckhmlfpf tfoot, #hmckhmlfpf tr, #hmckhmlfpf td, #hmckhmlfpf th {
+#hkvfvfxdqj thead, #hkvfvfxdqj tbody, #hkvfvfxdqj tfoot, #hkvfvfxdqj tr, #hkvfvfxdqj td, #hkvfvfxdqj th {
   border-style: none;
 }
 
-#hmckhmlfpf p {
+#hkvfvfxdqj p {
   margin: 0;
   padding: 0;
 }
 
-#hmckhmlfpf .gt_table {
+#hkvfvfxdqj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2263,12 +2263,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_caption {
+#hkvfvfxdqj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hmckhmlfpf .gt_title {
+#hkvfvfxdqj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2280,7 +2280,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#hmckhmlfpf .gt_subtitle {
+#hkvfvfxdqj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2292,7 +2292,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#hmckhmlfpf .gt_heading {
+#hkvfvfxdqj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2304,13 +2304,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_bottom_border {
+#hkvfvfxdqj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_col_headings {
+#hkvfvfxdqj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2325,7 +2325,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_col_heading {
+#hkvfvfxdqj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2345,7 +2345,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#hmckhmlfpf .gt_column_spanner_outer {
+#hkvfvfxdqj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2357,15 +2357,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#hmckhmlfpf .gt_column_spanner_outer:first-child {
+#hkvfvfxdqj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hmckhmlfpf .gt_column_spanner_outer:last-child {
+#hkvfvfxdqj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hmckhmlfpf .gt_column_spanner {
+#hkvfvfxdqj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2377,11 +2377,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#hmckhmlfpf .gt_spanner_row {
+#hkvfvfxdqj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hmckhmlfpf .gt_group_heading {
+#hkvfvfxdqj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2407,7 +2407,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#hmckhmlfpf .gt_empty_group_heading {
+#hkvfvfxdqj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2422,15 +2422,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#hmckhmlfpf .gt_from_md > :first-child {
+#hkvfvfxdqj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hmckhmlfpf .gt_from_md > :last-child {
+#hkvfvfxdqj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hmckhmlfpf .gt_row {
+#hkvfvfxdqj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2449,7 +2449,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#hmckhmlfpf .gt_stub {
+#hkvfvfxdqj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2462,7 +2462,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#hmckhmlfpf .gt_stub_row_group {
+#hkvfvfxdqj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2476,15 +2476,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#hmckhmlfpf .gt_row_group_first td {
+#hkvfvfxdqj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hmckhmlfpf .gt_row_group_first th {
+#hkvfvfxdqj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hmckhmlfpf .gt_summary_row {
+#hkvfvfxdqj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2494,16 +2494,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#hmckhmlfpf .gt_first_summary_row {
+#hkvfvfxdqj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_first_summary_row.thick {
+#hkvfvfxdqj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hmckhmlfpf .gt_last_summary_row {
+#hkvfvfxdqj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2513,7 +2513,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_grand_summary_row {
+#hkvfvfxdqj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2523,7 +2523,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#hmckhmlfpf .gt_first_grand_summary_row {
+#hkvfvfxdqj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2533,7 +2533,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_last_grand_summary_row_top {
+#hkvfvfxdqj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2543,11 +2543,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_striped {
+#hkvfvfxdqj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hmckhmlfpf .gt_table_body {
+#hkvfvfxdqj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2556,7 +2556,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_footnotes {
+#hkvfvfxdqj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2570,7 +2570,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_footnote {
+#hkvfvfxdqj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2579,7 +2579,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#hmckhmlfpf .gt_sourcenotes {
+#hkvfvfxdqj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2593,7 +2593,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#hmckhmlfpf .gt_sourcenote {
+#hkvfvfxdqj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2601,63 +2601,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#hmckhmlfpf .gt_left {
+#hkvfvfxdqj .gt_left {
   text-align: left;
 }
 
-#hmckhmlfpf .gt_center {
+#hkvfvfxdqj .gt_center {
   text-align: center;
 }
 
-#hmckhmlfpf .gt_right {
+#hkvfvfxdqj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hmckhmlfpf .gt_font_normal {
+#hkvfvfxdqj .gt_font_normal {
   font-weight: normal;
 }
 
-#hmckhmlfpf .gt_font_bold {
+#hkvfvfxdqj .gt_font_bold {
   font-weight: bold;
 }
 
-#hmckhmlfpf .gt_font_italic {
+#hkvfvfxdqj .gt_font_italic {
   font-style: italic;
 }
 
-#hmckhmlfpf .gt_super {
+#hkvfvfxdqj .gt_super {
   font-size: 65%;
 }
 
-#hmckhmlfpf .gt_footnote_marks {
+#hkvfvfxdqj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hmckhmlfpf .gt_asterisk {
+#hkvfvfxdqj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hmckhmlfpf .gt_indent_1 {
+#hkvfvfxdqj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hmckhmlfpf .gt_indent_2 {
+#hkvfvfxdqj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hmckhmlfpf .gt_indent_3 {
+#hkvfvfxdqj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hmckhmlfpf .gt_indent_4 {
+#hkvfvfxdqj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hmckhmlfpf .gt_indent_5 {
+#hkvfvfxdqj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2685,7 +2685,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 <td class="gt_row gt_left" headers="stub_1_2 Entity">Afghanistan</td>
 <td class="gt_row gt_left" headers="stub_1_2 Code">AFG</td>
 <td class="gt_row gt_right" headers="stub_1_2 Year">1851</td>
-<td class="gt_row gt_right" headers="stub_1_2 Annual greenhouse gas emissions in CO₂ equivalents">7403982</td>
+<td class="gt_row gt_right" headers="stub_1_2 Annual greenhouse gas emissions in CO₂ equivalents">7403983</td>
 </tr>
 <tr class="odd">
 <td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
@@ -2752,23 +2752,23 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="zzugriodcq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zzugriodcq table {
+<div id="cdsgohmhgk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cdsgohmhgk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zzugriodcq thead, #zzugriodcq tbody, #zzugriodcq tfoot, #zzugriodcq tr, #zzugriodcq td, #zzugriodcq th {
+#cdsgohmhgk thead, #cdsgohmhgk tbody, #cdsgohmhgk tfoot, #cdsgohmhgk tr, #cdsgohmhgk td, #cdsgohmhgk th {
   border-style: none;
 }
 
-#zzugriodcq p {
+#cdsgohmhgk p {
   margin: 0;
   padding: 0;
 }
 
-#zzugriodcq .gt_table {
+#cdsgohmhgk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2794,12 +2794,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_caption {
+#cdsgohmhgk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zzugriodcq .gt_title {
+#cdsgohmhgk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2811,7 +2811,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#zzugriodcq .gt_subtitle {
+#cdsgohmhgk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2823,7 +2823,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#zzugriodcq .gt_heading {
+#cdsgohmhgk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2835,13 +2835,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_bottom_border {
+#cdsgohmhgk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_col_headings {
+#cdsgohmhgk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2856,7 +2856,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_col_heading {
+#cdsgohmhgk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2876,7 +2876,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#zzugriodcq .gt_column_spanner_outer {
+#cdsgohmhgk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2888,15 +2888,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#zzugriodcq .gt_column_spanner_outer:first-child {
+#cdsgohmhgk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zzugriodcq .gt_column_spanner_outer:last-child {
+#cdsgohmhgk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zzugriodcq .gt_column_spanner {
+#cdsgohmhgk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2908,11 +2908,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#zzugriodcq .gt_spanner_row {
+#cdsgohmhgk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zzugriodcq .gt_group_heading {
+#cdsgohmhgk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2938,7 +2938,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#zzugriodcq .gt_empty_group_heading {
+#cdsgohmhgk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2953,15 +2953,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#zzugriodcq .gt_from_md > :first-child {
+#cdsgohmhgk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zzugriodcq .gt_from_md > :last-child {
+#cdsgohmhgk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zzugriodcq .gt_row {
+#cdsgohmhgk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2980,7 +2980,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#zzugriodcq .gt_stub {
+#cdsgohmhgk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2993,7 +2993,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#zzugriodcq .gt_stub_row_group {
+#cdsgohmhgk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3007,15 +3007,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#zzugriodcq .gt_row_group_first td {
+#cdsgohmhgk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zzugriodcq .gt_row_group_first th {
+#cdsgohmhgk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zzugriodcq .gt_summary_row {
+#cdsgohmhgk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3025,16 +3025,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#zzugriodcq .gt_first_summary_row {
+#cdsgohmhgk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_first_summary_row.thick {
+#cdsgohmhgk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zzugriodcq .gt_last_summary_row {
+#cdsgohmhgk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3044,7 +3044,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_grand_summary_row {
+#cdsgohmhgk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3054,7 +3054,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#zzugriodcq .gt_first_grand_summary_row {
+#cdsgohmhgk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3064,7 +3064,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_last_grand_summary_row_top {
+#cdsgohmhgk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3074,11 +3074,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_striped {
+#cdsgohmhgk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zzugriodcq .gt_table_body {
+#cdsgohmhgk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3087,7 +3087,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_footnotes {
+#cdsgohmhgk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3101,7 +3101,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_footnote {
+#cdsgohmhgk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3110,7 +3110,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#zzugriodcq .gt_sourcenotes {
+#cdsgohmhgk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3124,7 +3124,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#zzugriodcq .gt_sourcenote {
+#cdsgohmhgk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3132,63 +3132,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#zzugriodcq .gt_left {
+#cdsgohmhgk .gt_left {
   text-align: left;
 }
 
-#zzugriodcq .gt_center {
+#cdsgohmhgk .gt_center {
   text-align: center;
 }
 
-#zzugriodcq .gt_right {
+#cdsgohmhgk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zzugriodcq .gt_font_normal {
+#cdsgohmhgk .gt_font_normal {
   font-weight: normal;
 }
 
-#zzugriodcq .gt_font_bold {
+#cdsgohmhgk .gt_font_bold {
   font-weight: bold;
 }
 
-#zzugriodcq .gt_font_italic {
+#cdsgohmhgk .gt_font_italic {
   font-style: italic;
 }
 
-#zzugriodcq .gt_super {
+#cdsgohmhgk .gt_super {
   font-size: 65%;
 }
 
-#zzugriodcq .gt_footnote_marks {
+#cdsgohmhgk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zzugriodcq .gt_asterisk {
+#cdsgohmhgk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zzugriodcq .gt_indent_1 {
+#cdsgohmhgk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zzugriodcq .gt_indent_2 {
+#cdsgohmhgk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zzugriodcq .gt_indent_3 {
+#cdsgohmhgk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zzugriodcq .gt_indent_4 {
+#cdsgohmhgk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zzugriodcq .gt_indent_5 {
+#cdsgohmhgk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3829,23 +3829,23 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="bmfpattnmi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bmfpattnmi table {
+<div id="cvfcyhglhv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cvfcyhglhv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bmfpattnmi thead, #bmfpattnmi tbody, #bmfpattnmi tfoot, #bmfpattnmi tr, #bmfpattnmi td, #bmfpattnmi th {
+#cvfcyhglhv thead, #cvfcyhglhv tbody, #cvfcyhglhv tfoot, #cvfcyhglhv tr, #cvfcyhglhv td, #cvfcyhglhv th {
   border-style: none;
 }
 
-#bmfpattnmi p {
+#cvfcyhglhv p {
   margin: 0;
   padding: 0;
 }
 
-#bmfpattnmi .gt_table {
+#cvfcyhglhv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3871,12 +3871,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_caption {
+#cvfcyhglhv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bmfpattnmi .gt_title {
+#cvfcyhglhv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3888,7 +3888,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#bmfpattnmi .gt_subtitle {
+#cvfcyhglhv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3900,7 +3900,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#bmfpattnmi .gt_heading {
+#cvfcyhglhv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3912,13 +3912,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_bottom_border {
+#cvfcyhglhv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_col_headings {
+#cvfcyhglhv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3933,7 +3933,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_col_heading {
+#cvfcyhglhv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3953,7 +3953,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#bmfpattnmi .gt_column_spanner_outer {
+#cvfcyhglhv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3965,15 +3965,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#bmfpattnmi .gt_column_spanner_outer:first-child {
+#cvfcyhglhv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bmfpattnmi .gt_column_spanner_outer:last-child {
+#cvfcyhglhv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bmfpattnmi .gt_column_spanner {
+#cvfcyhglhv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3985,11 +3985,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#bmfpattnmi .gt_spanner_row {
+#cvfcyhglhv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bmfpattnmi .gt_group_heading {
+#cvfcyhglhv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4015,7 +4015,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#bmfpattnmi .gt_empty_group_heading {
+#cvfcyhglhv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4030,15 +4030,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#bmfpattnmi .gt_from_md > :first-child {
+#cvfcyhglhv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bmfpattnmi .gt_from_md > :last-child {
+#cvfcyhglhv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bmfpattnmi .gt_row {
+#cvfcyhglhv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4057,7 +4057,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#bmfpattnmi .gt_stub {
+#cvfcyhglhv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4070,7 +4070,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#bmfpattnmi .gt_stub_row_group {
+#cvfcyhglhv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4084,15 +4084,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#bmfpattnmi .gt_row_group_first td {
+#cvfcyhglhv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bmfpattnmi .gt_row_group_first th {
+#cvfcyhglhv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bmfpattnmi .gt_summary_row {
+#cvfcyhglhv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4102,16 +4102,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#bmfpattnmi .gt_first_summary_row {
+#cvfcyhglhv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_first_summary_row.thick {
+#cvfcyhglhv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bmfpattnmi .gt_last_summary_row {
+#cvfcyhglhv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4121,7 +4121,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_grand_summary_row {
+#cvfcyhglhv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4131,7 +4131,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#bmfpattnmi .gt_first_grand_summary_row {
+#cvfcyhglhv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4141,7 +4141,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_last_grand_summary_row_top {
+#cvfcyhglhv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4151,11 +4151,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_striped {
+#cvfcyhglhv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bmfpattnmi .gt_table_body {
+#cvfcyhglhv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4164,7 +4164,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_footnotes {
+#cvfcyhglhv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4178,7 +4178,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_footnote {
+#cvfcyhglhv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4187,7 +4187,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#bmfpattnmi .gt_sourcenotes {
+#cvfcyhglhv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4201,7 +4201,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#bmfpattnmi .gt_sourcenote {
+#cvfcyhglhv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4209,63 +4209,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#bmfpattnmi .gt_left {
+#cvfcyhglhv .gt_left {
   text-align: left;
 }
 
-#bmfpattnmi .gt_center {
+#cvfcyhglhv .gt_center {
   text-align: center;
 }
 
-#bmfpattnmi .gt_right {
+#cvfcyhglhv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bmfpattnmi .gt_font_normal {
+#cvfcyhglhv .gt_font_normal {
   font-weight: normal;
 }
 
-#bmfpattnmi .gt_font_bold {
+#cvfcyhglhv .gt_font_bold {
   font-weight: bold;
 }
 
-#bmfpattnmi .gt_font_italic {
+#cvfcyhglhv .gt_font_italic {
   font-style: italic;
 }
 
-#bmfpattnmi .gt_super {
+#cvfcyhglhv .gt_super {
   font-size: 65%;
 }
 
-#bmfpattnmi .gt_footnote_marks {
+#cvfcyhglhv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bmfpattnmi .gt_asterisk {
+#cvfcyhglhv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bmfpattnmi .gt_indent_1 {
+#cvfcyhglhv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bmfpattnmi .gt_indent_2 {
+#cvfcyhglhv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bmfpattnmi .gt_indent_3 {
+#cvfcyhglhv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bmfpattnmi .gt_indent_4 {
+#cvfcyhglhv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bmfpattnmi .gt_indent_5 {
+#cvfcyhglhv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4841,7 +4841,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 </div>
 <p>Simple Line graph with trend line</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ghg_raw <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ghg_raw <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"China"</span>, <span class="st">"United States"</span>, <span class="st">"India"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Emissions, <span class="at">color =</span> Country, <span class="at">shape =</span> Country)) <span class="sc">+</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># Scatterplot</span></span>
@@ -4869,6 +4869,1234 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 <div>
 <figure class="figure">
 <p><img src="ghg_prep_files/figure-html/source1-line-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Lets compare that against Energy generation type per country <a href="https://climatedata.imf.org/datasets/0bfab7fb7e0e4050b82bba40cd7a1bd5/explore">Source</a></p>
+<p>First, we format the data into each country and their energy generation per year</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>expenditure <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/energy_transition.csv"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>expenditure <span class="ot">&lt;-</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  expenditure <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Indicator <span class="sc">%in%</span> <span class="st">"Electricity Generation"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(F2000<span class="sc">:</span>F2022, <span class="sc">~</span><span class="fu">replace_na</span>(., <span class="dv">0</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country, ISO3) <span class="sc">|&gt;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(F2000<span class="sc">:</span>F2021, sum), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(expenditure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="dktnhuaaqn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dktnhuaaqn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dktnhuaaqn thead, #dktnhuaaqn tbody, #dktnhuaaqn tfoot, #dktnhuaaqn tr, #dktnhuaaqn td, #dktnhuaaqn th {
+  border-style: none;
+}
+
+#dktnhuaaqn p {
+  margin: 0;
+  padding: 0;
+}
+
+#dktnhuaaqn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dktnhuaaqn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dktnhuaaqn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dktnhuaaqn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dktnhuaaqn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dktnhuaaqn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dktnhuaaqn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dktnhuaaqn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dktnhuaaqn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dktnhuaaqn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dktnhuaaqn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dktnhuaaqn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dktnhuaaqn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dktnhuaaqn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dktnhuaaqn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dktnhuaaqn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dktnhuaaqn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dktnhuaaqn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dktnhuaaqn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dktnhuaaqn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dktnhuaaqn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dktnhuaaqn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dktnhuaaqn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dktnhuaaqn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dktnhuaaqn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dktnhuaaqn .gt_left {
+  text-align: left;
+}
+
+#dktnhuaaqn .gt_center {
+  text-align: center;
+}
+
+#dktnhuaaqn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dktnhuaaqn .gt_font_normal {
+  font-weight: normal;
+}
+
+#dktnhuaaqn .gt_font_bold {
+  font-weight: bold;
+}
+
+#dktnhuaaqn .gt_font_italic {
+  font-style: italic;
+}
+
+#dktnhuaaqn .gt_super {
+  font-size: 65%;
+}
+
+#dktnhuaaqn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dktnhuaaqn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dktnhuaaqn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dktnhuaaqn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dktnhuaaqn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dktnhuaaqn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dktnhuaaqn .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Country" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Country</th>
+<th id="ISO3" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ISO3</th>
+<th id="F2000" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2000</th>
+<th id="F2001" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2001</th>
+<th id="F2002" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2002</th>
+<th id="F2003" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2003</th>
+<th id="F2004" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2004</th>
+<th id="F2005" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2005</th>
+<th id="F2006" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2006</th>
+<th id="F2007" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2007</th>
+<th id="F2008" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2008</th>
+<th id="F2009" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2009</th>
+<th id="F2010" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2010</th>
+<th id="F2011" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2011</th>
+<th id="F2012" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2012</th>
+<th id="F2013" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2013</th>
+<th id="F2014" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2014</th>
+<th id="F2015" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2015</th>
+<th id="F2016" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2016</th>
+<th id="F2017" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2017</th>
+<th id="F2018" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2018</th>
+<th id="F2019" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2019</th>
+<th id="F2020" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2020</th>
+<th id="F2021" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2021</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_1 ISO3">AETMP</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2000">9282769.209</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2001">9150620.016</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2002">9429405.587</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2003">9505576.337</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2004">9731666.691</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2005">9947259.394</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2006">10001071.526</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2007">10176789.903</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2008">10185046.290</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2009">9815357.051</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2010">10264390.071</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2011">10183914.495</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2012">10154353.744</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2013">10179064.667</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2014">10134008.990</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2015">10135528.199</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2016">10203915.434</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2017">10213958.823</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2018">10379450.822</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2019">10248475.490</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2020">10003991.038</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2021">10266125.323</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 Country">Afghanistan, Islamic Rep. of</td>
+<td class="gt_row gt_left" headers="stub_1_2 ISO3">AFG</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2000">489.579</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2001">489.579</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2002">489.589</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2003">568.425</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2004">729.581</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2005">732.514</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2006">930.889</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2007">1002.148</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2008">886.970</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2009">946.431</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2010">982.619</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2011">917.406</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2012">958.218</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2013">1091.970</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2014">1170.263</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2015">1180.676</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2016">1211.892</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2017">1245.636</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2018">1113.400</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2019">1453.253</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2020">1209.751</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2021">1184.357</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 Country">Africa</td>
+<td class="gt_row gt_left" headers="stub_1_3 ISO3">NA605</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2000">414279.010</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2001">440853.311</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2002">467947.901</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2003">497358.046</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2004">559535.748</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2005">560086.726</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2006">571619.102</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2007">591268.862</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2008">603145.479</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2009">619297.625</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2010">653538.091</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2011">672145.715</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2012">700228.194</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2013">719769.924</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2014">746853.027</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2015">764928.837</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2016">761199.336</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2017">793001.759</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2018">817091.768</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2019">841742.803</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2020">823369.335</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2021">855077.193</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 Country">Albania</td>
+<td class="gt_row gt_left" headers="stub_1_4 ISO3">ALB</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2000">4778.000</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2001">3730.136</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2002">3738.272</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2003">4992.272</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2004">5606.272</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2005">5443.272</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2006">5524.272</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2007">2860.272</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2008">3797.272</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2009">5202.408</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2010">7568.544</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2011">4191.767</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2012">4725.924</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2013">6960.030</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2014">4725.629</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2015">5896.428</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2016">7783.062</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2017">4526.179</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2018">8553.486</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2019">5206.043</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2020">5313.166</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2021">8962.710</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 Country">Algeria</td>
+<td class="gt_row gt_left" headers="stub_1_5 ISO3">DZA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2000">25412.000</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2001">26625.000</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2002">27648.400</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2003">29571.600</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2004">31250.100</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2005">32875.261</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2006">35225.570</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2007">37196.080</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2008">40235.715</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2009">38537.000</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2010">45732.880</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2011">51203.339</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2012">57357.633</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2013">59851.017</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2014">64379.333</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2015">68902.507</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2016">71091.500</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2017">76018.111</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2018">76661.664</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2019">81531.045</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2020">79272.710</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2021">85509.110</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..247</td>
+<td class="gt_row gt_left" headers="stub_1_6 Country" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 ISO3" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2000" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2001" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2002" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2003" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2004" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2005" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2006" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2007" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2008" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2009" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2010" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2011" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2012" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2013" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2014" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2015" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2016" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2017" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2018" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2019" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2020" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2021" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">248</td>
+<td class="gt_row gt_left" headers="stub_1_7 Country">Zimbabwe</td>
+<td class="gt_row gt_left" headers="stub_1_7 ISO3">ZWE</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2000">7083.361</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2001">8021.672</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2002">8663.421</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2003">8892.732</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2004">9803.231</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2005">9463.415</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2006">7854.150</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2007">7527.157</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2008">7525.458</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2009">7219.900</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2010">8572.436</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2011">9084.475</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2012">9215.386</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2013">9270.369</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2014">10072.576</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2015">9523.359</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2016">7069.224</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2017">7852.554</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2018">9567.136</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2019">9434.758</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2020">6533.521</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2021">8724.781</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Then we plot the data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>expenditure <span class="ot">&lt;-</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  expenditure <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ISO3 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CHN"</span>, <span class="st">"USA"</span>, <span class="st">"IND"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">"F"</span>, <span class="st">""</span>))<span class="sc">|&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">24</span>, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Energy"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>expenditure<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(expenditure<span class="sc">$</span>Year))</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(expenditure)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="oujbtsncau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oujbtsncau table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#oujbtsncau thead, #oujbtsncau tbody, #oujbtsncau tfoot, #oujbtsncau tr, #oujbtsncau td, #oujbtsncau th {
+  border-style: none;
+}
+
+#oujbtsncau p {
+  margin: 0;
+  padding: 0;
+}
+
+#oujbtsncau .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#oujbtsncau .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#oujbtsncau .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#oujbtsncau .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#oujbtsncau .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#oujbtsncau .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#oujbtsncau .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#oujbtsncau .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#oujbtsncau .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#oujbtsncau .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#oujbtsncau .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oujbtsncau .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#oujbtsncau .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#oujbtsncau .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#oujbtsncau .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oujbtsncau .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#oujbtsncau .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#oujbtsncau .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#oujbtsncau .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oujbtsncau .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#oujbtsncau .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oujbtsncau .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#oujbtsncau .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oujbtsncau .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oujbtsncau .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oujbtsncau .gt_left {
+  text-align: left;
+}
+
+#oujbtsncau .gt_center {
+  text-align: center;
+}
+
+#oujbtsncau .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#oujbtsncau .gt_font_normal {
+  font-weight: normal;
+}
+
+#oujbtsncau .gt_font_bold {
+  font-weight: bold;
+}
+
+#oujbtsncau .gt_font_italic {
+  font-style: italic;
+}
+
+#oujbtsncau .gt_super {
+  font-size: 65%;
+}
+
+#oujbtsncau .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#oujbtsncau .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#oujbtsncau .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#oujbtsncau .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#oujbtsncau .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#oujbtsncau .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#oujbtsncau .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Country" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Country</th>
+<th id="ISO3" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ISO3</th>
+<th id="Year" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Year</th>
+<th id="Energy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Energy</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 Country">China, P.R.: Mainland</td>
+<td class="gt_row gt_left" headers="stub_1_1 ISO3">CHN</td>
+<td class="gt_row gt_right" headers="stub_1_1 Year">2000</td>
+<td class="gt_row gt_right" headers="stub_1_1 Energy">1355631</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 Country">China, P.R.: Mainland</td>
+<td class="gt_row gt_left" headers="stub_1_2 ISO3">CHN</td>
+<td class="gt_row gt_right" headers="stub_1_2 Year">2001</td>
+<td class="gt_row gt_right" headers="stub_1_2 Energy">1480837</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 Country">China, P.R.: Mainland</td>
+<td class="gt_row gt_left" headers="stub_1_3 ISO3">CHN</td>
+<td class="gt_row gt_right" headers="stub_1_3 Year">2002</td>
+<td class="gt_row gt_right" headers="stub_1_3 Energy">1654061</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 Country">China, P.R.: Mainland</td>
+<td class="gt_row gt_left" headers="stub_1_4 ISO3">CHN</td>
+<td class="gt_row gt_right" headers="stub_1_4 Year">2003</td>
+<td class="gt_row gt_right" headers="stub_1_4 Energy">1910655</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 Country">China, P.R.: Mainland</td>
+<td class="gt_row gt_left" headers="stub_1_5 ISO3">CHN</td>
+<td class="gt_row gt_right" headers="stub_1_5 Year">2004</td>
+<td class="gt_row gt_right" headers="stub_1_5 Energy">2203397</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..65</td>
+<td class="gt_row gt_left" headers="stub_1_6 Country" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 ISO3" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 Year" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 Energy" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">66</td>
+<td class="gt_row gt_left" headers="stub_1_7 Country">United States</td>
+<td class="gt_row gt_left" headers="stub_1_7 ISO3">USA</td>
+<td class="gt_row gt_right" headers="stub_1_7 Year">2021</td>
+<td class="gt_row gt_right" headers="stub_1_7 Energy">4374676</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(expenditure, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Energy, <span class="at">color =</span> Country)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span> <span class="co"># Line graph</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>),</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Energy Generated Over the Years"</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"For Top 3 Emitting Countries"</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Energy Generated (GWh)"</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Country"</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="st">"Country"</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ghg_prep_files/figure-html/source4-line1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
