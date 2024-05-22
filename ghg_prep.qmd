@@ -36,7 +36,9 @@ include_graphics("images/old_visualization.jpg")
 
 # Data Exploration
 
-Firstly, lets take a look at the raw data provided
+## Source 1 (Main Source) {#source1}
+
+Firstly, lets take a look at the raw data provided from [climatewatchdata.org](https://www.climatewatchdata.org/ghg-emissions)
 
 ```{r}
 #| label: explore-raw
@@ -66,7 +68,9 @@ ghg_raw |>
 
 Since there is only 1 distinct `Sector`, `Gas` and `Unit` type, we can drop those columns along with the `Source` column as it is not needed for our analysis. The unit MtCO₂e stands for "million metric tons of carbon dioxide equivalent."
 
-Next, we will take a look at another source, where the data is slightly more updated, up to 2022.
+## Source 2 (Alternative Source) {#source2}
+
+Next, we will take a look at another source, where the data is slightly more updated, up to 2022.[ourworldindata.org](https://ourworldindata.org/greenhouse-gas-emissions)
 
 ```{r}
 #| label: explore-raw2
@@ -75,4 +79,49 @@ Next, we will take a look at another source, where the data is slightly more upd
 ghg_raw2 <- read_csv("data/historical_emissions_source2.csv")
 gt_preview(ghg_raw2)
 ```
+
+Lets check the unique number of countries as well
+
+```{r}
+#| label: explore-unique2
+#| message: false
+
+ghg_raw2 |>
+  summarize(
+    n_distinct(Entity),
+  )
+```
+
+Since there are more countries covered, we can potentially keep the data from this source and merge it with the first source.
+
+## Source 3 (Alternative Source) {#source3}
+
+Lastly, we will take a look at the third source, where the data has more details
+
+```{r}
+#| label: explore-raw3
+#| message: false
+
+ghg_raw3 <- read_csv("data/historical_emissions_source3.csv")
+gt_preview(ghg_raw3)
+```
+
+From the preview we can see that there are many features, lets extract out the relevant ones to preview
+
+```{r}
+ghg_raw3 <-
+  ghg_raw3 |>
+  select(Country, Industry, Gas_Type, F1970:F2022)
+
+gt_preview(ghg_raw3)
+```
+
+From this we can tell that this data source not only have the countries, but it is split by the gas type and industry
+
+## Conclusion from exploration
+
+[Source 1](#source1) and [Source 2](#source2) have similar data, both consisting of each country's annual GHG emission. These data are suitable for a simple analysis while [Source 3](#source3) is more detailed, with the data split by industry and gas type.
+
+We can potentially merge Source 1 and 2 together to get a more complete dataset, and then explore Source 3 for more detailed analysis/different angles.
+
 

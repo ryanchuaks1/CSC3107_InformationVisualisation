@@ -131,29 +131,31 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 </section>
 <section id="data-exploration" class="level1">
 <h1>Data Exploration</h1>
-<p>Firstly, lets take a look at the raw data provided</p>
+<section id="source1" class="level2">
+<h2 class="anchored" data-anchor-id="source1">Source 1 (Main Source)</h2>
+<p>Firstly, lets take a look at the raw data provided from <a href="https://www.climatewatchdata.org/ghg-emissions">climatewatchdata.org</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ghg_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/historical_emissions.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="nzfexvnyvw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nzfexvnyvw table {
+<div id="ssvezrkxug" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ssvezrkxug table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nzfexvnyvw thead, #nzfexvnyvw tbody, #nzfexvnyvw tfoot, #nzfexvnyvw tr, #nzfexvnyvw td, #nzfexvnyvw th {
+#ssvezrkxug thead, #ssvezrkxug tbody, #ssvezrkxug tfoot, #ssvezrkxug tr, #ssvezrkxug td, #ssvezrkxug th {
   border-style: none;
 }
 
-#nzfexvnyvw p {
+#ssvezrkxug p {
   margin: 0;
   padding: 0;
 }
 
-#nzfexvnyvw .gt_table {
+#ssvezrkxug .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -179,12 +181,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_caption {
+#ssvezrkxug .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nzfexvnyvw .gt_title {
+#ssvezrkxug .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -196,7 +198,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#nzfexvnyvw .gt_subtitle {
+#ssvezrkxug .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -208,7 +210,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#nzfexvnyvw .gt_heading {
+#ssvezrkxug .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -220,13 +222,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_bottom_border {
+#ssvezrkxug .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_col_headings {
+#ssvezrkxug .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -241,7 +243,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_col_heading {
+#ssvezrkxug .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -261,7 +263,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#nzfexvnyvw .gt_column_spanner_outer {
+#ssvezrkxug .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -273,15 +275,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#nzfexvnyvw .gt_column_spanner_outer:first-child {
+#ssvezrkxug .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nzfexvnyvw .gt_column_spanner_outer:last-child {
+#ssvezrkxug .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nzfexvnyvw .gt_column_spanner {
+#ssvezrkxug .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -293,11 +295,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#nzfexvnyvw .gt_spanner_row {
+#ssvezrkxug .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nzfexvnyvw .gt_group_heading {
+#ssvezrkxug .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -323,7 +325,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#nzfexvnyvw .gt_empty_group_heading {
+#ssvezrkxug .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -338,15 +340,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#nzfexvnyvw .gt_from_md > :first-child {
+#ssvezrkxug .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nzfexvnyvw .gt_from_md > :last-child {
+#ssvezrkxug .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nzfexvnyvw .gt_row {
+#ssvezrkxug .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -365,7 +367,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#nzfexvnyvw .gt_stub {
+#ssvezrkxug .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -378,7 +380,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#nzfexvnyvw .gt_stub_row_group {
+#ssvezrkxug .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -392,15 +394,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#nzfexvnyvw .gt_row_group_first td {
+#ssvezrkxug .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nzfexvnyvw .gt_row_group_first th {
+#ssvezrkxug .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nzfexvnyvw .gt_summary_row {
+#ssvezrkxug .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -410,16 +412,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#nzfexvnyvw .gt_first_summary_row {
+#ssvezrkxug .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_first_summary_row.thick {
+#ssvezrkxug .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nzfexvnyvw .gt_last_summary_row {
+#ssvezrkxug .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -429,7 +431,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_grand_summary_row {
+#ssvezrkxug .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -439,7 +441,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#nzfexvnyvw .gt_first_grand_summary_row {
+#ssvezrkxug .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -449,7 +451,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_last_grand_summary_row_top {
+#ssvezrkxug .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -459,11 +461,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_striped {
+#ssvezrkxug .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nzfexvnyvw .gt_table_body {
+#ssvezrkxug .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -472,7 +474,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_footnotes {
+#ssvezrkxug .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -486,7 +488,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_footnote {
+#ssvezrkxug .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -495,7 +497,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#nzfexvnyvw .gt_sourcenotes {
+#ssvezrkxug .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -509,7 +511,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#nzfexvnyvw .gt_sourcenote {
+#ssvezrkxug .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -517,63 +519,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#nzfexvnyvw .gt_left {
+#ssvezrkxug .gt_left {
   text-align: left;
 }
 
-#nzfexvnyvw .gt_center {
+#ssvezrkxug .gt_center {
   text-align: center;
 }
 
-#nzfexvnyvw .gt_right {
+#ssvezrkxug .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nzfexvnyvw .gt_font_normal {
+#ssvezrkxug .gt_font_normal {
   font-weight: normal;
 }
 
-#nzfexvnyvw .gt_font_bold {
+#ssvezrkxug .gt_font_bold {
   font-weight: bold;
 }
 
-#nzfexvnyvw .gt_font_italic {
+#ssvezrkxug .gt_font_italic {
   font-style: italic;
 }
 
-#nzfexvnyvw .gt_super {
+#ssvezrkxug .gt_super {
   font-size: 65%;
 }
 
-#nzfexvnyvw .gt_footnote_marks {
+#ssvezrkxug .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nzfexvnyvw .gt_asterisk {
+#ssvezrkxug .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nzfexvnyvw .gt_indent_1 {
+#ssvezrkxug .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nzfexvnyvw .gt_indent_2 {
+#ssvezrkxug .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nzfexvnyvw .gt_indent_3 {
+#ssvezrkxug .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nzfexvnyvw .gt_indent_4 {
+#ssvezrkxug .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nzfexvnyvw .gt_indent_5 {
+#ssvezrkxug .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -935,29 +937,32 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 </div>
 </div>
 <p>Since there is only 1 distinct <code>Sector</code>, <code>Gas</code> and <code>Unit</code> type, we can drop those columns along with the <code>Source</code> column as it is not needed for our analysis. The unit MtCO₂e stands for “million metric tons of carbon dioxide equivalent.”</p>
-<p>Next, we will take a look at another source, where the data is slightly more updated, up to 2022.</p>
+</section>
+<section id="source2" class="level2">
+<h2 class="anchored" data-anchor-id="source2">Source 2 (Alternative Source)</h2>
+<p>Next, we will take a look at another source, where the data is slightly more updated, up to 2022.<a href="https://ourworldindata.org/greenhouse-gas-emissions">ourworldindata.org</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ghg_raw2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/historical_emissions_source2.csv"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="mtagirzmrd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mtagirzmrd table {
+<div id="yytitwiiyg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yytitwiiyg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mtagirzmrd thead, #mtagirzmrd tbody, #mtagirzmrd tfoot, #mtagirzmrd tr, #mtagirzmrd td, #mtagirzmrd th {
+#yytitwiiyg thead, #yytitwiiyg tbody, #yytitwiiyg tfoot, #yytitwiiyg tr, #yytitwiiyg td, #yytitwiiyg th {
   border-style: none;
 }
 
-#mtagirzmrd p {
+#yytitwiiyg p {
   margin: 0;
   padding: 0;
 }
 
-#mtagirzmrd .gt_table {
+#yytitwiiyg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -983,12 +988,12 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-left-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_caption {
+#yytitwiiyg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mtagirzmrd .gt_title {
+#yytitwiiyg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1000,7 +1005,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-width: 0;
 }
 
-#mtagirzmrd .gt_subtitle {
+#yytitwiiyg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1012,7 +1017,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-width: 0;
 }
 
-#mtagirzmrd .gt_heading {
+#yytitwiiyg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1024,13 +1029,13 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_bottom_border {
+#yytitwiiyg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_col_headings {
+#yytitwiiyg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1045,7 +1050,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_col_heading {
+#yytitwiiyg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1065,7 +1070,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#mtagirzmrd .gt_column_spanner_outer {
+#yytitwiiyg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1077,15 +1082,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 4px;
 }
 
-#mtagirzmrd .gt_column_spanner_outer:first-child {
+#yytitwiiyg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mtagirzmrd .gt_column_spanner_outer:last-child {
+#yytitwiiyg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mtagirzmrd .gt_column_spanner {
+#yytitwiiyg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1097,11 +1102,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   width: 100%;
 }
 
-#mtagirzmrd .gt_spanner_row {
+#yytitwiiyg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mtagirzmrd .gt_group_heading {
+#yytitwiiyg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1127,7 +1132,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   text-align: left;
 }
 
-#mtagirzmrd .gt_empty_group_heading {
+#yytitwiiyg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1142,15 +1147,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: middle;
 }
 
-#mtagirzmrd .gt_from_md > :first-child {
+#yytitwiiyg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mtagirzmrd .gt_from_md > :last-child {
+#yytitwiiyg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mtagirzmrd .gt_row {
+#yytitwiiyg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1169,7 +1174,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   overflow-x: hidden;
 }
 
-#mtagirzmrd .gt_stub {
+#yytitwiiyg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1182,7 +1187,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#mtagirzmrd .gt_stub_row_group {
+#yytitwiiyg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1196,15 +1201,15 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   vertical-align: top;
 }
 
-#mtagirzmrd .gt_row_group_first td {
+#yytitwiiyg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mtagirzmrd .gt_row_group_first th {
+#yytitwiiyg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mtagirzmrd .gt_summary_row {
+#yytitwiiyg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1214,16 +1219,16 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#mtagirzmrd .gt_first_summary_row {
+#yytitwiiyg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_first_summary_row.thick {
+#yytitwiiyg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mtagirzmrd .gt_last_summary_row {
+#yytitwiiyg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1233,7 +1238,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_grand_summary_row {
+#yytitwiiyg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1243,7 +1248,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#mtagirzmrd .gt_first_grand_summary_row {
+#yytitwiiyg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1253,7 +1258,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-top-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_last_grand_summary_row_top {
+#yytitwiiyg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1263,11 +1268,11 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_striped {
+#yytitwiiyg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mtagirzmrd .gt_table_body {
+#yytitwiiyg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1276,7 +1281,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-bottom-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_footnotes {
+#yytitwiiyg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1290,7 +1295,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_footnote {
+#yytitwiiyg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1299,7 +1304,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#mtagirzmrd .gt_sourcenotes {
+#yytitwiiyg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1313,7 +1318,7 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   border-right-color: #D3D3D3;
 }
 
-#mtagirzmrd .gt_sourcenote {
+#yytitwiiyg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1321,63 +1326,63 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
   padding-right: 5px;
 }
 
-#mtagirzmrd .gt_left {
+#yytitwiiyg .gt_left {
   text-align: left;
 }
 
-#mtagirzmrd .gt_center {
+#yytitwiiyg .gt_center {
   text-align: center;
 }
 
-#mtagirzmrd .gt_right {
+#yytitwiiyg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mtagirzmrd .gt_font_normal {
+#yytitwiiyg .gt_font_normal {
   font-weight: normal;
 }
 
-#mtagirzmrd .gt_font_bold {
+#yytitwiiyg .gt_font_bold {
   font-weight: bold;
 }
 
-#mtagirzmrd .gt_font_italic {
+#yytitwiiyg .gt_font_italic {
   font-style: italic;
 }
 
-#mtagirzmrd .gt_super {
+#yytitwiiyg .gt_super {
   font-size: 65%;
 }
 
-#mtagirzmrd .gt_footnote_marks {
+#yytitwiiyg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mtagirzmrd .gt_asterisk {
+#yytitwiiyg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mtagirzmrd .gt_indent_1 {
+#yytitwiiyg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mtagirzmrd .gt_indent_2 {
+#yytitwiiyg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mtagirzmrd .gt_indent_3 {
+#yytitwiiyg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mtagirzmrd .gt_indent_4 {
+#yytitwiiyg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mtagirzmrd .gt_indent_5 {
+#yytitwiiyg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1449,6 +1454,2037 @@ Figure&nbsp;1: Visualization of The Top 10 GHG Emitters Contribute Over Two-Thir
 </div>
 </div>
 </div>
+<p>Lets check the unique number of countries as well</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ghg_raw2 <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">n_distinct</span>(Entity),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  `n_distinct(Entity)`
+                 &lt;int&gt;
+1                  215</code></pre>
+</div>
+</div>
+<p>Since there are more countries covered, we can potentially keep the data from this source and merge it with the first source.</p>
+</section>
+<section id="source3" class="level2">
+<h2 class="anchored" data-anchor-id="source3">Source 3 (Alternative Source)</h2>
+<p>Lastly, we will take a look at the third source, where the data has more details</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ghg_raw3 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/historical_emissions_source3.csv"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="fbaawjpcgs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fbaawjpcgs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#fbaawjpcgs thead, #fbaawjpcgs tbody, #fbaawjpcgs tfoot, #fbaawjpcgs tr, #fbaawjpcgs td, #fbaawjpcgs th {
+  border-style: none;
+}
+
+#fbaawjpcgs p {
+  margin: 0;
+  padding: 0;
+}
+
+#fbaawjpcgs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#fbaawjpcgs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fbaawjpcgs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fbaawjpcgs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fbaawjpcgs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fbaawjpcgs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fbaawjpcgs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fbaawjpcgs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fbaawjpcgs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#fbaawjpcgs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#fbaawjpcgs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fbaawjpcgs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fbaawjpcgs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fbaawjpcgs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fbaawjpcgs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fbaawjpcgs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fbaawjpcgs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fbaawjpcgs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#fbaawjpcgs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fbaawjpcgs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fbaawjpcgs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fbaawjpcgs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fbaawjpcgs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fbaawjpcgs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fbaawjpcgs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fbaawjpcgs .gt_left {
+  text-align: left;
+}
+
+#fbaawjpcgs .gt_center {
+  text-align: center;
+}
+
+#fbaawjpcgs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fbaawjpcgs .gt_font_normal {
+  font-weight: normal;
+}
+
+#fbaawjpcgs .gt_font_bold {
+  font-weight: bold;
+}
+
+#fbaawjpcgs .gt_font_italic {
+  font-style: italic;
+}
+
+#fbaawjpcgs .gt_super {
+  font-size: 65%;
+}
+
+#fbaawjpcgs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#fbaawjpcgs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fbaawjpcgs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fbaawjpcgs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fbaawjpcgs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fbaawjpcgs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fbaawjpcgs .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="ObjectId" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ObjectId</th>
+<th id="Country" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Country</th>
+<th id="ISO2" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ISO2</th>
+<th id="ISO3" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ISO3</th>
+<th id="Indicator" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Indicator</th>
+<th id="Unit" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Unit</th>
+<th id="Source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Source</th>
+<th id="CTS_Code" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">CTS_Code</th>
+<th id="CTS_Name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">CTS_Name</th>
+<th id="CTS_Full_Descriptor" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">CTS_Full_Descriptor</th>
+<th id="Industry" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Industry</th>
+<th id="Gas_Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Gas_Type</th>
+<th id="Scale" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Scale</th>
+<th id="F1970" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1970</th>
+<th id="F1971" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1971</th>
+<th id="F1972" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1972</th>
+<th id="F1973" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1973</th>
+<th id="F1974" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1974</th>
+<th id="F1975" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1975</th>
+<th id="F1976" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1976</th>
+<th id="F1977" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1977</th>
+<th id="F1978" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1978</th>
+<th id="F1979" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1979</th>
+<th id="F1980" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1980</th>
+<th id="F1981" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1981</th>
+<th id="F1982" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1982</th>
+<th id="F1983" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1983</th>
+<th id="F1984" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1984</th>
+<th id="F1985" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1985</th>
+<th id="F1986" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1986</th>
+<th id="F1987" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1987</th>
+<th id="F1988" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1988</th>
+<th id="F1989" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1989</th>
+<th id="F1990" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1990</th>
+<th id="F1991" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1991</th>
+<th id="F1992" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1992</th>
+<th id="F1993" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1993</th>
+<th id="F1994" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1994</th>
+<th id="F1995" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1995</th>
+<th id="F1996" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1996</th>
+<th id="F1997" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1997</th>
+<th id="F1998" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1998</th>
+<th id="F1999" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1999</th>
+<th id="F2000" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2000</th>
+<th id="F2001" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2001</th>
+<th id="F2002" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2002</th>
+<th id="F2003" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2003</th>
+<th id="F2004" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2004</th>
+<th id="F2005" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2005</th>
+<th id="F2006" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2006</th>
+<th id="F2007" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2007</th>
+<th id="F2008" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2008</th>
+<th id="F2009" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2009</th>
+<th id="F2010" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2010</th>
+<th id="F2011" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2011</th>
+<th id="F2012" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2012</th>
+<th id="F2013" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2013</th>
+<th id="F2014" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2014</th>
+<th id="F2015" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2015</th>
+<th id="F2016" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2016</th>
+<th id="F2017" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2017</th>
+<th id="F2018" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2018</th>
+<th id="F2019" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2019</th>
+<th id="F2020" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2020</th>
+<th id="F2021" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2021</th>
+<th id="F2022" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2022</th>
+<th id="F2023" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2023</th>
+<th id="F2024" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2024</th>
+<th id="F2025" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2025</th>
+<th id="F2026" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2026</th>
+<th id="F2027" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2027</th>
+<th id="F2028" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2028</th>
+<th id="F2029" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2029</th>
+<th id="F2030" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2030</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 ObjectId">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_1 ISO2">NA</td>
+<td class="gt_row gt_left" headers="stub_1_1 ISO3">AETMP</td>
+<td class="gt_row gt_left" headers="stub_1_1 Indicator">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_1 Unit">Million metric tons of CO2 equivalent</td>
+<td class="gt_row gt_left" headers="stub_1_1 Source">United Nations Framework Convention on Climate Change (UNFCCC). 2022. Greenhouse Gas Inventory Data - Detailed data by Party - Annex I. https://di.unfccc.int/detailed_data_by_party. Accessed on 2022-11-07. Copyright 2022 United Nations Framework Convention on Climate Change; EDGARv7.0, Crippa, M., Guizzardi, D., Banja, M., Solazzo, E., Muntean, M., Schaaf, E., Pagani, F., Monforti-Ferrario, F., Olivier, J., Quadrelli, R., Risquez Martin, A., Taghavi-Moharamli, P., Grassi, G., Rossi, S., Jacome Felix Oom, D., Branco, A., San-Miguel-Ayanz, J. and Vignati, E., CO2 emissions of all world countries - 2022 Report, EUR 31182 EN, Publications Office of the European Union, Luxembourg, 2022, doi:10.2760/730164, JRC130363; Food and Agriculture Organization of the United Nations (FAO). FAOSTAT Climate Change, Emissions, Emission Totals. License: CC BY-NC-SA 3.0 IGO. Extracted from: https://www.fao.org/faostat/en/#data/GT. Accessed on 2022-11-07; IMF staff calculations.</td>
+<td class="gt_row gt_left" headers="stub_1_1 CTS_Code">ECNGDR</td>
+<td class="gt_row gt_left" headers="stub_1_1 CTS_Name">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_1 CTS_Full_Descriptor">Environment, Climate Change, Greenhouse Gas Emissions, National GHG Emissions Inventories and Implied National Mitigation (Nationally Determined Contributions) Targets, Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_1 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_1 Gas_Type">Carbon dioxide</td>
+<td class="gt_row gt_left" headers="stub_1_1 Scale">Units</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1970">9105.274612</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1971">8979.709134</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1972">9386.947306</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1973">9893.826848</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1974">9625.024123</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1975">9257.177469</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1976">9787.166099</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1977">9998.022496</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1978">10078.985850</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1979">10314.500690</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1980">9945.983697</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1981">9678.039695</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1982">9304.126111</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1983">9251.566244</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1984">9574.937951</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1985">9653.127364</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1986">9643.138500</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1987">9854.03250</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1988">10214.233020</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1989">10359.972920</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1990">10423.627770</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1991">10424.345650</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1992">10480.691470</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1993">10563.970660</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1994">10708.851650</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1995">10846.130610</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1996">11208.996470</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1997">11245.82307</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1998">11266.568100</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1999">11391.121760</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2000">11734.131820</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2001">11728.684830</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2002">11788.451540</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2003">11974.984110</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2004">12091.246790</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2005">12099.163390</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2006">11994.44019</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2007">12095.811790</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2008">11776.759590</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2009">11100.433500</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2010">11496.714880</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2011">11294.553250</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2012">11120.313810</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2013">11215.210330</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2014">11031.084230</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2015">10888.440520</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2016">10755.069310</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2017">10692.356430</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2018">10757.611950</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2019">10470.994480</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2020">9507.983542</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2021">10009.163700</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2022">10079.79561</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2023">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2024">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2025">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2026">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2027">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2028">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2029">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2030">NA</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_right" headers="stub_1_2 ObjectId">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_2 ISO2">NA</td>
+<td class="gt_row gt_left" headers="stub_1_2 ISO3">AETMP</td>
+<td class="gt_row gt_left" headers="stub_1_2 Indicator">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_2 Unit">Million metric tons of CO2 equivalent</td>
+<td class="gt_row gt_left" headers="stub_1_2 Source">United Nations Framework Convention on Climate Change (UNFCCC). 2022. Greenhouse Gas Inventory Data - Detailed data by Party - Annex I. https://di.unfccc.int/detailed_data_by_party. Accessed on 2022-11-07. Copyright 2022 United Nations Framework Convention on Climate Change; EDGARv7.0, Crippa, M., Guizzardi, D., Banja, M., Solazzo, E., Muntean, M., Schaaf, E., Pagani, F., Monforti-Ferrario, F., Olivier, J., Quadrelli, R., Risquez Martin, A., Taghavi-Moharamli, P., Grassi, G., Rossi, S., Jacome Felix Oom, D., Branco, A., San-Miguel-Ayanz, J. and Vignati, E., CO2 emissions of all world countries - 2022 Report, EUR 31182 EN, Publications Office of the European Union, Luxembourg, 2022, doi:10.2760/730164, JRC130363; Food and Agriculture Organization of the United Nations (FAO). FAOSTAT Climate Change, Emissions, Emission Totals. License: CC BY-NC-SA 3.0 IGO. Extracted from: https://www.fao.org/faostat/en/#data/GT. Accessed on 2022-11-07; IMF staff calculations.</td>
+<td class="gt_row gt_left" headers="stub_1_2 CTS_Code">ECNGDR</td>
+<td class="gt_row gt_left" headers="stub_1_2 CTS_Name">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_2 CTS_Full_Descriptor">Environment, Climate Change, Greenhouse Gas Emissions, National GHG Emissions Inventories and Implied National Mitigation (Nationally Determined Contributions) Targets, Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_2 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_2 Gas_Type">Greenhouse gas</td>
+<td class="gt_row gt_left" headers="stub_1_2 Scale">Units</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1970">9916.035235</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1971">9763.397133</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1972">10172.023190</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1973">10685.204370</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1974">10369.862030</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1975">10015.039070</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1976">10484.836490</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1977">10691.434770</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1978">10763.773870</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1979">11041.525670</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1980">10673.787090</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1981">10397.609570</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1982">10014.740750</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1983">9934.117110</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1984">10247.370070</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1985">10344.344370</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1986">10338.494640</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1987">10551.92723</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1988">10912.054170</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1989">11064.248150</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1990">11175.318560</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1991">11174.542530</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1992">11225.533740</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1993">11296.027870</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1994">11432.357880</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1995">11568.687940</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1996">11933.494270</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1997">11971.27375</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1998">11980.280280</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1999">12084.545370</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2000">12423.942440</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2001">12409.814010</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2002">12450.150910</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2003">12632.835090</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2004">12747.336020</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2005">12745.324280</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2006">12650.17853</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2007">12746.293440</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2008">12440.502610</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2009">11741.628190</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2010">12144.012200</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2011">11925.380150</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2012">11736.073890</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2013">11840.778030</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2014">11648.015230</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2015">11494.616010</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2016">11320.945940</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2017">11265.868000</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2018">11332.050400</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2019">11026.770180</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2020">10023.059970</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2021">10515.180960</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2022">10597.78937</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2023">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2024">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2025">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2026">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2027">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2028">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2029">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2030">NA</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_right" headers="stub_1_3 ObjectId">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_3 ISO2">NA</td>
+<td class="gt_row gt_left" headers="stub_1_3 ISO3">AETMP</td>
+<td class="gt_row gt_left" headers="stub_1_3 Indicator">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_3 Unit">Million metric tons of CO2 equivalent</td>
+<td class="gt_row gt_left" headers="stub_1_3 Source">United Nations Framework Convention on Climate Change (UNFCCC). 2022. Greenhouse Gas Inventory Data - Detailed data by Party - Annex I. https://di.unfccc.int/detailed_data_by_party. Accessed on 2022-11-07. Copyright 2022 United Nations Framework Convention on Climate Change; EDGARv7.0, Crippa, M., Guizzardi, D., Banja, M., Solazzo, E., Muntean, M., Schaaf, E., Pagani, F., Monforti-Ferrario, F., Olivier, J., Quadrelli, R., Risquez Martin, A., Taghavi-Moharamli, P., Grassi, G., Rossi, S., Jacome Felix Oom, D., Branco, A., San-Miguel-Ayanz, J. and Vignati, E., CO2 emissions of all world countries - 2022 Report, EUR 31182 EN, Publications Office of the European Union, Luxembourg, 2022, doi:10.2760/730164, JRC130363; Food and Agriculture Organization of the United Nations (FAO). FAOSTAT Climate Change, Emissions, Emission Totals. License: CC BY-NC-SA 3.0 IGO. Extracted from: https://www.fao.org/faostat/en/#data/GT. Accessed on 2022-11-07; IMF staff calculations.</td>
+<td class="gt_row gt_left" headers="stub_1_3 CTS_Code">ECNGDR</td>
+<td class="gt_row gt_left" headers="stub_1_3 CTS_Name">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_3 CTS_Full_Descriptor">Environment, Climate Change, Greenhouse Gas Emissions, National GHG Emissions Inventories and Implied National Mitigation (Nationally Determined Contributions) Targets, Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_3 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_3 Gas_Type">Methane</td>
+<td class="gt_row gt_left" headers="stub_1_3 Scale">Units</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1970">762.877813</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1971">735.945916</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1972">735.022260</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1973">738.635221</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1974">692.799893</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1975">706.263403</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1976">643.494196</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1977">637.204807</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1978">626.515608</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1979">666.957272</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1980">668.886620</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1981">661.223628</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1982">651.697725</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1983">622.851660</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1984">610.953614</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1985">628.888698</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1986">632.121630</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1987">633.25279</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1988">630.494816</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1989">635.198402</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1990">650.306788</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1991">646.661836</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1992">637.904776</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1993">621.808413</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1994">609.420012</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1995">604.540155</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1996">602.818186</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1997">600.56451</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1998">586.688633</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1999">568.056068</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2000">566.587457</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2001">559.684821</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2002">541.230339</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2003">537.569000</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2004">537.022643</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2005">531.258431</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2006">541.30172</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2007">538.396171</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2008">555.435937</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2009">539.024361</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2010">543.521843</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2011">530.386479</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2012">519.590476</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2013">529.322982</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2014">523.352106</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2015">516.083454</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2016">477.831089</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2017">487.588109</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2018">490.287467</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2019">474.488788</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2020">440.978129</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2021">428.586757</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2022">440.33809</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2023">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2024">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2025">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2026">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2027">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2028">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2029">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2030">NA</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_right" headers="stub_1_4 ObjectId">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_4 ISO2">NA</td>
+<td class="gt_row gt_left" headers="stub_1_4 ISO3">AETMP</td>
+<td class="gt_row gt_left" headers="stub_1_4 Indicator">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_4 Unit">Million metric tons of CO2 equivalent</td>
+<td class="gt_row gt_left" headers="stub_1_4 Source">United Nations Framework Convention on Climate Change (UNFCCC). 2022. Greenhouse Gas Inventory Data - Detailed data by Party - Annex I. https://di.unfccc.int/detailed_data_by_party. Accessed on 2022-11-07. Copyright 2022 United Nations Framework Convention on Climate Change; EDGARv7.0, Crippa, M., Guizzardi, D., Banja, M., Solazzo, E., Muntean, M., Schaaf, E., Pagani, F., Monforti-Ferrario, F., Olivier, J., Quadrelli, R., Risquez Martin, A., Taghavi-Moharamli, P., Grassi, G., Rossi, S., Jacome Felix Oom, D., Branco, A., San-Miguel-Ayanz, J. and Vignati, E., CO2 emissions of all world countries - 2022 Report, EUR 31182 EN, Publications Office of the European Union, Luxembourg, 2022, doi:10.2760/730164, JRC130363; Food and Agriculture Organization of the United Nations (FAO). FAOSTAT Climate Change, Emissions, Emission Totals. License: CC BY-NC-SA 3.0 IGO. Extracted from: https://www.fao.org/faostat/en/#data/GT. Accessed on 2022-11-07; IMF staff calculations.</td>
+<td class="gt_row gt_left" headers="stub_1_4 CTS_Code">ECNGDR</td>
+<td class="gt_row gt_left" headers="stub_1_4 CTS_Name">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_4 CTS_Full_Descriptor">Environment, Climate Change, Greenhouse Gas Emissions, National GHG Emissions Inventories and Implied National Mitigation (Nationally Determined Contributions) Targets, Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_4 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_4 Gas_Type">Nitrous oxide</td>
+<td class="gt_row gt_left" headers="stub_1_4 Scale">Units</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1970">47.882810</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1971">47.742083</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1972">50.053627</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1973">52.742296</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1974">52.038016</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1975">51.598201</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1976">54.176193</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1977">56.207471</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1978">58.272411</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1979">60.067714</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1980">58.916777</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1981">58.346247</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1982">58.916909</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1983">59.699205</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1984">61.478507</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1985">62.328304</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1986">63.234515</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1987">64.64194</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1988">67.326333</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1989">69.076828</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1990">101.384002</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1991">103.535042</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1992">106.937489</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1993">110.248797</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1994">114.086218</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1995">118.017173</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1996">121.679616</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1997">124.88618</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1998">127.023544</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1999">125.367542</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2000">123.223170</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2001">121.444350</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2002">120.469027</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2003">120.281983</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2004">119.066591</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2005">114.902451</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2006">114.43661</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2007">112.085473</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2008">108.307076</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2009">102.170333</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2010">103.775476</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2011">100.440416</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2012">96.169605</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2013">96.244718</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2014">93.578886</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2015">90.092037</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2016">88.045539</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2017">85.923467</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2018">84.150983</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2019">81.286912</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2020">74.098301</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2021">77.430497</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2022">77.65568</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2023">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2024">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2025">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2026">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2027">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2028">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2029">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2030">NA</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_right" headers="stub_1_5 ObjectId">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_5 ISO2">NA</td>
+<td class="gt_row gt_left" headers="stub_1_5 ISO3">AETMP</td>
+<td class="gt_row gt_left" headers="stub_1_5 Indicator">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_5 Unit">Million metric tons of CO2 equivalent</td>
+<td class="gt_row gt_left" headers="stub_1_5 Source">United Nations Framework Convention on Climate Change (UNFCCC). 2022. Greenhouse Gas Inventory Data - Detailed data by Party - Annex I. https://di.unfccc.int/detailed_data_by_party. Accessed on 2022-11-07. Copyright 2022 United Nations Framework Convention on Climate Change; EDGARv7.0, Crippa, M., Guizzardi, D., Banja, M., Solazzo, E., Muntean, M., Schaaf, E., Pagani, F., Monforti-Ferrario, F., Olivier, J., Quadrelli, R., Risquez Martin, A., Taghavi-Moharamli, P., Grassi, G., Rossi, S., Jacome Felix Oom, D., Branco, A., San-Miguel-Ayanz, J. and Vignati, E., CO2 emissions of all world countries - 2022 Report, EUR 31182 EN, Publications Office of the European Union, Luxembourg, 2022, doi:10.2760/730164, JRC130363; Food and Agriculture Organization of the United Nations (FAO). FAOSTAT Climate Change, Emissions, Emission Totals. License: CC BY-NC-SA 3.0 IGO. Extracted from: https://www.fao.org/faostat/en/#data/GT. Accessed on 2022-11-07; IMF staff calculations.</td>
+<td class="gt_row gt_left" headers="stub_1_5 CTS_Code">ECNGDR</td>
+<td class="gt_row gt_left" headers="stub_1_5 CTS_Name">Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_5 CTS_Full_Descriptor">Environment, Climate Change, Greenhouse Gas Emissions, National GHG Emissions Inventories and Implied National Mitigation (Nationally Determined Contributions) Targets, Annual Net Emissions/Removals</td>
+<td class="gt_row gt_left" headers="stub_1_5 Industry">1.A. Fuel Combustion Activities</td>
+<td class="gt_row gt_left" headers="stub_1_5 Gas_Type">Carbon dioxide</td>
+<td class="gt_row gt_left" headers="stub_1_5 Scale">Units</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1970">8925.621028</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1971">8828.690951</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1972">9230.591749</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1973">9726.308545</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1974">9477.961800</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1975">9133.349314</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1976">9646.982231</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1977">9870.139256</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1978">9947.899469</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1979">10169.580210</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1980">9790.183911</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1981">9527.809718</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1982">9173.219482</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1983">9108.914424</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1984">9413.094455</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1985">9496.414366</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1986">9498.562776</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1987">9712.96617</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1988">10065.623080</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1989">10200.814740</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1990">10318.949190</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1991">10324.787570</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1992">10385.998630</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1993">10469.990140</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1994">10614.153270</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1995">10752.647670</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1996">11114.691890</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1997">11151.40889</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1998">11174.677490</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1999">11302.482600</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2000">11642.280530</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2001">11638.240110</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2002">11695.190980</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2003">11883.357720</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2004">11999.120590</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2005">12003.173450</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2006">11900.47999</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2007">12000.876820</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2008">11681.484290</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2009">11009.034520</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2010">11403.827980</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2011">11193.862190</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2012">11014.071340</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2013">11102.033320</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2014">10907.730280</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2015">10765.057240</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2016">10636.044700</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2017">10567.983520</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2018">10620.084950</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2019">10316.302660</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2020">9379.264165</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2021">9885.854724</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2022">9963.28164</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2023">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2024">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2025">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2026">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2027">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2028">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2029">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2030">NA</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..22763</td>
+<td class="gt_row gt_right" headers="stub_1_6 ObjectId" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Country" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 ISO2" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 ISO3" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Indicator" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Unit" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Source" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 CTS_Code" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 CTS_Name" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 CTS_Full_Descriptor" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Industry" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Gas_Type" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Scale" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1970" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1971" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1972" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1973" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1974" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1975" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1976" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1977" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1978" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1979" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1980" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1981" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1982" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1983" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1984" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1985" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1986" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1987" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1988" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1989" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1990" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1991" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1992" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1993" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1994" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1995" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1996" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1997" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1998" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1999" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2000" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2001" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2002" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2003" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2004" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2005" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2006" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2007" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2008" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2009" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2010" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2011" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2012" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2013" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2014" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2015" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2016" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2017" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2018" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2019" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2020" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2021" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2022" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2023" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2024" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2025" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2026" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2027" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2028" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2029" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2030" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">22764</td>
+<td class="gt_row gt_right" headers="stub_1_7 ObjectId">27335</td>
+<td class="gt_row gt_left" headers="stub_1_7 Country">Zimbabwe</td>
+<td class="gt_row gt_left" headers="stub_1_7 ISO2">ZW</td>
+<td class="gt_row gt_left" headers="stub_1_7 ISO3">ZWE</td>
+<td class="gt_row gt_left" headers="stub_1_7 Indicator">Total GHG emissions including land-use, land-use change and forestry</td>
+<td class="gt_row gt_left" headers="stub_1_7 Unit">Million metric tons of CO2 equivalent</td>
+<td class="gt_row gt_left" headers="stub_1_7 Source">United Nations Framework Convention on Climate Change (UNFCCC). 2022. Greenhouse Gas Inventory Data - Detailed data by Party - Annex I. https://di.unfccc.int/detailed_data_by_party. Accessed on 2022-11-07. Copyright 2022 United Nations Framework Convention on Climate Change; EDGARv7.0, Crippa, M., Guizzardi, D., Banja, M., Solazzo, E., Muntean, M., Schaaf, E., Pagani, F., Monforti-Ferrario, F., Olivier, J., Quadrelli, R., Risquez Martin, A., Taghavi-Moharamli, P., Grassi, G., Rossi, S., Jacome Felix Oom, D., Branco, A., San-Miguel-Ayanz, J. and Vignati, E., CO2 emissions of all world countries - 2022 Report, EUR 31182 EN, Publications Office of the European Union, Luxembourg, 2022, doi:10.2760/730164, JRC130363; Food and Agriculture Organization of the United Nations (FAO). FAOSTAT Climate Change, Emissions, Emission Totals. License: CC BY-NC-SA 3.0 IGO. Extracted from: https://www.fao.org/faostat/en/#data/GT. Accessed on 2022-11-07; IMF staff calculations.</td>
+<td class="gt_row gt_left" headers="stub_1_7 CTS_Code">ECNGDI</td>
+<td class="gt_row gt_left" headers="stub_1_7 CTS_Name">Total GHG Emissions Including Land-Use and Land-Use Change and Forestry</td>
+<td class="gt_row gt_left" headers="stub_1_7 CTS_Full_Descriptor">Environment, Climate Change, Greenhouse Gas Emissions, National GHG Emissions Inventories and Implied National Mitigation (Nationally Determined Contributions) Targets, Total GHG Emissions Including Land-Use and Land-Use Change and Forestry</td>
+<td class="gt_row gt_left" headers="stub_1_7 Industry">Not Applicable</td>
+<td class="gt_row gt_left" headers="stub_1_7 Gas_Type">Nitrous oxide</td>
+<td class="gt_row gt_left" headers="stub_1_7 Scale">Units</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1970">3.228621</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1971">3.410361</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1972">3.453731</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1973">3.451941</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1974">3.526026</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1975">3.693638</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1976">3.682132</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1977">3.729308</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1978">3.537182</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1979">3.286479</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1980">3.304709</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1981">3.469387</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1982">3.624464</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1983">3.583682</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1984">3.552272</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1985">3.803195</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1986">3.969062</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1987">4.02188</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1988">4.095512</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1989">4.148418</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1990">4.595252</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1991">4.001851</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1992">4.130234</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1993">3.483111</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1994">3.540547</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1995">3.515183</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1996">4.126503</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1997">4.12836</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1998">4.360922</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1999">4.687099</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2000">4.663704</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2001">4.737745</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2002">4.244042</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2003">3.915666</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2004">3.888698</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2005">3.914441</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2006">3.79036</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2007">3.912445</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2008">3.867923</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2009">4.087309</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2010">4.515132</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2011">4.672079</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2012">4.771422</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2013">4.876874</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2014">4.093139</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2015">4.459222</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2016">4.437603</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2017">4.295473</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2018">4.434059</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2019">4.395436</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2020">4.361364</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2021">4.447934</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2022">4.44155</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2023">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2024">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2025">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2026">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2027">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2028">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2029">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2030">NA</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>From the preview we can see that there are many features, lets extract out the relevant ones to preview</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ghg_raw3 <span class="ot">&lt;-</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  ghg_raw3 <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Country, Industry, Gas_Type, F1970<span class="sc">:</span>F2022)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gt_preview</span>(ghg_raw3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="rvnaqmanft" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rvnaqmanft table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rvnaqmanft thead, #rvnaqmanft tbody, #rvnaqmanft tfoot, #rvnaqmanft tr, #rvnaqmanft td, #rvnaqmanft th {
+  border-style: none;
+}
+
+#rvnaqmanft p {
+  margin: 0;
+  padding: 0;
+}
+
+#rvnaqmanft .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rvnaqmanft .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rvnaqmanft .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rvnaqmanft .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rvnaqmanft .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rvnaqmanft .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rvnaqmanft .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rvnaqmanft .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rvnaqmanft .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rvnaqmanft .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rvnaqmanft .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rvnaqmanft .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rvnaqmanft .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rvnaqmanft .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rvnaqmanft .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvnaqmanft .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rvnaqmanft .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rvnaqmanft .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rvnaqmanft .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvnaqmanft .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rvnaqmanft .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvnaqmanft .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rvnaqmanft .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvnaqmanft .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rvnaqmanft .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvnaqmanft .gt_left {
+  text-align: left;
+}
+
+#rvnaqmanft .gt_center {
+  text-align: center;
+}
+
+#rvnaqmanft .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rvnaqmanft .gt_font_normal {
+  font-weight: normal;
+}
+
+#rvnaqmanft .gt_font_bold {
+  font-weight: bold;
+}
+
+#rvnaqmanft .gt_font_italic {
+  font-style: italic;
+}
+
+#rvnaqmanft .gt_super {
+  font-size: 65%;
+}
+
+#rvnaqmanft .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rvnaqmanft .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rvnaqmanft .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rvnaqmanft .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rvnaqmanft .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rvnaqmanft .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rvnaqmanft .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="Country" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Country</th>
+<th id="Industry" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Industry</th>
+<th id="Gas_Type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Gas_Type</th>
+<th id="F1970" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1970</th>
+<th id="F1971" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1971</th>
+<th id="F1972" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1972</th>
+<th id="F1973" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1973</th>
+<th id="F1974" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1974</th>
+<th id="F1975" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1975</th>
+<th id="F1976" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1976</th>
+<th id="F1977" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1977</th>
+<th id="F1978" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1978</th>
+<th id="F1979" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1979</th>
+<th id="F1980" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1980</th>
+<th id="F1981" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1981</th>
+<th id="F1982" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1982</th>
+<th id="F1983" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1983</th>
+<th id="F1984" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1984</th>
+<th id="F1985" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1985</th>
+<th id="F1986" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1986</th>
+<th id="F1987" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1987</th>
+<th id="F1988" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1988</th>
+<th id="F1989" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1989</th>
+<th id="F1990" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1990</th>
+<th id="F1991" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1991</th>
+<th id="F1992" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1992</th>
+<th id="F1993" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1993</th>
+<th id="F1994" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1994</th>
+<th id="F1995" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1995</th>
+<th id="F1996" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1996</th>
+<th id="F1997" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1997</th>
+<th id="F1998" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1998</th>
+<th id="F1999" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F1999</th>
+<th id="F2000" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2000</th>
+<th id="F2001" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2001</th>
+<th id="F2002" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2002</th>
+<th id="F2003" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2003</th>
+<th id="F2004" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2004</th>
+<th id="F2005" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2005</th>
+<th id="F2006" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2006</th>
+<th id="F2007" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2007</th>
+<th id="F2008" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2008</th>
+<th id="F2009" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2009</th>
+<th id="F2010" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2010</th>
+<th id="F2011" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2011</th>
+<th id="F2012" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2012</th>
+<th id="F2013" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2013</th>
+<th id="F2014" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2014</th>
+<th id="F2015" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2015</th>
+<th id="F2016" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2016</th>
+<th id="F2017" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2017</th>
+<th id="F2018" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2018</th>
+<th id="F2019" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2019</th>
+<th id="F2020" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2020</th>
+<th id="F2021" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2021</th>
+<th id="F2022" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">F2022</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_1 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_1 Gas_Type">Carbon dioxide</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1970">9105.274612</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1971">8979.709134</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1972">9386.947306</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1973">9893.826848</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1974">9625.024123</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1975">9257.177469</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1976">9787.166099</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1977">9998.022496</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1978">10078.985850</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1979">10314.500690</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1980">9945.983697</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1981">9678.039695</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1982">9304.126111</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1983">9251.566244</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1984">9574.937951</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1985">9653.127364</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1986">9643.138500</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1987">9854.03250</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1988">10214.233020</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1989">10359.972920</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1990">10423.627770</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1991">10424.345650</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1992">10480.691470</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1993">10563.970660</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1994">10708.851650</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1995">10846.130610</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1996">11208.996470</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1997">11245.82307</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1998">11266.568100</td>
+<td class="gt_row gt_right" headers="stub_1_1 F1999">11391.121760</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2000">11734.131820</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2001">11728.684830</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2002">11788.451540</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2003">11974.984110</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2004">12091.246790</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2005">12099.163390</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2006">11994.44019</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2007">12095.811790</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2008">11776.759590</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2009">11100.433500</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2010">11496.714880</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2011">11294.553250</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2012">11120.313810</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2013">11215.210330</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2014">11031.084230</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2015">10888.440520</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2016">10755.069310</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2017">10692.356430</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2018">10757.611950</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2019">10470.994480</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2020">9507.983542</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2021">10009.163700</td>
+<td class="gt_row gt_right" headers="stub_1_1 F2022">10079.79561</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_2 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_2 Gas_Type">Greenhouse gas</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1970">9916.035235</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1971">9763.397133</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1972">10172.023190</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1973">10685.204370</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1974">10369.862030</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1975">10015.039070</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1976">10484.836490</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1977">10691.434770</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1978">10763.773870</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1979">11041.525670</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1980">10673.787090</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1981">10397.609570</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1982">10014.740750</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1983">9934.117110</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1984">10247.370070</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1985">10344.344370</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1986">10338.494640</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1987">10551.92723</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1988">10912.054170</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1989">11064.248150</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1990">11175.318560</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1991">11174.542530</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1992">11225.533740</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1993">11296.027870</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1994">11432.357880</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1995">11568.687940</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1996">11933.494270</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1997">11971.27375</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1998">11980.280280</td>
+<td class="gt_row gt_right" headers="stub_1_2 F1999">12084.545370</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2000">12423.942440</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2001">12409.814010</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2002">12450.150910</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2003">12632.835090</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2004">12747.336020</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2005">12745.324280</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2006">12650.17853</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2007">12746.293440</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2008">12440.502610</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2009">11741.628190</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2010">12144.012200</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2011">11925.380150</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2012">11736.073890</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2013">11840.778030</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2014">11648.015230</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2015">11494.616010</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2016">11320.945940</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2017">11265.868000</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2018">11332.050400</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2019">11026.770180</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2020">10023.059970</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2021">10515.180960</td>
+<td class="gt_row gt_right" headers="stub_1_2 F2022">10597.78937</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_3 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_3 Gas_Type">Methane</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1970">762.877813</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1971">735.945916</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1972">735.022260</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1973">738.635221</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1974">692.799893</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1975">706.263403</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1976">643.494196</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1977">637.204807</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1978">626.515608</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1979">666.957272</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1980">668.886620</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1981">661.223628</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1982">651.697725</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1983">622.851660</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1984">610.953614</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1985">628.888698</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1986">632.121630</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1987">633.25279</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1988">630.494816</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1989">635.198402</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1990">650.306788</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1991">646.661836</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1992">637.904776</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1993">621.808413</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1994">609.420012</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1995">604.540155</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1996">602.818186</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1997">600.56451</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1998">586.688633</td>
+<td class="gt_row gt_right" headers="stub_1_3 F1999">568.056068</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2000">566.587457</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2001">559.684821</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2002">541.230339</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2003">537.569000</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2004">537.022643</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2005">531.258431</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2006">541.30172</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2007">538.396171</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2008">555.435937</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2009">539.024361</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2010">543.521843</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2011">530.386479</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2012">519.590476</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2013">529.322982</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2014">523.352106</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2015">516.083454</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2016">477.831089</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2017">487.588109</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2018">490.287467</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2019">474.488788</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2020">440.978129</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2021">428.586757</td>
+<td class="gt_row gt_right" headers="stub_1_3 F2022">440.33809</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_4 Industry">1. Energy</td>
+<td class="gt_row gt_left" headers="stub_1_4 Gas_Type">Nitrous oxide</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1970">47.882810</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1971">47.742083</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1972">50.053627</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1973">52.742296</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1974">52.038016</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1975">51.598201</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1976">54.176193</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1977">56.207471</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1978">58.272411</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1979">60.067714</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1980">58.916777</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1981">58.346247</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1982">58.916909</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1983">59.699205</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1984">61.478507</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1985">62.328304</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1986">63.234515</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1987">64.64194</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1988">67.326333</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1989">69.076828</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1990">101.384002</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1991">103.535042</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1992">106.937489</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1993">110.248797</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1994">114.086218</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1995">118.017173</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1996">121.679616</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1997">124.88618</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1998">127.023544</td>
+<td class="gt_row gt_right" headers="stub_1_4 F1999">125.367542</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2000">123.223170</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2001">121.444350</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2002">120.469027</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2003">120.281983</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2004">119.066591</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2005">114.902451</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2006">114.43661</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2007">112.085473</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2008">108.307076</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2009">102.170333</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2010">103.775476</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2011">100.440416</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2012">96.169605</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2013">96.244718</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2014">93.578886</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2015">90.092037</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2016">88.045539</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2017">85.923467</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2018">84.150983</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2019">81.286912</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2020">74.098301</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2021">77.430497</td>
+<td class="gt_row gt_right" headers="stub_1_4 F2022">77.65568</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 Country">Advanced Economies</td>
+<td class="gt_row gt_left" headers="stub_1_5 Industry">1.A. Fuel Combustion Activities</td>
+<td class="gt_row gt_left" headers="stub_1_5 Gas_Type">Carbon dioxide</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1970">8925.621028</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1971">8828.690951</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1972">9230.591749</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1973">9726.308545</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1974">9477.961800</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1975">9133.349314</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1976">9646.982231</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1977">9870.139256</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1978">9947.899469</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1979">10169.580210</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1980">9790.183911</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1981">9527.809718</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1982">9173.219482</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1983">9108.914424</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1984">9413.094455</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1985">9496.414366</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1986">9498.562776</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1987">9712.96617</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1988">10065.623080</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1989">10200.814740</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1990">10318.949190</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1991">10324.787570</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1992">10385.998630</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1993">10469.990140</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1994">10614.153270</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1995">10752.647670</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1996">11114.691890</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1997">11151.40889</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1998">11174.677490</td>
+<td class="gt_row gt_right" headers="stub_1_5 F1999">11302.482600</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2000">11642.280530</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2001">11638.240110</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2002">11695.190980</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2003">11883.357720</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2004">11999.120590</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2005">12003.173450</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2006">11900.47999</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2007">12000.876820</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2008">11681.484290</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2009">11009.034520</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2010">11403.827980</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2011">11193.862190</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2012">11014.071340</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2013">11102.033320</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2014">10907.730280</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2015">10765.057240</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2016">10636.044700</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2017">10567.983520</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2018">10620.084950</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2019">10316.302660</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2020">9379.264165</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2021">9885.854724</td>
+<td class="gt_row gt_right" headers="stub_1_5 F2022">9963.28164</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..22763</td>
+<td class="gt_row gt_left" headers="stub_1_6 Country" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Industry" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Gas_Type" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1970" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1971" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1972" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1973" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1974" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1975" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1976" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1977" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1978" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1979" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1980" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1981" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1982" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1983" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1984" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1985" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1986" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1987" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1988" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1989" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1990" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1991" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1992" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1993" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1994" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1995" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1996" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1997" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1998" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F1999" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2000" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2001" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2002" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2003" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2004" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2005" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2006" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2007" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2008" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2009" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2010" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2011" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2012" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2013" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2014" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2015" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2016" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2017" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2018" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2019" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2020" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2021" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 F2022" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">22764</td>
+<td class="gt_row gt_left" headers="stub_1_7 Country">Zimbabwe</td>
+<td class="gt_row gt_left" headers="stub_1_7 Industry">Not Applicable</td>
+<td class="gt_row gt_left" headers="stub_1_7 Gas_Type">Nitrous oxide</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1970">3.228621</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1971">3.410361</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1972">3.453731</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1973">3.451941</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1974">3.526026</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1975">3.693638</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1976">3.682132</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1977">3.729308</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1978">3.537182</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1979">3.286479</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1980">3.304709</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1981">3.469387</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1982">3.624464</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1983">3.583682</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1984">3.552272</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1985">3.803195</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1986">3.969062</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1987">4.02188</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1988">4.095512</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1989">4.148418</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1990">4.595252</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1991">4.001851</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1992">4.130234</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1993">3.483111</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1994">3.540547</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1995">3.515183</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1996">4.126503</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1997">4.12836</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1998">4.360922</td>
+<td class="gt_row gt_right" headers="stub_1_7 F1999">4.687099</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2000">4.663704</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2001">4.737745</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2002">4.244042</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2003">3.915666</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2004">3.888698</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2005">3.914441</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2006">3.79036</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2007">3.912445</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2008">3.867923</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2009">4.087309</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2010">4.515132</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2011">4.672079</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2012">4.771422</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2013">4.876874</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2014">4.093139</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2015">4.459222</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2016">4.437603</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2017">4.295473</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2018">4.434059</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2019">4.395436</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2020">4.361364</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2021">4.447934</td>
+<td class="gt_row gt_right" headers="stub_1_7 F2022">4.44155</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>From this we can tell that this data source not only have the countries, but it is split by the gas type and industry</p>
+</section>
+<section id="conclusion-from-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-from-exploration">Conclusion from exploration</h2>
+<p><a href="#source1">Source 1</a> and <a href="#source2">Source 2</a> have similar data, both consisting of each country’s annual GHG emission. These data are suitable for a simple analysis while <a href="#source3">Source 3</a> is more detailed, with the data split by industry and gas type.</p>
+<p>We can potentially merge Source 1 and 2 together to get a more complete dataset, and then explore Source 3 for more detailed analysis/different angles.</p>
+</section>
 </section>
 
 </main>
