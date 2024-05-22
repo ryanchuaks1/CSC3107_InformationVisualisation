@@ -18,58 +18,55 @@ library(knitr)
 
 Greenhouse Gases ($CO_2$) data visualisation:
 
-![](./figures/Visualisation_Graph.png){fig-align="center"}
+![](./figures/old_visualization.jpg){fig-align="center"}
 
-<em>Data source: [theGuardian.com](https://www.theguardian.com/environment/datablog/ng-interactive/2022/oct/03/tracking-australias-progress-on-the-climate-crisis-and-the-consequences-of-global-heating) </em>
+<em>Data source: [wri.org](https://www.wri.org/insights/4-charts-explain-greenhouse-gas-emissions-countries-and-sectors) </em>
 
 # Critical Analysis
 
 ## What data are visualized?
 
-$CO_2$ emissions by country (x-axis)
+The Top 10 GHG Emitters by Country and Sector
 
-- Bigger Circles = Larger Emissions
-- Red Circles = Increase in Emissions
-- Blue Circles = Decrease in Emissions
-
+- **Data Type**: Greenhouse Gas Emissions ($MtCO_2e$ - Million Metric Tons of $CO_2$ **Equivalent**)
+- **Countries**: Top 10 countries with the highest emissions (highlighted)
+- **Years**: 1990 to 2019
 
 ## What does the visualization aim to communicate? {.smaller}
 
-The visualization aims to communicate the $CO_2$ emissions by country, and the changes in emissions over time through 2 methods:
-
-1. Circle Size (Larger Circle = Larger Emissions)
-2. Circle Color (Red = Increase, Blue = Decrease)
+The visualization aims to communicate the change in greenhouse gas emissions over time for a selection of countries. It highlights the top 10 countries with the highest emissions from 1990 to 2019.
 
 ## What aspects of the visualization do you appreciate?
 
-The use of shape size and color to represent the increase/decrease in emissions:
+::: {.incremental}
+- **Clear Ranking**: The visualization clearly ranks the countries based on their emissions. (Size)
+- **Color Coding**: The color coding helps differentiate between countries.
+- **Contextual Information**: The visualization depicts the sectors emitting the greenhouse gases per country.
+:::
 
-- **Clear Trend Display**: Shows a clear trend of how greenhouse gas emissions have changed over time for a selection of countries.
-- **Color Coding**: Differentiates between increases and decreases using color coding.
 
 ## What aspects do you find problematic?
 
-::: {.nonincremental}
-- **Limited Country Selection**
-- **Unspecified Greenhouse Gases**
+::: {.incremental}
 - **Visual Clutter**
-- **Lack of Contextual Information**
-- **No Trend Lines**
+- **Unspecified Greenhouse Gases**
+- **Lack of Trend Analysis**
 :::
 
 ::: {.notes}
-- **Limited Country Selection**: Only includes a selection of countries, not all.
-- **Unspecified Greenhouse Gases**: Does not specify which other greenhouse gases are included in the CO2 equivalent mentioned in the title.
-- **Visual Clutter**: Sequential bubbles create visual clutter, especially for countries with larger changes, making it hard to distinguish individual years and magnitudes.
-- **Lack of Contextual Information**: Only shows percentage changes without absolute emission values, making it difficult to gauge the actual impact.
-- **No Trend Lines**: Absence of trend lines makes it difficult to see overall trends for each country over the years.
+- **Visual Clutter**: Pie Chart showing 2 different data categories (Countries and Sectors) in a single chart, making it difficult to interpret.
+- **Unspecified Greenhouse Gases**: Does not specify which other greenhouse gases are included (Might just be the data source issue)
+- **Lack of Trend Analysis**: The visualization does not provide a clear trend analysis for each country over the years.
 :::
 
 
 ## How can the visualization be improved?
 
+::: {.incremental}
 - **Line Graph with Trend Lines**: Using a line graph with trend lines for each country can help show the overall trend over the years more clearly. Each line could be color-coded to indicate the average trend (increasing or decreasing). 
 - **World Map Representation**: Use a world map to show the changes in emissions by country.
+- **Heat Map**: A heat map can be used to show the emissions for each country.
+:::
 
 ## Are the data publicly available, or are there suitable surrogate data? {.smaller}
 
@@ -78,7 +75,48 @@ The use of shape size and color to represent the increase/decrease in emissions:
 ### Original Data View
 
 ```{r}
-#| label: original-data
+#| label: original-data-climate-watch
+
+emissions <- read_csv("dataset/historical_emissions.csv")
+
+# Pivot Longer
+emissions <-
+  emissions |>
+  # columns 2020 to 1990
+  pivot_longer(
+    cols = c(7:37), names_to = "Year", values_to = "Emissions",
+    values_transform = list(Emissions = as.numeric)
+  ) |>
+  select(Country, Year, Emissions)
+
+emissions |>
+  slice_sample(n = 3) |>
+  gt() |>
+  tab_header(title = "Original Data") |>
+  fmt_number(
+    columns = "Emissions",
+    decimals = 3,
+    use_seps = TRUE
+  ) |>
+  # Footnote
+  tab_footnote(
+    footnote = md("Gas emissions in Million metric tons of $CO_2$ equivalent."),
+    locations = cells_column_labels(columns = "Emissions")
+  ) |>
+  # Source
+  tab_source_note(
+    source_note = md("Data source: [climatewatchdata.org](https://www.climatewatchdata.org/ghg-emissions)")
+  ) |>
+  tab_options(
+    table.width = "100%",
+    table.font.size = "70%"
+  )
+```
+
+### OurWorldInData
+
+```{r}
+#| label: our-world-in-data
 
 emissions <- read_csv("dataset/total-ghg-emissions.csv")
 
@@ -86,16 +124,15 @@ emissions <- read_csv("dataset/total-ghg-emissions.csv")
 emissions |>
   slice_sample(n = 5) |>
   gt() |>
-  tab_header(title = "Original Data") |>
+  tab_header(title = "Our World In Data") |>
   fmt_number(
     columns = "Annual greenhouse gas emissions in CO₂ equivalents",
     decimals = 0,
     use_seps = TRUE
   ) |>
-
   # Footnote
   tab_footnote(
-    footnote = md("Gas emissions in kilogram $CO_2$ equivalents."),
+    footnote = md("Gas emissions in Million metric tons of $CO_2$ equivalent."),
     locations = cells_column_labels(columns = "Annual greenhouse gas emissions in CO₂ equivalents")
   ) |>
   # Source
@@ -108,9 +145,10 @@ emissions |>
   )
 ```
 
-### Another Dataset (If any)
+### Climate Data
+
 ```{r}
-#| label: alternative-data
+#| label: climate-data
 
 alternate_emissions <- read_csv("dataset/Annual_Greenhouse_Gas_(GHG)_Air_Emissions_Accounts.csv")
 
@@ -155,4 +193,3 @@ Add more datasets to the presentation (If any).
 
 -->
 :::
-
