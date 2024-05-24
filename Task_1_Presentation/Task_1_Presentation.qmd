@@ -80,7 +80,7 @@ At the same time, it illustrates sectors with percentage on their emissions' con
 ```{r}
 #| label: original-data-climate-watch
 
-emissions <- read_csv("dataset/historical_emissions.csv")
+emissions <- read_csv("dataset/historical_emissions_orig.csv")
 
 # Pivot Longer
 emissions <-
@@ -90,7 +90,7 @@ emissions <-
     cols = c(7:37), names_to = "Year", values_to = "Emissions",
     values_transform = list(Emissions = as.numeric)
   ) |>
-  select(Country, Year, Emissions)
+  select(Country, Sector, Year, Emissions)
 
 emissions |>
   slice_sample(n = 3) |>
