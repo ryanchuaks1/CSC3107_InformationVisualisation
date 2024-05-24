@@ -231,10 +231,11 @@ Simple Line graph with trend line
 #| label: source1-line
 
 ghg_raw |>
-  filter(Country %in% c("China", "United States", "India")) |>
+  filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
   ggplot(aes(x = Year, y = Emissions, color = Country, shape = Country)) +
   geom_point() + # Scatterplot
   geom_smooth(method = "lm", se = FALSE) +
+  # scale_y_log10() +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
