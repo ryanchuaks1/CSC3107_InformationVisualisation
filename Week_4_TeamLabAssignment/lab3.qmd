@@ -1,0 +1,229 @@
+---
+title: "Visualizing Greenhouse Gas Emissions in the world"
+subtitle: "Data Preparation done by *Team Bisque*"
+format: html
+author: "
+  Ryan Chua - 2201421<br>
+  Loo Siong Yu - 2201255<br>
+  Chua Kang Le - 2201161<br>
+  Phua Tiffany - 2202698<br>
+  Woon Jun Wei - 2200624<br>
+  Ong Si Hui - 2201945"
+---
+
+# Introduction
+
+In this exercise, you will delve into the world of data visualization using ggplot2. The assignment is divided into two parts, each focusing on a different data set and exploring various visualization techniques.
+
+In Chapter 2, you will work with the Palmer penguins data set, which contains information about three species of penguins: Adélie, Chinstrap, and Gentoo (Figure 1.1). Your task is to create visualizations of the penguins’ bill lengths that will highlight differences between the species.
+
+The Palmer penguins data set contains information about three species of penguins: Adélie, Chinstrap, and Gentoo. Artwork by Horst (2020).
+In Chapter 3, you will explore the tragic history of the Titanic and examine data about its passengers and crew. Our goal is to analyze whether travelers in different classes had a different chance of survival. This exercise will showcase the power of visualization in uncovering patterns and insights within categorical data.
+
+The primary learning objectives of this exercise include developing proficiency in using ggplot2 and fostering critical thinking skills to evaluate the relative advantages and disadvantages of different visualization techniques. By the end of this exercise, you should be able to make informed decisions about the most appropriate visualization technique for various types of data that you may encounter in the future.
+
+```{r}
+#| label: required-packages
+#| message: false
+
+library(tidyverse)
+library(palmerpenguins)
+library(ggbeeswarm)
+library(ggmosaic)
+library(dplyr)
+```
+
+# 2 Visualizing the Distribution of Quantitative Data: Bill Lengths of Pygoscelis Penguins
+
+Pygoscelis penguins, also known as brush-tailed penguins, are a genus found in the Antarctic and subantarctic regions. They are characterized by their black and white plumage and a unique swimming technique called porpoising, where they leap out of the water in a series of rapid jumps to breathe air. This genus includes three species: the Adélie penguin (Pygoscelis adeliae), the gentoo penguin (Pygoscelis papua), and the chinstrap penguin (Pygoscelis antarcticus). Researchers at Palmer Station in Antarctica have collected data on the bill length of these penguins (Gorman, Williams and Fraser, 2014). You will use these data, available from the palmerpenguins package, to explore the differences between the species using various plot types.
+
+## 2.1 Remove Missing Values
+
+Remove the penguins with missing bill length measurements from the penguins tibble to avoid ggplot2 warning messages in subsequent tasks.
+
+```{r}
+#| label: remove-missing-values
+#| message: false
+
+penguins <- penguins |>
+  drop_na("bill_length_mm")
+
+head(penguins)
+```
+
+## 2.2 Scatter Plot of Species versus Bill Length
+
+Create a scatter plot displaying bill length on the x-axis and species on the y-axis. For this task and all subsequent ones, customize the axis labels and add a plot title. Additionally, include a plot caption attributing the source as “Gorman et al. (2014)”.
+
+```{r}
+#| label: scatter-plot
+#| message: false
+
+p <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
+  geom_point() +
+  labs(
+    x = "Bill Length (mm)",
+    y = "Species",
+    title = "Scatter Plot of Species versus Bill Length",
+    caption = "Source: Gorman et al. (2014)"
+  )
+
+p
+```
+
+## 2.3 Why Should You Jitter the Plot?
+
+Which feature of the data suggests that jittering the scatter plot might be beneficial? (Hint: Show that individuals cannot be uniquely identified by their bill length and species.)
+
+Answer: Jittering helps to spread out the points along the y-axis, making it easier to distinguish between the different species. This is particularly useful when the data points are overlapping, as it allows us to visualize the distribution of bill lengths for each species more clearly.
+
+## 2.4 Jitter Plot
+
+Create a jitter plot displaying bill length on the x-axis and species on the y-axis. Reduce the opacity of the points and adjust the width and height arguments so that points are only jittered in the y-direction while ensuring that the points for different species are clearly separated.
+
+```{r}
+#| label: jitter-plot
+#| message: false
+
+p_jitter <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
+  geom_point(position = position_jitter(height = 0.2), alpha = 0.5) +
+  labs(
+    x = "Bill Length (mm)",
+    y = "Species",
+    title = "Jitter Plot of Species versus Bill Length",
+    caption = "Source: Gorman et al. (2014)"
+  )
+
+p_jitter
+```
+
+## 2.5 Bee-Swarm Plot
+
+Use the geom_beeswarm() function from the ggbeeswarm package to produce a bee-swarm plot illustrating the distribution of bill lengths for each species. Display bill length on the x-axis and species on the y-axis.
+
+```{r}
+#| label: bee-swarm-plot
+#| message: false
+
+p_beeswarm <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
+  geom_beeswarm() +
+  labs(
+    x = "Bill Length (mm)",
+    y = "Species",
+    title = "Bee-Swarm Plot of Species versus Bill Length",
+    caption = "Source: Gorman et al. (2014)"
+  )
+
+p_beeswarm
+```
+
+## 2.6 Pros and Cons of Bee-Swarm Plots
+
+State one advantage and one disadvantage of using a bee-swarm plot rather than a jitter plot for these data?
+
+Advantage: Bee-swarm plots provide a more compact visualization of the data compared to jitter plots, making it easier to identify the distribution of bill lengths for each species.
+
+Disadvantage: Bee-swarm plots may become cluttered when there are many data points, potentially obscuring the underlying patterns in the data.
+
+## 2.7 Violin Plot with Boxes
+
+Combine a violin plot and a box plot in one graph. The plot should display bill length on the x-axis and species on the y-axis.
+
+```{r}
+#| label: violin-plot
+#| message: false
+
+p_violin <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
+  geom_violin() +
+  geom_boxplot(width = 0.1, fill = "white") +
+  labs(
+    x = "Species",
+    y = "Bill Length (mm)",
+    title = "Violin Plot with Boxes of Bill Length by Species",
+    caption = "Source: Gorman et al. (2014)"
+  )
+
+p_violin
+```
+
+## 2.8 Frequency Polygons with Rug Plot
+
+Display the bill-length distribution of each species as a frequency polygon, using a bin width of your choice. Combine all three frequency polygons into one coordinate system using a color aesthetic. Place a rug plot below the x-axis to show the distribution of individual data points with corresponding colors.
+
+```{r}
+#| label: frequency-polygons
+#| message: false
+
+p_freq_polygons <- ggplot(penguins, aes(x = bill_length_mm, color = species)) +
+  geom_freqpoly(binwidth = 3) +
+  geom_rug() +
+  labs(
+    x = "Bill Length (mm)",
+    y = "Frequency",
+    title = "Frequency Polygons of Bill Length by Species",
+    caption = "Source: Gorman et al. (2014)"
+  )
+
+p_freq_polygons
+```
+
+## 2.9 Faceted Frequency Polygons with Rug Plots
+
+Produce a faceted plot that displays the bill-length distribution of each species in a separate facet, using the same bin width as in the previous task. Add a rug plot below each frequency polygon.
+
+```{r}
+#| label: faceted-frequency-polygons
+#| message: false
+
+p_faceted_freq_polygons <- ggplot(penguins, aes(x = bill_length_mm, color = species)) +
+  geom_freqpoly(binwidth = 3) +
+  geom_rug() +
+  facet_wrap(~species) +
+  labs(
+    x = "Bill Length (mm)",
+    y = "Frequency",
+    title = "Faceted Frequency Polygons of Bill Length by Species",
+    caption = "Source: Gorman et al. (2014)"
+  )
+
+p_faceted_freq_polygons
+```
+
+## 2.10 Pros and Cons of Faceting
+
+State one strength and one weakness of the faceted plot in the previous task compared to the earlier non-faceted frequency polygons with rug plot.
+
+Strength: Faceting allows us to compare the bill-length distribution of each species more easily by displaying them in separate panels. This makes it simpler to identify differences between the species.
+
+Weakness: Faceting may lead to visual clutter when there are many facets, making it challenging to interpret the data. It can also be less effective in highlighting patterns that are consistent across different facets.
+
+## 2.11 Unmarked Bonus Question: Pairwise t-Test
+
+All plots above suggest that the bill length of the Adélie penguin is shorter than that of the gentoo and chinstrap penguins. Let us support this observation quantitatively:
+
+1. Calculate the mean bill length for each species.
+2. Perform a pairwise t-test using R. Report the p-value and interpret the result using a significance level of 0.05.
+
+```{r}
+#| label: pairwise-t-test
+#| message: false
+
+# Calculate the mean bill length for each species
+mean_bill_length <- penguins %>%
+  group_by(species) %>%
+  summarize(mean_bill_length = mean(bill_length_mm, na.rm = TRUE))
+
+print(mean_bill_length)
+
+# Perform a pairwise t-test
+pairwise_t_test_results <- pairwise.t.test(penguins$bill_length_mm, penguins$species, p.adjust.method = "none")
+
+# Extract p-values for comparisons involving Adélie penguins
+pairwise_t_test_results$p.value
+
+# Interpret the result
+# The p-values for the pairwise t-tests comparing the bill length of Adélie penguins with that of gentoo and chinstrap penguins are both less than 0.05. Therefore, we reject the null hypothesis that the mean bill length of Adélie penguins is equal to that of gentoo and chinstrap penguins. This result supports the observation that the bill length of Adélie penguins is shorter than that of the other two species.
+```
+
+
+.
