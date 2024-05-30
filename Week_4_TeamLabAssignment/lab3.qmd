@@ -9,6 +9,7 @@ author: "
   Phua Tiffany - 2202698<br>
   Woon Jun Wei - 2200624<br>
   Ong Si Hui - 2201945"
+number-sections: true
 ---
 
 # Introduction
@@ -33,11 +34,11 @@ library(ggmosaic)
 library(dplyr)
 ```
 
-# 2 Visualizing the Distribution of Quantitative Data: Bill Lengths of Pygoscelis Penguins
+# Visualizing the Distribution of Quantitative Data: Bill Lengths of Pygoscelis Penguins
 
 Pygoscelis penguins, also known as brush-tailed penguins, are a genus found in the Antarctic and subantarctic regions. They are characterized by their black and white plumage and a unique swimming technique called porpoising, where they leap out of the water in a series of rapid jumps to breathe air. This genus includes three species: the Adélie penguin (Pygoscelis adeliae), the gentoo penguin (Pygoscelis papua), and the chinstrap penguin (Pygoscelis antarcticus). Researchers at Palmer Station in Antarctica have collected data on the bill length of these penguins (Gorman, Williams and Fraser, 2014). You will use these data, available from the palmerpenguins package, to explore the differences between the species using various plot types.
 
-## 2.1 Remove Missing Values
+## Remove Missing Values
 
 Remove the penguins with missing bill length measurements from the penguins tibble to avoid ggplot2 warning messages in subsequent tasks.
 
@@ -51,7 +52,7 @@ penguins <- penguins |>
 head(penguins)
 ```
 
-## 2.2 Scatter Plot of Species versus Bill Length
+## Scatter Plot of Species versus Bill Length
 
 Create a scatter plot displaying bill length on the x-axis and species on the y-axis. For this task and all subsequent ones, customize the axis labels and add a plot title. Additionally, include a plot caption attributing the source as “Gorman et al. (2014)”.
 
@@ -71,13 +72,13 @@ p <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
 p
 ```
 
-## 2.3 Why Should You Jitter the Plot?
+## Why Should You Jitter the Plot?
 
 Which feature of the data suggests that jittering the scatter plot might be beneficial? (Hint: Show that individuals cannot be uniquely identified by their bill length and species.)
 
 Answer: Jittering helps to spread out the points along the y-axis, making it easier to distinguish between the different species. This is particularly useful when the data points are overlapping, as it allows us to visualize the distribution of bill lengths for each species more clearly.
 
-## 2.4 Jitter Plot
+## Jitter Plot
 
 Create a jitter plot displaying bill length on the x-axis and species on the y-axis. Reduce the opacity of the points and adjust the width and height arguments so that points are only jittered in the y-direction while ensuring that the points for different species are clearly separated.
 
@@ -97,7 +98,7 @@ p_jitter <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
 p_jitter
 ```
 
-## 2.5 Bee-Swarm Plot
+## Bee-Swarm Plot
 
 Use the geom_beeswarm() function from the ggbeeswarm package to produce a bee-swarm plot illustrating the distribution of bill lengths for each species. Display bill length on the x-axis and species on the y-axis.
 
@@ -117,7 +118,7 @@ p_beeswarm <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
 p_beeswarm
 ```
 
-## 2.6 Pros and Cons of Bee-Swarm Plots
+## Pros and Cons of Bee-Swarm Plots
 
 State one advantage and one disadvantage of using a bee-swarm plot rather than a jitter plot for these data?
 
@@ -125,7 +126,7 @@ Advantage: Bee-swarm plots provide a more compact visualization of the data comp
 
 Disadvantage: Bee-swarm plots may become cluttered when there are many data points, potentially obscuring the underlying patterns in the data.
 
-## 2.7 Violin Plot with Boxes
+## Violin Plot with Boxes
 
 Combine a violin plot and a box plot in one graph. The plot should display bill length on the x-axis and species on the y-axis.
 
@@ -146,7 +147,7 @@ p_violin <- ggplot(penguins, aes(x = bill_length_mm, y = species)) +
 p_violin
 ```
 
-## 2.8 Frequency Polygons with Rug Plot
+## Frequency Polygons with Rug Plot
 
 Display the bill-length distribution of each species as a frequency polygon, using a bin width of your choice. Combine all three frequency polygons into one coordinate system using a color aesthetic. Place a rug plot below the x-axis to show the distribution of individual data points with corresponding colors.
 
@@ -167,7 +168,7 @@ p_freq_polygons <- ggplot(penguins, aes(x = bill_length_mm, color = species)) +
 p_freq_polygons
 ```
 
-## 2.9 Faceted Frequency Polygons with Rug Plots
+## Faceted Frequency Polygons with Rug Plots
 
 Produce a faceted plot that displays the bill-length distribution of each species in a separate facet, using the same bin width as in the previous task. Add a rug plot below each frequency polygon.
 
@@ -189,7 +190,7 @@ p_faceted_freq_polygons <- ggplot(penguins, aes(x = bill_length_mm, color = spec
 p_faceted_freq_polygons
 ```
 
-## 2.10 Pros and Cons of Faceting
+## Pros and Cons of Faceting
 
 State one strength and one weakness of the faceted plot in the previous task compared to the earlier non-faceted frequency polygons with rug plot.
 
@@ -197,7 +198,7 @@ Strength: Faceting allows us to compare the bill-length distribution of each spe
 
 Weakness: Faceting may lead to visual clutter when there are many facets, making it challenging to interpret the data. It can also be less effective in highlighting patterns that are consistent across different facets.
 
-## 2.11 Unmarked Bonus Question: Pairwise t-Test
+## Unmarked Bonus Question: Pairwise t-Test
 
 All plots above suggest that the bill length of the Adélie penguin is shorter than that of the gentoo and chinstrap penguins. Let us support this observation quantitatively:
 
@@ -225,5 +226,104 @@ pairwise_t_test_results$p.value
 # The p-values for the pairwise t-tests comparing the bill length of Adélie penguins with that of gentoo and chinstrap penguins are both less than 0.05. Therefore, we reject the null hypothesis that the mean bill length of Adélie penguins is equal to that of gentoo and chinstrap penguins. This result supports the observation that the bill length of Adélie penguins is shorter than that of the other two species.
 ```
 
+# Visualizing the Distribution of Categorical Data: Travelers on the Titanic
 
-.
+The spreadsheet at titanic.csv, available from Prof. Gastner’s website, contains information about the passengers and crew aboard the Titanic during its maiden voyage in 1912, which tragically ended when the ship hit an iceberg and sank. This spreadsheet is based on data available from the Encyclopedia Titanica (Hind, 2023).
+
+```{r}
+#| label: read-titanic-data
+
+titanic <- read_csv("titanic.csv")
+
+head(titanic)
+```
+
+## Bar Chart of Travelers by Class
+
+Create a bar chart displaying the number of travelers by class (1st, 2nd, 3rd, and crew). Include a plot title and a caption attributing the source as “Encyclopedia Titanica (2023).” Aim for a solution similar to Figure 3.1.
+
+Hint: You may find it easier to aggregate the number of passenger using count() before calling ggplot().
+
+```{r}
+#| label: bar-chart-class
+
+titanic_class <- titanic |>
+  count(class) |>
+  mutate(class = factor(class, levels = c("1st", "2nd", "3rd", "Crew")))
+
+
+# Create the horizontal bar chart
+ggplot(titanic_class, aes(x = class, y = n)) +
+  geom_bar(stat = "identity", fill = "white", color = "black") +
+  geom_text(aes(label = n), hjust = -0.3, color = "black") +
+  coord_flip() +
+  labs(title = "Titanic Travelers by Class",
+       x = "Class",
+       y = "Number of Travelers",
+       caption = "Source: Encyclopedia Titanica (2023)") +
+  theme_minimal() +
+  theme(plot.caption = element_text(hjust = 0.5))
+
+```
+
+## Dodged Bar Chart of Travelers by Class and Survival
+
+Use a dodged bar chart to visualize the dependence of the survival rate on the class in which a person traveled. Aim for a solution similar to Figure 3.2.
+
+```{r}
+#| label: dodged-bar-chart-survival
+
+# Aggregate the number of passengers by class and survival status
+travelers_by_class_survival <- titanic |>
+  count(class, survived)
+
+# Reorder the class factor levels to ensure Crew is at the top and 1st class is at the bottom
+travelers_by_class_survival$class <- factor(travelers_by_class_survival$class, levels = c("1st", "2nd", "3rd", "Crew"))
+
+# Create the dodged bar chart
+ggplot(travelers_by_class_survival, aes(x = class, y = n, fill = survived)) +
+  geom_bar(stat = "identity", position = "dodge", color = "white") +
+  geom_text(aes(label = n, color= survived), position = position_dodge(width = 0.8), hjust = -0.3, show.legend = FALSE) +
+  coord_flip() +
+  labs(title = "Titanic Travelers by Class and Survival",
+       x = "Class",
+       y = "Number of Travelers",
+       fill = "Survived",
+       caption = "Source: Encyclopedia Titanica (2023)") +
+  theme_minimal() +
+  scale_fill_manual(values = c("TRUE" = "turquoise", "FALSE" = "coral")) +
+  scale_color_manual(values = c("TRUE" = "turquoise", "FALSE" = "coral"))
+
+```
+
+## Mosaic Plot
+
+When working with two categorical variables, such as class and survival, mosaic plots provide an alternative to segmented bar charts. Use the `geom_mosaic()` function from the ggmosaic package to create a mosaic plot of the data in titanic. Aim for a solution similar to Figure 3.3.
+
+This task requires some hacking skills. Look at the documentation for geom_mosaic(). A hint for printing the number of travelers in each category at the center of the corresponding mosaic tile can be found on Stack Overflow.
+
+```{r}
+#| label: mosaic-plot
+
+# Create the mosaic plot
+p <- ggplot(data = titanic) +
+  geom_mosaic(aes(x = product(class), fill = survived))
+
+# Extract the data for text labels
+label_data <- ggplot_build(p)$data[[1]] |>
+  group_by(x__class, xmin, xmax, ymin, ymax) |>
+  summarise(total = sum(.wt), .groups = 'drop')
+
+# Add the text labels with total counts, ensuring only the total number is shown
+p + geom_text(data = label_data,
+              aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = total),
+              size = 5, check_overlap = TRUE)
+```
+
+## Pros and Cons of Mosaic Plots
+
+State one advantage and one disadvantage of using the mosaic plot in Figure 3.3 instead of the dodged bar chart in Figure 3.2 for the Titanic data.
+
+Advantage: Mosaic plots provide a visual representation of the conditional distribution of one categorical variable within each category of another categorical variable, making it easier to compare the proportions of different groups.
+
+Disadvantage: Mosaic plots can be challenging to interpret when the number of categories is large or when the categories are imbalanced, as the plot may become cluttered and difficult to read.

@@ -104,8 +104,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>In this exercise, you will delve into the world of data visualization using ggplot2. The assignment is divided into two parts, each focusing on a different data set and exploring various visualization techniques.</p>
 <p>In Chapter 2, you will work with the Palmer penguins data set, which contains information about three species of penguins: Adélie, Chinstrap, and Gentoo (Figure 1.1). Your task is to create visualizations of the penguins’ bill lengths that will highlight differences between the species.</p>
 <p>The Palmer penguins data set contains information about three species of penguins: Adélie, Chinstrap, and Gentoo. Artwork by Horst (2020). In Chapter 3, you will explore the tragic history of the Titanic and examine data about its passengers and crew. Our goal is to analyze whether travelers in different classes had a different chance of survival. This exercise will showcase the power of visualization in uncovering patterns and insights within categorical data.</p>
@@ -118,11 +118,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="visualizing-the-distribution-of-quantitative-data-bill-lengths-of-pygoscelis-penguins" class="level1">
-<h1>2 Visualizing the Distribution of Quantitative Data: Bill Lengths of Pygoscelis Penguins</h1>
+<section id="visualizing-the-distribution-of-quantitative-data-bill-lengths-of-pygoscelis-penguins" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Visualizing the Distribution of Quantitative Data: Bill Lengths of Pygoscelis Penguins</h1>
 <p>Pygoscelis penguins, also known as brush-tailed penguins, are a genus found in the Antarctic and subantarctic regions. They are characterized by their black and white plumage and a unique swimming technique called porpoising, where they leap out of the water in a series of rapid jumps to breathe air. This genus includes three species: the Adélie penguin (Pygoscelis adeliae), the gentoo penguin (Pygoscelis papua), and the chinstrap penguin (Pygoscelis antarcticus). Researchers at Palmer Station in Antarctica have collected data on the bill length of these penguins (Gorman, Williams and Fraser, 2014). You will use these data, available from the palmerpenguins package, to explore the differences between the species using various plot types.</p>
-<section id="remove-missing-values" class="level2">
-<h2 class="anchored" data-anchor-id="remove-missing-values">2.1 Remove Missing Values</h2>
+<section id="remove-missing-values" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="remove-missing-values"><span class="header-section-number">2.1</span> Remove Missing Values</h2>
 <p>Remove the penguins with missing bill length measurements from the penguins tibble to avoid ggplot2 warning messages in subsequent tasks.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
@@ -143,8 +143,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="scatter-plot-of-species-versus-bill-length" class="level2">
-<h2 class="anchored" data-anchor-id="scatter-plot-of-species-versus-bill-length">2.2 Scatter Plot of Species versus Bill Length</h2>
+<section id="scatter-plot-of-species-versus-bill-length" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="scatter-plot-of-species-versus-bill-length"><span class="header-section-number">2.2</span> Scatter Plot of Species versus Bill Length</h2>
 <p>Create a scatter plot displaying bill length on the x-axis and species on the y-axis. For this task and all subsequent ones, customize the axis labels and add a plot title. Additionally, include a plot caption attributing the source as “Gorman et al.&nbsp;(2014)”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> species)) <span class="sc">+</span></span>
@@ -166,13 +166,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="why-should-you-jitter-the-plot" class="level2">
-<h2 class="anchored" data-anchor-id="why-should-you-jitter-the-plot">2.3 Why Should You Jitter the Plot?</h2>
+<section id="why-should-you-jitter-the-plot" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="why-should-you-jitter-the-plot"><span class="header-section-number">2.3</span> Why Should You Jitter the Plot?</h2>
 <p>Which feature of the data suggests that jittering the scatter plot might be beneficial? (Hint: Show that individuals cannot be uniquely identified by their bill length and species.)</p>
 <p>Answer: Jittering helps to spread out the points along the y-axis, making it easier to distinguish between the different species. This is particularly useful when the data points are overlapping, as it allows us to visualize the distribution of bill lengths for each species more clearly.</p>
 </section>
-<section id="jitter-plot" class="level2">
-<h2 class="anchored" data-anchor-id="jitter-plot">2.4 Jitter Plot</h2>
+<section id="jitter-plot" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="jitter-plot"><span class="header-section-number">2.4</span> Jitter Plot</h2>
 <p>Create a jitter plot displaying bill length on the x-axis and species on the y-axis. Reduce the opacity of the points and adjust the width and height arguments so that points are only jittered in the y-direction while ensuring that the points for different species are clearly separated.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p_jitter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> species)) <span class="sc">+</span></span>
@@ -194,8 +194,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="bee-swarm-plot" class="level2">
-<h2 class="anchored" data-anchor-id="bee-swarm-plot">2.5 Bee-Swarm Plot</h2>
+<section id="bee-swarm-plot" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="bee-swarm-plot"><span class="header-section-number">2.5</span> Bee-Swarm Plot</h2>
 <p>Use the geom_beeswarm() function from the ggbeeswarm package to produce a bee-swarm plot illustrating the distribution of bill lengths for each species. Display bill length on the x-axis and species on the y-axis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p_beeswarm <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> species)) <span class="sc">+</span></span>
@@ -217,14 +217,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="pros-and-cons-of-bee-swarm-plots" class="level2">
-<h2 class="anchored" data-anchor-id="pros-and-cons-of-bee-swarm-plots">2.6 Pros and Cons of Bee-Swarm Plots</h2>
+<section id="pros-and-cons-of-bee-swarm-plots" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="pros-and-cons-of-bee-swarm-plots"><span class="header-section-number">2.6</span> Pros and Cons of Bee-Swarm Plots</h2>
 <p>State one advantage and one disadvantage of using a bee-swarm plot rather than a jitter plot for these data?</p>
 <p>Advantage: Bee-swarm plots provide a more compact visualization of the data compared to jitter plots, making it easier to identify the distribution of bill lengths for each species.</p>
 <p>Disadvantage: Bee-swarm plots may become cluttered when there are many data points, potentially obscuring the underlying patterns in the data.</p>
 </section>
-<section id="violin-plot-with-boxes" class="level2">
-<h2 class="anchored" data-anchor-id="violin-plot-with-boxes">2.7 Violin Plot with Boxes</h2>
+<section id="violin-plot-with-boxes" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="violin-plot-with-boxes"><span class="header-section-number">2.7</span> Violin Plot with Boxes</h2>
 <p>Combine a violin plot and a box plot in one graph. The plot should display bill length on the x-axis and species on the y-axis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p_violin <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> species)) <span class="sc">+</span></span>
@@ -247,8 +247,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="frequency-polygons-with-rug-plot" class="level2">
-<h2 class="anchored" data-anchor-id="frequency-polygons-with-rug-plot">2.8 Frequency Polygons with Rug Plot</h2>
+<section id="frequency-polygons-with-rug-plot" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="frequency-polygons-with-rug-plot"><span class="header-section-number">2.8</span> Frequency Polygons with Rug Plot</h2>
 <p>Display the bill-length distribution of each species as a frequency polygon, using a bin width of your choice. Combine all three frequency polygons into one coordinate system using a color aesthetic. Place a rug plot below the x-axis to show the distribution of individual data points with corresponding colors.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_freq_polygons <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">color =</span> species)) <span class="sc">+</span></span>
@@ -271,8 +271,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="faceted-frequency-polygons-with-rug-plots" class="level2">
-<h2 class="anchored" data-anchor-id="faceted-frequency-polygons-with-rug-plots">2.9 Faceted Frequency Polygons with Rug Plots</h2>
+<section id="faceted-frequency-polygons-with-rug-plots" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="faceted-frequency-polygons-with-rug-plots"><span class="header-section-number">2.9</span> Faceted Frequency Polygons with Rug Plots</h2>
 <p>Produce a faceted plot that displays the bill-length distribution of each species in a separate facet, using the same bin width as in the previous task. Add a rug plot below each frequency polygon.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p_faceted_freq_polygons <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">color =</span> species)) <span class="sc">+</span></span>
@@ -296,14 +296,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="pros-and-cons-of-faceting" class="level2">
-<h2 class="anchored" data-anchor-id="pros-and-cons-of-faceting">2.10 Pros and Cons of Faceting</h2>
+<section id="pros-and-cons-of-faceting" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="pros-and-cons-of-faceting"><span class="header-section-number">2.10</span> Pros and Cons of Faceting</h2>
 <p>State one strength and one weakness of the faceted plot in the previous task compared to the earlier non-faceted frequency polygons with rug plot.</p>
 <p>Strength: Faceting allows us to compare the bill-length distribution of each species more easily by displaying them in separate panels. This makes it simpler to identify differences between the species.</p>
 <p>Weakness: Faceting may lead to visual clutter when there are many facets, making it challenging to interpret the data. It can also be less effective in highlighting patterns that are consistent across different facets.</p>
 </section>
-<section id="unmarked-bonus-question-pairwise-t-test" class="level2">
-<h2 class="anchored" data-anchor-id="unmarked-bonus-question-pairwise-t-test">2.11 Unmarked Bonus Question: Pairwise t-Test</h2>
+<section id="unmarked-bonus-question-pairwise-t-test" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="unmarked-bonus-question-pairwise-t-test"><span class="header-section-number">2.11</span> Unmarked Bonus Question: Pairwise t-Test</h2>
 <p>All plots above suggest that the bill length of the Adélie penguin is shorter than that of the gentoo and chinstrap penguins. Let us support this observation quantitatively:</p>
 <ol type="1">
 <li>Calculate the mean bill length for each species.</li>
@@ -337,7 +337,147 @@ Gentoo    5.330682e-76 0.003178539</code></pre>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpret the result</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The p-values for the pairwise t-tests comparing the bill length of Adélie penguins with that of gentoo and chinstrap penguins are both less than 0.05. Therefore, we reject the null hypothesis that the mean bill length of Adélie penguins is equal to that of gentoo and chinstrap penguins. This result supports the observation that the bill length of Adélie penguins is shorter than that of the other two species.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>.</p>
+</section>
+</section>
+<section id="visualizing-the-distribution-of-categorical-data-travelers-on-the-titanic" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Visualizing the Distribution of Categorical Data: Travelers on the Titanic</h1>
+<p>The spreadsheet at titanic.csv, available from Prof.&nbsp;Gastner’s website, contains information about the passengers and crew aboard the Titanic during its maiden voyage in 1912, which tragically ended when the ship hit an iceberg and sank. This spreadsheet is based on data available from the Encyclopedia Titanica (Hind, 2023).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"titanic.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 2208 Columns: 14
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (9): fam_name, given_name, class, sex, ticket, embarkation_port, profess...
+dbl (3): id, age, recovered_body
+lgl (2): survived, certain_on_lifeboat
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(titanic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 14
+     id fam_name given_name     age class sex   survived ticket embarkation_port
+  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;  &lt;chr&gt;           
+1     1 Abbing   Anthony         41 3rd   Male  FALSE    5547   Southampton     
+2     2 Abbott   Ernest Owen     21 Crew  Male  FALSE    &lt;NA&gt;   Southampton     
+3     3 Abbott   Eugene Jose…    13 3rd   Male  FALSE    CA2673 Southampton     
+4     4 Abbott   Rhoda Mary …    39 3rd   Fema… TRUE     CA2673 Southampton     
+5     5 Abbott   Rossmore Ed…    16 3rd   Male  FALSE    CA2673 Southampton     
+6     6 Abelseth Kalle (Kare…    16 3rd   Fema… TRUE     348125 Southampton     
+# ℹ 5 more variables: profession &lt;chr&gt;, job_on_board &lt;chr&gt;, lifeboat &lt;chr&gt;,
+#   certain_on_lifeboat &lt;lgl&gt;, recovered_body &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<section id="bar-chart-of-travelers-by-class" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="bar-chart-of-travelers-by-class"><span class="header-section-number">3.1</span> Bar Chart of Travelers by Class</h2>
+<p>Create a bar chart displaying the number of travelers by class (1st, 2nd, 3rd, and crew). Include a plot title and a caption attributing the source as “Encyclopedia Titanica (2023).” Aim for a solution similar to Figure 3.1.</p>
+<p>Hint: You may find it easier to aggregate the number of passenger using count() before calling ggplot().</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>titanic_class <span class="ot">&lt;-</span> titanic <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(class) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">class =</span> <span class="fu">factor</span>(class, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1st"</span>, <span class="st">"2nd"</span>, <span class="st">"3rd"</span>, <span class="st">"Crew"</span>)))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the horizontal bar chart</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(titanic_class, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Titanic Travelers by Class"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Class"</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of Travelers"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Encyclopedia Titanica (2023)"</span>) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab3_files/figure-html/bar-chart-class-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dodged-bar-chart-of-travelers-by-class-and-survival" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="dodged-bar-chart-of-travelers-by-class-and-survival"><span class="header-section-number">3.2</span> Dodged Bar Chart of Travelers by Class and Survival</h2>
+<p>Use a dodged bar chart to visualize the dependence of the survival rate on the class in which a person traveled. Aim for a solution similar to Figure 3.2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate the number of passengers by class and survival status</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>travelers_by_class_survival <span class="ot">&lt;-</span> titanic <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(class, survived)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder the class factor levels to ensure Crew is at the top and 1st class is at the bottom</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>travelers_by_class_survival<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">factor</span>(travelers_by_class_survival<span class="sc">$</span>class, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"1st"</span>, <span class="st">"2nd"</span>, <span class="st">"3rd"</span>, <span class="st">"Crew"</span>))</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the dodged bar chart</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(travelers_by_class_survival, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> n, <span class="at">fill =</span> survived)) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n, <span class="at">color=</span> survived), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Titanic Travelers by Class and Survival"</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Class"</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number of Travelers"</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Survived"</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Encyclopedia Titanica (2023)"</span>) <span class="sc">+</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"turquoise"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"coral"</span>)) <span class="sc">+</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"turquoise"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"coral"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab3_files/figure-html/dodged-bar-chart-survival-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mosaic-plot" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="mosaic-plot"><span class="header-section-number">3.3</span> Mosaic Plot</h2>
+<p>When working with two categorical variables, such as class and survival, mosaic plots provide an alternative to segmented bar charts. Use the <code>geom_mosaic()</code> function from the ggmosaic package to create a mosaic plot of the data in titanic. Aim for a solution similar to Figure 3.3.</p>
+<p>This task requires some hacking skills. Look at the documentation for geom_mosaic(). A hint for printing the number of travelers in each category at the center of the corresponding mosaic tile can be found on Stack Overflow.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the mosaic plot</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> titanic) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_mosaic</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">product</span>(class), <span class="at">fill =</span> survived))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the data for text labels</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>label_data <span class="ot">&lt;-</span> <span class="fu">ggplot_build</span>(p)<span class="sc">$</span>data[[<span class="dv">1</span>]] <span class="sc">|&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(x__class, xmin, xmax, ymin, ymax) <span class="sc">|&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(.wt), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `scale_name` argument of `continuous_scale()` is deprecated as of ggplot2
+3.5.0.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `trans` argument of `continuous_scale()` is deprecated as of ggplot2 3.5.0.
+ℹ Please use the `transform` argument instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `unite_()` was deprecated in tidyr 1.2.0.
+ℹ Please use `unite()` instead.
+ℹ The deprecated feature was likely used in the ggmosaic package.
+  Please report the issue at &lt;https://github.com/haleyjeppson/ggmosaic&gt;.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the text labels with total counts, ensuring only the total number is shown</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">data =</span> label_data,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x =</span> (xmin <span class="sc">+</span> xmax) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">y =</span> (ymin <span class="sc">+</span> ymax) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">label =</span> total),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">5</span>, <span class="at">check_overlap =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab3_files/figure-html/mosaic-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pros-and-cons-of-mosaic-plots" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="pros-and-cons-of-mosaic-plots"><span class="header-section-number">3.4</span> Pros and Cons of Mosaic Plots</h2>
+<p>State one advantage and one disadvantage of using the mosaic plot in Figure 3.3 instead of the dodged bar chart in Figure 3.2 for the Titanic data.</p>
+<p>Advantage: Mosaic plots provide a visual representation of the conditional distribution of one categorical variable within each category of another categorical variable, making it easier to compare the proportions of different groups.</p>
+<p>Disadvantage: Mosaic plots can be challenging to interpret when the number of categories is large or when the categories are imbalanced, as the plot may become cluttered and difficult to read.</p>
 </section>
 </section>
 
