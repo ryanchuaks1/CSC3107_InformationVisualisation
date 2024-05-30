@@ -1,6 +1,6 @@
 ---
-title: "Visualizing Greenhouse Gas Emissions in the world"
-subtitle: "Data Preparation done by *Team Bisque*"
+title: "Exercise: Visualizing Distributions of Quantitative and Categorical Data"
+subtitle: "Done by *Team Bisque*"
 format: html
 author: "
   Ryan Chua - 2201421<br>
