@@ -86,13 +86,14 @@ dim(ghg_raw)
 We then group similar gases together (CO2, F-Gas, N20, CH4) and sum them up for each country
 
 ```{r}
-# 
-# ghg_co2 <- ghg_raw |>
-#   filter(Gas %in% c("CO2")) |>
-#   # Pivot longer to get ISO, Country, sector, year and emissions
-#   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
-#     values_transform = list(Emissions = as.numeric)) |>
-#   
+ 
+ghg_co2_year <- ghg_raw |>
+  filter(Gas %in% c("CO2")) |>
+  # Pivot longer to get ISO, Country, sector, year and emissions
+  pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
+    values_transform = list(Emissions = as.numeric))
+
+# head(ghg_co2_year)
 #   group_by(ISO, Country, Year)
 # 
 # ghg_co2_total_sector <- ghg_co2 |>
@@ -264,8 +265,13 @@ Lets start by visualizing the data from the main source with a heatmap
 ```{r}
 #| label: source1-heatmap
 
+# Sum up the emissions for each country across all Sector in the same year
+ghg_co2_year <- ghg_co2 |>
+  group_by(Country, Year) |>
+  summarize(Emissions = sum(Emissions), .groups = 'drop')
+
 # Select the countries largest overall 10 emitters and display their emissions over the years in a heatmap
-ghg_co2 |>
+ghg_co2_year |>
   filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
   ggplot(aes(x = Year, y = Country, fill = Emissions)) +
   geom_tile(color = "white") +
@@ -397,6 +403,32 @@ ghg_total_sector |>
   labs(
     title = "Top 10 GHG Emitters",
     subtitle = "Emissions by Sector",
+    fill = "Sector"
+  )
+```
+
+Stacked bar chart of the top 10 countries emissions by sector
+
+```{r}
+#| label: source1-stackedbar
+
+ghg_total_sector |>
+  filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
+  ggplot(aes(x = Country, y = Emissions, fill = Sector)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    subtitle = "Emissions by Sector",
+    x = "Country",
+    y = "Emissions (MtCO₂e)",
     fill = "Sector"
   )
 ```
