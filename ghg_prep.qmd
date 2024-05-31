@@ -49,7 +49,7 @@ Firstly, lets take a look at the raw data provided from [climatewatchdata.org](h
 #| label: explore-raw
 #| message: false
 
-ghg_raw <- read_csv("data/historical_emissions.csv")
+ghg_raw <- read_csv("data/historical_emissions_orig.csv")
 gt_preview(ghg_raw)
 ```
 
@@ -71,29 +71,131 @@ ghg_raw |>
   )
 ```
 
-Since there is only 1 distinct `Sector`, `Gas` and `Unit` type, we can drop those columns along with the `Source` column as it is not needed for our analysis. The unit MtCO₂e stands for "million metric tons of carbon dioxide equivalent."
+Since there is only 1 distinct `Unit` type, we can drop this columns along  as it is not needed for our analysis. The unit MtCO₂e stands for "million metric tons of carbon dioxide equivalent."
 
 ```{r}
 ghg_raw <-
   ghg_raw |>
-  select(-c(Sector, Gas, Unit, "Data source"))
+  select(-Unit, -"Data source")
 
 gt_preview(ghg_raw)
+# Print size of the dataset
+dim(ghg_raw)
 ```
 
-Then we pivot the data long to make it easier to work with
+We then group similar gases together (CO2, F-Gas, N20, CH4) and sum them up for each country
 
 ```{r}
-ghg_raw <-
-  ghg_raw |>
-  pivot_longer(
-    cols = 3:33, names_to = "Year", values_to = "Emissions",
-    values_transform = list(Emissions = as.numeric)
-  )
+# 
+# ghg_co2 <- ghg_raw |>
+#   filter(Gas %in% c("CO2")) |>
+#   # Pivot longer to get ISO, Country, sector, year and emissions
+#   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
+#     values_transform = list(Emissions = as.numeric)) |>
+#   
+#   group_by(ISO, Country, Year)
+# 
+# ghg_co2_total_sector <- ghg_co2 |>
+#   # Sum up the emissions for each country across all years
+#   group_by(ISO, Country) |>
+#   summarize(Emissions = sum(Emissions)) |>
+#   arrange(desc(Emissions))
+# 
+# ghg_fgas <- ghg_raw |>
+#   filter(Gas %in% c("F-Gas")) |>
+#   # Pivot longer to get ISO, Country, sector, year and emissions
+#   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
+#     values_transform = list(Emissions = as.numeric)) |>
+#   group_by(ISO, Country, Year)
+#   
+# ghg_n2o <- ghg_raw |>
+#   filter(Gas %in% c("N2O")) |>
+#   # Pivot longer to get ISO, Country, sector, year and emissions
+#   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
+#     values_transform = list(Emissions = as.numeric)) |>
+#   group_by(ISO, Country, Year)
+#   
+# ghg_ch4 <- ghg_raw |>
+#   filter(Gas %in% c("CH4")) |>
+#   # Pivot longer to get ISO, Country, sector, year and emissions
+#   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
+#     values_transform = list(Emissions = as.numeric)) |>
+#   group_by(ISO, Country, Year)
+#   
+# 
+# ghg_co2_total_sector
 
-gt_preview(ghg_raw)
+
 ```
 
+```{r}
+# Conversion factors to CO2 equivalent
+conversion_factors <- tibble(
+  Gas = c("CO2", "F-Gas", "N2O", "CH4"),
+  Factor = c(1, 1430, 298, 25)  # Example values, these should be the correct global warming potential (GWP) factors
+)
+
+# Top 10 countries
+top_10_countries <- c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")
+
+# Function to process each gas
+process_gas <- function(data, gas_name, factor) {
+  data |>
+    filter(Gas == gas_name) |>
+    pivot_longer(cols = 5:ncol(data), names_to = "Year", values_to = "Emissions", values_transform = list(Emissions = as.numeric)) |>
+    mutate(Emissions = Emissions * factor) |>
+    group_by(ISO, Country, Sector, Year) |>
+    summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop')
+}
+
+# Process each gas
+ghg_co2 <- process_gas(ghg_raw, "CO2", conversion_factors %>% filter(Gas == "CO2") %>% pull(Factor))
+ghg_fgas <- process_gas(ghg_raw, "F-Gas", conversion_factors %>% filter(Gas == "F-Gas") %>% pull(Factor))
+ghg_n2o <- process_gas(ghg_raw, "N2O", conversion_factors %>% filter(Gas == "N2O") %>% pull(Factor))
+ghg_ch4 <- process_gas(ghg_raw, "CH4", conversion_factors %>% filter(Gas == "CH4") %>% pull(Factor))
+
+# Combine all gases
+ghg_combined <- bind_rows(ghg_co2, ghg_fgas, ghg_n2o, ghg_ch4)
+
+# Sum up the emissions for each country and sector across all years
+ghg_total_sector <- ghg_combined |>
+  group_by(ISO, Country, Sector) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
+  arrange(desc(Emissions))
+
+# Drop row with the WORLD ISO
+ghg_total_sector <- ghg_total_sector |>
+  filter(ISO != "WORLD")
+
+# Categorize countries as "Top 10" or "Others"
+ghg_total_sector <- ghg_total_sector |>
+  mutate(Country = if_else(Country %in% top_10_countries, Country, "Others"))
+
+# Sum emissions for each country and sector
+ghg_total_sector <- ghg_total_sector |>
+  group_by(Country, Sector) |>
+  summarize(Emissions = sum(Emissions), .groups = 'drop')
+
+# Calculate total emissions for each country
+country_total_emissions <- ghg_total_sector |>
+  group_by(Country) |>
+  summarize(Total_Emissions = sum(Emissions), .groups = 'drop')
+
+# Join total emissions back to the main data
+ghg_total_sector <- ghg_total_sector |>
+  left_join(country_total_emissions, by = "Country")
+
+# Rank countries by total emissions
+ghg_total_sector <- ghg_total_sector |>
+  arrange(desc(Total_Emissions), Country, desc(Emissions))
+
+# Remove the Total_Emissions column as it's no longer needed
+ghg_total_sector <- ghg_total_sector |>
+  select(-Total_Emissions)
+
+# Preview the result
+gt_preview(ghg_total_sector, 10)
+```
 
 
 ## Source 2 (Alternative Source) {#source2}
@@ -163,7 +265,7 @@ Lets start by visualizing the data from the main source with a heatmap
 #| label: source1-heatmap
 
 # Select the countries largest overall 10 emitters and display their emissions over the years in a heatmap
-ghg_raw |>
+ghg_co2 |>
   filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
   ggplot(aes(x = Year, y = Country, fill = Emissions)) +
   geom_tile(color = "white") +
@@ -193,7 +295,7 @@ World Map view of the all GHG emitters
 
 world <- map_data("world")
 
-ghg_data <- ghg_raw |>
+ghg_data <- ghg_co2 |>
   # Filter top 10
   # filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
 
@@ -202,6 +304,7 @@ ghg_data <- ghg_raw |>
   summarize(Emissions = sum(Emissions)) |>
   # Ensure the region column matches the map data
   mutate(region = Country)
+
 
 # Join the map data with the emissions data
 world_map <- left_join(world, ghg_data, by = c("region" = "Country"))
@@ -230,7 +333,7 @@ Simple Line graph with trend line
 ```{r}
 #| label: source1-line
 
-ghg_raw |>
+ghg_co2 |>
   filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
   ggplot(aes(x = Year, y = Emissions, color = Country, shape = Country)) +
   geom_point() + # Scatterplot
@@ -253,6 +356,53 @@ ghg_raw |>
     shape = "Country"
   )
 ```
+
+Pie Charts
+
+```{r}
+#| label: source1-pie
+
+# Pie chart of the top 10 countries + Others
+ghg_total_sector |>
+  filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada", "Others")) |>
+  ggplot(aes(x = "", y = Emissions, fill = Country)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "right"
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    subtitle = "Emissions by Sector",
+    fill = "Country"
+  )
+
+# Pie chart of the top 10 sectors 
+ghg_total_sector |>
+  filter(Sector %in% c("Energy", "Agriculture", "Industrial Processes", "Waste", "Land Use Change and Forestry", "Transport", "Buildings", "Other Fuel Combustion", "Fugitive Emissions", "Bunker Fuels")) |>
+  ggplot(aes(x = "", y = Emissions, fill = Sector)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "right"
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    subtitle = "Emissions by Sector",
+    fill = "Sector"
+  )
+```
+
+
+
 
 Lets compare that against Energy generation type per country
 [Source](https://climatedata.imf.org/datasets/0bfab7fb7e0e4050b82bba40cd7a1bd5/explore)
@@ -310,3 +460,4 @@ ggplot(expenditure, aes(x = Year, y = Energy, color = Country)) +
     shape = "Country"
   )
 ```
+
