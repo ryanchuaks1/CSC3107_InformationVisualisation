@@ -26,9 +26,13 @@ library(knitr)
 library(gt)
 library(dplyr)
 
-# Graphical Visualisation
+# Graphical Visualization
 library(ggplot2)
 library(maps)
+library(webr)
+
+# To retrieve data from the World Bank Data API
+library(wbstats)
 ```
 
 ```{r}
@@ -491,5 +495,80 @@ ggplot(expenditure, aes(x = Year, y = Energy, color = Country)) +
     color = "Country",
     shape = "Country"
   )
+```
+
+Taking into consideration the population of each country
+
+```{r}
+#| label: source1-donut
+
+# Top 3 sectors in each country by Emissions data
+ghg_total_sectors <- ghg_combined |>
+  group_by(ISO, Country, Sector) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
+  group_by(ISO, Country) |>
+  top_n(3, Emissions) |>
+  ungroup()
+
+# Top 10 countries by Emissions data
+ghg_total_countries <- ghg_combined  |>
+  filter(ISO != "WORLD") |>
+  group_by(ISO, Country) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
+  arrange(desc(Emissions)) |>
+  slice(1:10) |>
+  select(ISO) |>
+  left_join(ghg_total_sectors, by = "ISO")
+
+countries <- ghg_total_countries$ISO |>
+  unique()
+
+# Get the population data from the World Bank API
+population_data <- wb_data("SP.POP.TOTL", country = countries, start_date = 1990, end_date = 2021) |>
+  rename(population = SP.POP.TOTL) |>
+  select(iso3c, population) |>
+  group_by(iso3c) |>
+  summarize(avg_population = mean(population))
+
+# Merge the population data with the emissions data
+ghg_total_countries <- ghg_total_countries |>
+  left_join(population_data, by = c("ISO" = "iso3c"))
+
+# Adding population data before filtering top 10 countries
+ghg_total_countries_2 <- ghg_combined  |>
+  filter(ISO != "WORLD") |>
+  left_join(population_data, by = c("ISO" = "iso3c")) |>
+  group_by(ISO, Country, avg_population) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
+  mutate(Emissions_per_capita_country = Emissions / avg_population) |>
+  arrange(desc(Emissions_per_capita_country)) |>
+  slice(1:10) |>
+  select(ISO, avg_population, Emissions_per_capita_country) |>
+  left_join(ghg_total_sectors, by = "ISO") |>
+  mutate(Emissions_per_capita = Emissions / avg_population)
+
+PieDonut(
+  ghg_total_countries,
+  aes(x = Country, y = Sector, count = Emissions),
+  showPieName = FALSE,
+  labelposition = 1,
+  title = "Top 10 GHG Emitters",
+  pieLabelSize = 2,
+  donutLabelSize = 2,
+  showRatioPie = FALSE
+  )
+
+PieDonut(
+  ghg_total_countries_2,
+  aes(x = Country, y = Sector, count = Emissions_per_capita),
+  showPieName = FALSE,
+  labelposition = 1,
+  title = "Top 10 GHG Emitters per capita",
+  pieLabelSize = 2,
+  donutLabelSize = 2,
+  showRatioPie = FALSE
+  )
+
+gt_preview(ghg_total_countries_2, 10)
 ```
 
