@@ -90,116 +90,128 @@ dim(ghg_raw)
 We then group similar gases together (CO2, F-Gas, N20, CH4) and sum them up for each country
 
 ```{r}
- 
 ghg_co2_year <- ghg_raw |>
   filter(Gas %in% c("CO2")) |>
   # Pivot longer to get ISO, Country, sector, year and emissions
-  pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
-    values_transform = list(Emissions = as.numeric))
+  pivot_longer(
+    cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
+    values_transform = list(Emissions = as.numeric)
+  )
 
 # head(ghg_co2_year)
 #   group_by(ISO, Country, Year)
-# 
+#
 # ghg_co2_total_sector <- ghg_co2 |>
 #   # Sum up the emissions for each country across all years
 #   group_by(ISO, Country) |>
 #   summarize(Emissions = sum(Emissions)) |>
 #   arrange(desc(Emissions))
-# 
+#
 # ghg_fgas <- ghg_raw |>
 #   filter(Gas %in% c("F-Gas")) |>
 #   # Pivot longer to get ISO, Country, sector, year and emissions
 #   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
 #     values_transform = list(Emissions = as.numeric)) |>
 #   group_by(ISO, Country, Year)
-#   
+#
 # ghg_n2o <- ghg_raw |>
 #   filter(Gas %in% c("N2O")) |>
 #   # Pivot longer to get ISO, Country, sector, year and emissions
 #   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
 #     values_transform = list(Emissions = as.numeric)) |>
 #   group_by(ISO, Country, Year)
-#   
+#
 # ghg_ch4 <- ghg_raw |>
 #   filter(Gas %in% c("CH4")) |>
 #   # Pivot longer to get ISO, Country, sector, year and emissions
 #   pivot_longer(cols = 5:ncol(ghg_raw), names_to = "Year", values_to = "Emissions",
 #     values_transform = list(Emissions = as.numeric)) |>
 #   group_by(ISO, Country, Year)
-#   
-# 
+#
+#
 # ghg_co2_total_sector
-
-
 ```
 
 ```{r}
-# Conversion factors to CO2 equivalent
-conversion_factors <- tibble(
-  Gas = c("CO2", "F-Gas", "N2O", "CH4"),
-  Factor = c(1, 1430, 298, 25)  # Example values, these should be the correct global warming potential (GWP) factors
-)
+#| label: process-data
 
-# Top 10 countries
-top_10_countries <- c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")
+suppressWarnings({
+  # Conversion factors to CO2 equivalent
+  conversion_factors <- tibble(
+    Gas = c("CO2", "F-Gas", "N2O", "CH4"),
+    Factor = c(1, 1430, 298, 25)
+  )
 
-# Function to process each gas
-process_gas <- function(data, gas_name, factor) {
-  data |>
-    filter(Gas == gas_name) |>
-    pivot_longer(cols = 5:ncol(data), names_to = "Year", values_to = "Emissions", values_transform = list(Emissions = as.numeric)) |>
-    mutate(Emissions = Emissions * factor) |>
-    group_by(ISO, Country, Sector, Year) |>
-    summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop')
-}
+  # Function to process each gas
+  process_gas <- function(data, gas_name, factor) {
+    data |>
+      filter(Gas == gas_name) |>
+      pivot_longer(cols = 5:ncol(data), names_to = "Year", values_to = "Emissions", values_transform = list(Emissions = as.numeric)) |>
+      mutate(Emissions = Emissions * factor) |>
+      group_by(ISO, Country, Sector, Year) |>
+      summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop")
+  }
 
-# Process each gas
-ghg_co2 <- process_gas(ghg_raw, "CO2", conversion_factors %>% filter(Gas == "CO2") %>% pull(Factor))
-ghg_fgas <- process_gas(ghg_raw, "F-Gas", conversion_factors %>% filter(Gas == "F-Gas") %>% pull(Factor))
-ghg_n2o <- process_gas(ghg_raw, "N2O", conversion_factors %>% filter(Gas == "N2O") %>% pull(Factor))
-ghg_ch4 <- process_gas(ghg_raw, "CH4", conversion_factors %>% filter(Gas == "CH4") %>% pull(Factor))
+  # Process each gas
+  ghg_co2 <- process_gas(ghg_raw, "CO2", conversion_factors |> filter(Gas == "CO2") |> pull(Factor))
+  ghg_fgas <- process_gas(ghg_raw, "F-Gas", conversion_factors |> filter(Gas == "F-Gas") |> pull(Factor))
+  ghg_n2o <- process_gas(ghg_raw, "N2O", conversion_factors |> filter(Gas == "N2O") |> pull(Factor))
+  ghg_ch4 <- process_gas(ghg_raw, "CH4", conversion_factors |> filter(Gas == "CH4") |> pull(Factor))
 
-# Combine all gases
-ghg_combined <- bind_rows(ghg_co2, ghg_fgas, ghg_n2o, ghg_ch4)
+  # Combine all gases
+  ghg_combined <- bind_rows(ghg_co2, ghg_fgas, ghg_n2o, ghg_ch4)
 
-# Sum up the emissions for each country and sector across all years
-ghg_total_sector <- ghg_combined |>
-  group_by(ISO, Country, Sector) |>
-  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
-  arrange(desc(Emissions))
+  # Sum up the emissions for each country and sector across all years
+  ghg_total_sector <- ghg_combined |>
+    group_by(ISO, Country, Sector) |>
+    summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
+    arrange(desc(Emissions))
 
-# Drop row with the WORLD ISO
-ghg_total_sector <- ghg_total_sector |>
-  filter(ISO != "WORLD")
+  # Drop row with the WORLD ISO
+  ghg_total_sector <- ghg_total_sector |>
+    filter(ISO != "WORLD")
 
-# Categorize countries as "Top 10" or "Others"
-ghg_total_sector <- ghg_total_sector |>
-  mutate(Country = if_else(Country %in% top_10_countries, Country, "Others"))
+  # Calculate total emissions for each country
+  country_total_emissions <- ghg_total_sector |>
+    group_by(Country) |>
+    summarize(Total_Emissions = sum(Emissions), .groups = "drop")
 
-# Sum emissions for each country and sector
-ghg_total_sector <- ghg_total_sector |>
-  group_by(Country, Sector) |>
-  summarize(Emissions = sum(Emissions), .groups = 'drop')
+  # Get the top 10 countries by total emissions
+  top_10_countries <- country_total_emissions |>
+    top_n(10, wt = Total_Emissions) |>
+    pull(Country)
 
-# Calculate total emissions for each country
-country_total_emissions <- ghg_total_sector |>
-  group_by(Country) |>
-  summarize(Total_Emissions = sum(Emissions), .groups = 'drop')
+  # Categorize countries as "Top 10" or "Others"
+  ghg_total_sector <- ghg_total_sector |>
+    mutate(Country = if_else(Country %in% top_10_countries, Country, "Others"))
 
-# Join total emissions back to the main data
-ghg_total_sector <- ghg_total_sector |>
-  left_join(country_total_emissions, by = "Country")
+  # Sum emissions for each country and sector
+  ghg_total_sector <- ghg_total_sector |>
+    group_by(Country, Sector) |>
+    summarize(Emissions = sum(Emissions), .groups = "drop")
 
-# Rank countries by total emissions
-ghg_total_sector <- ghg_total_sector |>
-  arrange(desc(Total_Emissions), Country, desc(Emissions))
+  # Calculate total emissions for each country again after categorization
+  country_total_emissions <- ghg_total_sector |>
+    group_by(Country) |>
+    summarize(Total_Emissions = sum(Emissions), .groups = "drop")
 
-# Remove the Total_Emissions column as it's no longer needed
-ghg_total_sector <- ghg_total_sector |>
-  select(-Total_Emissions)
+  # Sort countries by total emissions
+  ghg_total_sector <- ghg_total_sector |>
+    left_join(country_total_emissions, by = "Country") |>
+    arrange(desc(Total_Emissions), Country, desc(Emissions))
 
-# Preview the result
-gt_preview(ghg_total_sector, 10)
+  # Update Country factor levels to reflect the sorted order
+  ghg_total_sector$Country <- factor(ghg_total_sector$Country, levels = unique(ghg_total_sector$Country))
+
+  # Remove the Total_Emissions column as it's no longer needed
+  ghg_total_sector <- ghg_total_sector |>
+    select(-Total_Emissions)
+
+  # Preview the result (Top 10 countries and sector)
+  ghg_total_sector |>
+    filter(Country != "Others") |>
+    gt_preview(10)
+})
 ```
 
 
@@ -272,7 +284,7 @@ Lets start by visualizing the data from the main source with a heatmap
 # Sum up the emissions for each country across all Sector in the same year
 ghg_co2_year <- ghg_co2 |>
   group_by(Country, Year) |>
-  summarize(Emissions = sum(Emissions), .groups = 'drop')
+  summarize(Emissions = sum(Emissions), .groups = "drop")
 
 # Select the countries largest overall 10 emitters and display their emissions over the years in a heatmap
 ghg_co2_year |>
@@ -374,7 +386,6 @@ Pie Charts
 
 # Pie chart of the top 10 countries + Others
 ghg_total_sector |>
-  filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada", "Others")) |>
   ggplot(aes(x = "", y = Emissions, fill = Country)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y", start = 0) +
@@ -387,13 +398,12 @@ ghg_total_sector |>
   ) +
   labs(
     title = "Top 10 GHG Emitters",
-    subtitle = "Emissions by Sector",
+    subtitle = "Emissions by Country",
     fill = "Country"
   )
 
-# Pie chart of the top 10 sectors 
+# Pie chart of the top 10 sectors
 ghg_total_sector |>
-  filter(Sector %in% c("Energy", "Agriculture", "Industrial Processes", "Waste", "Land Use Change and Forestry", "Transport", "Buildings", "Other Fuel Combustion", "Fugitive Emissions", "Bunker Fuels")) |>
   ggplot(aes(x = "", y = Emissions, fill = Sector)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y", start = 0) +
@@ -417,7 +427,6 @@ Stacked bar chart of the top 10 countries emissions by sector
 #| label: source1-stackedbar
 
 ghg_total_sector |>
-  filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
   ggplot(aes(x = Country, y = Emissions, fill = Sector)) +
   geom_bar(stat = "identity") +
   theme_minimal() +
@@ -454,7 +463,7 @@ expenditure <- read_csv("data/energy_transition.csv")
 expenditure <-
   expenditure |>
   filter(Indicator %in% "Electricity Generation") |>
-  mutate(across(F2000:F2022, ~replace_na(., 0))) |>
+  mutate(across(F2000:F2022, ~ replace_na(., 0))) |>
   group_by(Country, ISO3) |>
   summarize(across(F2000:F2021, sum), .groups = "drop")
 
@@ -470,7 +479,7 @@ Then we plot the data
 expenditure <-
   expenditure |>
   filter(ISO3 %in% c("CHN", "USA", "IND")) |>
-  rename_with(~str_replace(., "F", ""))|>
+  rename_with(~ str_replace(., "F", "")) |>
   pivot_longer(cols = 3:24, names_to = "Year", values_to = "Energy")
 
 expenditure$Year <- as.numeric(as.character(expenditure$Year))
@@ -478,7 +487,7 @@ gt_preview(expenditure)
 
 
 ggplot(expenditure, aes(x = Year, y = Energy, color = Country)) +
-  geom_line(linewidth=1) + # Line graph
+  geom_line(linewidth = 1) + # Line graph
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
@@ -505,16 +514,16 @@ Taking into consideration the population of each country
 # Top 3 sectors in each country by Emissions data
 ghg_total_sectors <- ghg_combined |>
   group_by(ISO, Country, Sector) |>
-  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
   group_by(ISO, Country) |>
   top_n(3, Emissions) |>
   ungroup()
 
 # Top 10 countries by Emissions data
-ghg_total_countries <- ghg_combined  |>
+ghg_total_countries <- ghg_combined |>
   filter(ISO != "WORLD") |>
   group_by(ISO, Country) |>
-  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
   arrange(desc(Emissions)) |>
   slice(1:10) |>
   select(ISO) |>
@@ -535,11 +544,11 @@ ghg_total_countries <- ghg_total_countries |>
   left_join(population_data, by = c("ISO" = "iso3c"))
 
 # Adding population data before filtering top 10 countries
-ghg_total_countries_2 <- ghg_combined  |>
+ghg_total_countries_2 <- ghg_combined |>
   filter(ISO != "WORLD") |>
   left_join(population_data, by = c("ISO" = "iso3c")) |>
   group_by(ISO, Country, avg_population) |>
-  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = 'drop') |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
   mutate(Emissions_per_capita_country = Emissions / avg_population) |>
   arrange(desc(Emissions_per_capita_country)) |>
   slice(1:10) |>
@@ -556,7 +565,7 @@ PieDonut(
   pieLabelSize = 2,
   donutLabelSize = 2,
   showRatioPie = FALSE
-  )
+)
 
 PieDonut(
   ghg_total_countries_2,
@@ -567,8 +576,7 @@ PieDonut(
   pieLabelSize = 2,
   donutLabelSize = 2,
   showRatioPie = FALSE
-  )
+)
 
 gt_preview(ghg_total_countries_2, 10)
 ```
-
