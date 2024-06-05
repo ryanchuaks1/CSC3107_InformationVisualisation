@@ -1,0 +1,389 @@
+---
+title: "Lab 5"
+author: "
+  Ryan Chua - 2201421<br>
+  Loo Siong Yu - 2201255<br>
+  Chua Kang Le - 2201161<br>
+  Phua Tiffany - 2202698<br>
+  Woon Jun Wei - 2200624<br>
+  Ong Si Hui - 2201945"
+number-sections: true
+format: html
+knitr:
+  opts_chunk:
+    fig.width: 7.5
+    fig.height: 5
+    fig.align: center
+---
+
+# Introduction
+
+```{r}
+#| label: required-packages
+#| message: false
+
+library(tidyverse)
+library(readxl)
+library(countrycode)
+library(ggrepel)
+library(ggplot2)
+library(scales)
+library(RColorBrewer)
+```
+
+
+# Preparing the Data
+
+
+## Data Import
+
+```{r}
+#| label: data-import
+
+# Define file paths
+gdp_path <- "API_NY.GDP.PCAP.KD_DS2_en_excel_v2_143214.xls"
+life_expectancy_path <- "API_SP.DYN.LE00.IN_DS2_en_excel_v2_142982.xls"
+population_path <- "API_SP.POP.TOTL_DS2_en_excel_v2_144629.xls"
+
+# Import data from the "Data" sheet, skipping the first 3 rows
+gdp_data <- read_excel(gdp_path, sheet = "Data", skip = 3) %>% as_tibble()
+life_expectancy_data <- read_excel(life_expectancy_path, sheet = "Data", skip = 3) %>% as_tibble()
+population_data <- read_excel(population_path, sheet = "Data", skip = 3) %>% as_tibble()
+
+# Display the first few rows of each tibble
+head(gdp_data)
+head(life_expectancy_data)
+head(population_data)
+```
+
+
+
+## Column Selection
+
+For each tibble, retain only three columns:
+
+1. `country`: Data from the Excel columns titled “Country Name.”
+2. `code`: Data from the Excel columns titled “Country Code.”
+3. Either `gdp_per_cap`, `life_exp` or `pop`: Data for 2019 only.
+
+```{r}
+#| label: column-selection
+
+gdp_data <- gdp_data |>
+  select(country = `Country Name`, code = `Country Code`, gdp_per_cap = `2019`)
+
+life_expectancy_data <- life_expectancy_data |>
+  select(country = `Country Name`, code = `Country Code`, life_exp = `2019`)
+
+population_data <- population_data |>
+  select(country = `Country Name`, code = `Country Code`, pop = `2019`)
+
+# Display the first few rows of each tibble
+head(gdp_data)
+head(life_expectancy_data)
+head(population_data)
+```
+
+## Merge Data
+
+Use left_join() to merge the three spreadsheets into a single tibble named countries containing five columns: country, code, gdp_per_cap, life_exp, and pop.
+
+```{r}
+#| label: merge-data
+
+# Merge the three tibbles into a single tibble
+countries <- gdp_data |>
+  left_join(life_expectancy_data, by = c("country", "code")) |>
+  left_join(population_data, by = c("country", "code"))
+
+# Display the first few rows of the merged tibble
+head(countries)
+```
+
+
+## Identify Non-Country Rows
+
+Some rows in the World Bank spreadsheets represent regions rather than individual countries, such as “East Asia & Pacific (excluding high income).” To exclude these rows from the countries tibble, we will use the countrycode() function from the countrycode package. This function allows us to convert country names and country codes from one format to another (e.g., from the English name to standardized ISO 3166-1 numeric codes). A useful feature of countrycode() is that it returns a non-missing value only if the three-letter World Bank code belongs to a single country, for example:
+
+```{r}
+test <- tibble(
+  country = c("Slovak Republic", "Arab World", "Norway"),
+  code = c("SVK", "ARB", "NOR")
+)
+mutate(
+  test,
+  code_2 = countrycode(code, origin = "wb", destination = "wb")
+)
+```
+
+```{r}
+#| label: identify-non-country-rows
+
+# Identify non-country rows
+countries <- countries |>
+  mutate(
+    code_2 = countrycode(code, origin = "wb", destination = "wb")
+  ) |>
+  filter(!is.na(code_2))
+
+# Display the first few rows of the filtered tibble
+head(countries)
+```
+
+## Append Continent Column
+
+Use countrycode() to append a colummn containing the continent of each country.
+
+```{r}
+#| label: append-continent-column
+
+# Append a column containing the continent of each country
+countries <- countries |>
+  mutate(
+    continent = countrycode(code, origin = "wb", destination = "continent")
+  )
+
+# Display the first few rows of the tibble
+head(countries)
+```
+
+## Remove Missing Data
+
+Remove all rows from the countries tibble that contain any missing values to prevent ggplot2 from triggering a warning in subsequent tasks.
+
+```{r}
+#| label: remove-missing-data
+
+# Remove rows with missing values
+countries <- countries |>
+  drop_na()
+
+# Display the first few rows of the tibble
+head(countries)
+```
+
+## Count Countries
+
+How many countries are remaining in the countries tibble?
+
+```{r}
+#| label: count-countries
+
+# Count the number of countries
+countries |>
+  count()
+
+```
+
+## Prepare Country Labels
+
+A subsequent task requires you to add country names as labels to the plot. To prepare for this task, add a label column to the data containing the three-letter codes of the following countries:
+
+- The 10 countries with the highest GDP.
+- The 10 countries with the lowest GDP.
+- The 10 countries with the longest life expectancy.
+- The 10 countries with the shortest life expectancy.
+- The 10 most populous countries.
+
+Please note that some countries may be included in multiple categories. For all other countries, the label should be an empty string.
+
+```{r}
+#| label: prepare-country-labels
+
+# Prepare country labels
+countries <- countries |>
+  mutate(
+    label = case_when(
+      # Highest GDP
+      rank(desc(gdp_per_cap)) <= 10 ~ code,
+      # Lowest GDP
+      rank(gdp_per_cap) <= 10 ~ code,
+      # Longest life expectancy
+      rank(life_exp) <= 10 ~ code,
+      # Shortest life expectancy
+      rank(desc(life_exp)) <= 10 ~ code,
+      # Most populous
+      rank(pop) <= 10 ~ code,
+      # other countries
+      TRUE ~ ""
+    )
+  )
+
+# Display the first few rows of the tibble
+head(countries)  
+```
+
+# Visualising the data
+
+## Set Up Basic Plot
+
+As an initial step towards creating a plot similar to Figure 1.2, create a basic plot by using ggplot() and a geom_*() function to display one bubble per country. Choose suitable aesthetics for the plot and make the bubbles semi-transparent, which is an improvement compared to Gapminder’s approach.
+
+```{r}
+#| label: set-up-basic-plot
+
+# Set up a basic plot
+p <- ggplot(countries, aes(x = gdp_per_cap, y = life_exp, size = pop, color = continent)) +
+  geom_point(alpha = 0.6) # Semi-transparent bubbles
+
+# Display the plot
+p
+```
+
+## Add Labels
+
+Use `geom_text_repel()` to add the labels from the label column of the countries tibble. Set the show.legend argument equal to FALSE to exclude the text layer from the legends.
+
+```{r}
+#| label: add-labels
+
+# Add labels to the plot
+p <- p +
+  geom_text_repel(
+    aes(label = label),
+    show.legend = FALSE
+  )
+
+# Display the plot
+p
+```
+
+## Add Trend Curve
+
+Use geom_smooth() to fit a single LOESS curve to all data points in the plot. Set the countries’ population as the weighting variable for the curve. Choose a neutral color for the curve to indicate that it is not specific to any continent.
+
+```{r}
+#| label: add-trend-curve
+
+# Add a trend curve to the plot
+p <- p +
+  geom_smooth(
+    method = "loess",
+    se = FALSE,
+    color = "gray",
+    size = 1,
+    aes(weight = pop)
+  )
+
+# Display the plot
+p
+```
+
+## Add Annotations
+
+Provide meaningful axis labels, legend labels and a title for the plot. Additionally, include a caption that credits the World Bank as the data source.
+
+```{r}
+#| label: add-annotations
+
+# Add annotations to the plot
+p <- p +
+  labs(
+    x = "GDP per Capita (2019, constant 2010 US$)",
+    y = "Life Expectancy (2019)",
+    size = "Population (2019)",
+    color = "Continent",
+    title = "World Development Indicators",
+    caption = "Data Source: World Bank"
+  )
+
+# Display the plot
+p
+```
+
+## Change x-Axis Scale
+
+Change the x-coordinates to a logarithmic scale in the plot. Adjust the breaks and minor breaks of the logarithmic scale as shown in figure Figure 1.3 using the breaks_log() functions from the scales package. Customize the tick mark labels to be more reader-friendly, such as displaying “$1,000” instead of the default “1e+03” format.
+
+```{r}
+#| label: change-x-axis-scale
+
+# Change the x-axis scale to a logarithmic scale
+p <- p +
+  scale_x_log10(
+    breaks = breaks_log(n = 10),
+    labels = scales::dollar_format(scale = 0.001)
+  )
+
+# Display the plot
+p
+```
+
+## Change Size Scale
+
+Use scale_size_area() to adjust the legend so that the areas of the bubbles represent populations of 1 million, 10 million, 100 million and 1 billion. Modify the labels in the legend from “1e+06”, “1e+07”, “1e+08”, and “1e+09” to more reader-friendly strings like “1M”, “10M”, “100M”, and “1B”. Increase the max_size argument to ensure that the bubble areas are approximately the same as in the Gapminder figure.
+
+```{r}
+#| label: change-size-scale
+
+# Change the size scale of the plot
+p <- p +
+  scale_size_area(
+    breaks = c(1e6, 1e7, 1e8, 1e9),
+    labels = c("1M", "10M", "100M", "1B"),
+    max_size = 20
+  )
+
+# Display the plot
+p
+```
+
+## Change Color Scale
+
+Change the color scale to the ColorBrewer palette “Set1,” which provides clearer contrasts than ggplot2’s default colors. Note that these colors are not the same as those in the Gapminder figure.
+
+```{r}
+#| label: change-color-scale
+
+# Change the color scale of the plot
+p <- p +
+  scale_color_brewer(palette = "Set1")
+
+# Display the plot
+p
+```
+
+## Override Transparency in Legend
+
+Semi-transparent colors are effective for addressing overplotting in the bubble plot. However, they are not ideal for the legend, where we want clear color contrasts. Override the alpha aesthetic in the legend to remove transparency. Additionally, increase the sizes of the circles in the color legend to enhance readability. You can refer to section 11.3.6 in Wickham, Navarro and Pedersen (2021) for related examples.
+
+```{r}
+#| label: override-transparency-in-legend
+
+# Override transparency in the legend
+p <- p +
+  guides(
+    color = guide_legend(override.aes = list(alpha = 1, size = 5))
+  )
+
+# Display the plot
+p
+```
+
+## Choose a ggplot2 Theme
+
+Choose a ggplot2 theme and provide arguments to support your choice. There is no definitive right or wrong answer in this case, but you should clearly express your reasoning.
+
+```{r}
+#| label: choose-a-ggplot2-theme
+
+# Choose a ggplot2 theme
+p <- p +
+  theme_minimal()
+
+# Display the plot
+p
+```
+
+`theme_minimal()` was chosen because it provides a clean and simple background that does not distract from the data. The white background and light gray gridlines make the plot easy to read, while the default font size and color are suitable for the plot. The minimal theme is a good choice for this plot because it emphasizes the data without adding unnecessary elements.
+
+## Reason About the Data
+
+Write at least four sentences about the data. What does the plot reveal about the data? If you refer to specific countries, make sure to add the corresponding labels in the plot if necessary.
+
+Answer:
+
+The provided scatter plot elucidates World Development Indicators for various countries in 2019, with a specific focus on GDP per capita (measured in constant 2010 US$) and life expectancy. The size of each bubble is proportional to the population size, while the color coding represents different continents. The data reveals a positive correlation between GDP per capita and life expectancy; countries with higher GDP per capita tend to exhibit higher life expectancies. Notable examples include Japan (JPN) and the United States (USA), both of which display high GDP per capita and life expectancy. Conversely, countries such as Nigeria (NGA) and the Democratic Republic of Congo (COD) are characterized by low GDP per capita and life expectancy. Furthermore, there is a discernible disparity among continents, with African nations predominantly situated in the lower spectrum of both GDP per capita and life expectancy, in stark contrast to their European and Asian counterparts. This visual representation underscores the significant economic and health inequalities that exist on a global scale.
+
+
+
