@@ -203,7 +203,7 @@ countries <- countries |>
       # Shortest life expectancy
       rank(desc(life_exp)) <= 10 ~ code,
       # Most populous
-      rank(pop) <= 10 ~ code,
+      rank(desc(pop)) <= 10 ~ code,
       # other countries
       TRUE ~ ""
     )
@@ -302,7 +302,7 @@ Change the x-coordinates to a logarithmic scale in the plot. Adjust the breaks a
 p <- p +
   scale_x_log10(
     breaks = breaks_log(n = 10),
-    labels = scales::dollar_format(scale = 0.001)
+    labels = scales::label_number(scale = 1, suffix = "")
   )
 
 # Display the plot
