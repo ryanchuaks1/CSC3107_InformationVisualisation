@@ -1,0 +1,42 @@
+---
+title: Top 10 Countries with the Highest Greenhouse Gas Emissions
+format:
+  poster-typst: 
+    size: "33x23" # Approximately A1
+    poster-authors: "Ryan Chua, Woon Jun Wei, Ong Shi Hui, Chua Kang Le, Phua Tiffany, Loo Siong Yu"
+    institution-logo: "./images/sit-logo.png"
+    footer-text: "CSC3107 Information Visualization"
+    footer-emails: "Team Bisque"
+execute:
+  echo: false
+knitr:
+  opts_chunk:
+    dev: svglite
+---
+
+```{r}
+#| label: setup
+#| include: false
+```
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
