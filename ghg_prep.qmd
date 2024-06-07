@@ -9,6 +9,11 @@ author: "
   Phua Tiffany - 2202698<br>
   Woon Jun Wei - 2200624<br>
   Ong Si Hui - 2201945"
+knitr:
+  opts_chunk:
+    fig.width: 10
+    fig.height: 10
+    fig.align: center
 ---
 
 # Introduction
@@ -140,7 +145,10 @@ suppressWarnings({
   # Conversion factors to CO2 equivalent
   conversion_factors <- tibble(
     Gas = c("CO2", "F-Gas", "N2O", "CH4"),
-    Factor = c(1, 1430, 298, 25)
+    # Factor = c(1, 1, 265, 28) # From source
+    Factor = c(1, 1, 1, 1) # From source
+    # Factor = c(1, 1300, 265, 28) # From source
+    # Factor = c(1, 1430, 298, 25)
   )
 
   # Function to process each gas
@@ -445,6 +453,51 @@ ghg_total_sector |>
     y = "Emissions (MtCO₂e)",
     fill = "Sector"
   )
+
+# Assuming ghg_total_sector is your original data frame
+# Summarize the emissions of the top 10 countries
+top_10_countries <- ghg_total_sector %>%
+  group_by(Country) %>%
+  summarize(Total_Emissions = sum(Emissions)) %>%
+  filter(Country != "Others") %>% # Remove the "Others" category
+  top_n(10, Total_Emissions)
+
+# Create a new data frame for the top 10 countries
+top_10_data <- ghg_total_sector %>%
+  filter(Country %in% top_10_countries$Country) %>%
+  group_by(Sector) %>%
+  summarize(Emissions = sum(Emissions)) %>%
+  mutate(Country = "Top 10")
+
+# Create a new data frame for the "Others" countries
+others_data <- ghg_total_sector %>%
+  filter(!Country %in% top_10_countries$Country) %>%
+  group_by(Sector) %>%
+  summarize(Emissions = sum(Emissions)) %>%
+  mutate(Country = "Others")
+
+# Combine the data frames
+final_data <- bind_rows(top_10_data, others_data)
+
+# Plot the final stacked bar chart
+ggplot(final_data, aes(x = Country, y = Emissions, fill = Sector)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    subtitle = "Emissions by Sector",
+    x = "Country",
+    y = "Emissions (MtCO₂e)",
+    fill = "Sector"
+  )
+
 ```
 
 
@@ -516,8 +569,10 @@ Taking into consideration the population of each country
 ghg_total_sectors <- ghg_combined |>
   group_by(ISO, Country, Sector) |>
   summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
+  # filter(Sector != "Energy") |> #Filter Energy
   group_by(ISO, Country) |>
   top_n(3, Emissions) |>
+  arrange(desc(Emissions)) |>
   ungroup()
 
 # Top 10 countries by Emissions data
@@ -563,9 +618,13 @@ PieDonut(
   showPieName = FALSE,
   labelposition = 1,
   title = "Top 10 GHG Emitters",
-  pieLabelSize = 2,
-  donutLabelSize = 2,
-  showRatioPie = FALSE
+  pieLabelSize = 4,
+  donutLabelSize = 3,
+  showRatioThreshold = 0.001,
+  showRatioPie = FALSE,
+  showRatioDonut = FALSE,
+  explodeDonut = TRUE
+  
 )
 
 PieDonut(
@@ -576,6 +635,7 @@ PieDonut(
   title = "Top 10 GHG Emitters per capita",
   pieLabelSize = 2,
   donutLabelSize = 2,
+  showRatioThreshold = 0.001,
   showRatioPie = FALSE
 )
 
