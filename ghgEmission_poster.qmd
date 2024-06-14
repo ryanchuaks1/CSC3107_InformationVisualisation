@@ -17,26 +17,200 @@ knitr:
 ```{r}
 #| label: setup
 #| include: false
+
+library(knitr)
+purl("ghg_prep.qmd")
+source("ghg_prep.R")
 ```
 
+# Introduction
 
-## Quarto
+Greenhouse gas (GHG) emissions from human activities such as fossil fuel combustion, deforestation, and industrial processes are significant contributors to climate change. The primary GHGs—carbon dioxide (CO2), methane (CH4), nitrous oxide (N2O), and fluorinated gases—trap heat in the Earth's atmosphere, causing a warming effect known as the greenhouse effect. This results in rising global temperatures, disrupted weather patterns, and more frequent extreme weather events like hurricanes, droughts, and floods. For instance, global temperatures have increased by approximately 1.2°C since the late 19th century[^Jones1999Surface], and sea levels have risen by about 20 centimeters over the past century due to melting polar ice caps and glaciers, threatening various species' habitats.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+[^Jones1999Surface]: Jones, P. D., New, M., Parker, D. E., Martin, S., & Rigor, I. G. (1999). Surface air temperature and its changes over the past 150 years. Reviews of Geophysics, 37(2), 173–199. doi:10.1029/1999rg900002
 
-## Running Code
+Beyond climate change, GHG emissions affect air quality and public health, leading to respiratory and cardiovascular diseases. The World Health Organization (WHO) estimates that air pollution causes around 3.3 million premature deaths annually [^Lelieveld2015The]. Additionally, the increased concentration of GHGs disrupts ecosystems and endangers biodiversity. Ocean acidification, resulting from excess CO2 absorption by oceans, has risen by 30% since the Industrial Revolution[^Popattanachai2021Ocean], adversely impacting marine life, particularly coral reefs and shellfish. Visualizing GHG emissions is crucial for understanding their distribution across countries and sectors, identifying major contributors, and informing policy decisions to reduce emissions. Highlighting the top 10 emitting countries emphasizes the need for coordinated efforts to mitigate climate change and promotes discussions on sustainable practices, renewable energy, and effective environmental policies.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+[^Lelieveld2015The]: Lelieveld, J., Evans, J., Fnais, M. et al. The contribution of outdoor air pollution sources to premature mortality on a global scale. Nature 525, 367–371 (2015). https://doi.org/10.1038/nature15371
+[^Popattanachai2021Ocean]: Popattanachai, N., & A Kirk, E. (2021). "Chapter 4: Ocean acidification and multilateral environmental agreements". In Research Handbook on Ocean Acidification Law and Policy. Cheltenham, UK: Edward Elgar Publishing. Retrieved Jun 14, 2024, from https://doi.org/10.4337/9781789900149.00012 
 
+# Previous Visualization
 ```{r}
-1 + 1
+#| label: fig-previous-vis
+#| fig-cap: "Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
+#| out-width: 80%
+
+include_graphics("images/old_visualization.jpg")
 ```
 
-You can add options to executable code like this
+# Strengths
+- **Clear Ranking**: The visualization clearly ranks the countries based on their emissions. (Size)
+- **Color Coding**: The color coding helps differentiate between countries.
+- **Contextual Information**: The visualization depicts the sectors emitting the greenhouse gases per country.
 
+# Suggested Improvements
+
+We decided to exclude the "Others" category from the previous visualization to enhance clarity and focus on the top 10 countries with the highest greenhouse gas emissions. This adjustment allows for a more straightforward comparison of emissions across these leading countries and their respective sectors. Additionally, we included a stacked bar chart to display the emissions by sector for these top 10 countries in comparison to the rest of the world. This approach provides a clearer understanding of the major contributors to global emissions and highlights the differences between the top emitters and other countries.
+
+1. **Removed "Others" category:** Enhanced clarity by focusing on the top 10 countries with the highest greenhouse gas emissions.
+2. **Donut chart:** Visualized the top 10 countries and their emission sectors, allowing for straightforward comparison.
+3. **Stacked bar chart:** Added to show emissions by sector for the top 10 countries compared to the rest of the world.
+4. **Enhanced comparison:** Improved understanding of major contributors to global emissions.
+5. **Clear visualization:** Highlighted differences between top emitters and other countries.
+
+
+# Implementation
+
+## Data
+
+- **Data Source:** The dataset used for this visualization was retrieved from the World Bank Data API [^climatewatchdata]. It includes greenhouse gas emissions data (CO2, F-Gas, N2O, CH4) by sector for various countries. We removed the 'Unit' column as it contained only one distinct value, "MtCO₂e," representing million metric tons of carbon dioxide equivalent.
+- **Data Preparation:** We cleaned and transformed the dataset to compute total emissions by sector for each country and to identify the top 10 countries with the highest greenhouse gas emissions.
+- **Sector Analysis:** Data was grouped by country and sector to determine the top three emitting sectors per country. Additionally, we calculated emissions per capita for the top 10 countries to provide further insights into emission trends.
+
+[^climatewatchdata]: <https://www.climatewatchdata.org/ghg-emissions?end_year=2021&start_year=1990>
+
+
+## Software
+
+We used the Quarto publication framework and the R programming language, along with the following third-party packages:
+
+<!-- To be updated -->
+
+* *readxl* for data import
+* *tidyverse* for data transformation, including *ggplot2* for visualization
+  based on the grammar of graphics
+* *knitr* for dynamic document generation
+* *gt* for creating tables
+* *wbstats* for retrieving data from the World Bank Data API
+* *dplyr* for data manipulation
+
+```{=typst}
+#v(2em)
+```
+
+
+# Improved Visualization
+
+::: {#fig-ggplot layout-ncol=2}
 ```{r}
-#| echo: false
-2 * 2
-```
+#| label: fig-ggplot
+#| fig-cap: "Revised Visualization of Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
+#| fig-width: 3.0
+#| fig-height: 2.8
+#| out-width: 80%
+#| warning: false
 
-The `echo: false` option disables the printing of code (only output is displayed).
+# Top 3 sectors in each country by Emissions data
+ghg_total_sectors <- ghg_combined |>
+  group_by(ISO, Country, Sector) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
+  # filter(Sector != "Energy") |> #Filter Energy
+  group_by(ISO, Country) |>
+  top_n(3, Emissions) |>
+  arrange(desc(Emissions)) |>
+  ungroup()
+
+# Top 10 countries by Emissions data
+ghg_total_countries <- ghg_combined |>
+  filter(ISO != "WORLD") |>
+  group_by(ISO, Country) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
+  arrange(desc(Emissions)) |>
+  slice(1:10) |>
+  select(ISO) |>
+  left_join(ghg_total_sectors, by = "ISO")
+
+countries <- ghg_total_countries$ISO |>
+  unique()
+
+# Get the population data from the World Bank API
+population_data <- wb_data("SP.POP.TOTL", country = countries, start_date = 1990, end_date = 2021) |>
+  rename(population = SP.POP.TOTL) |>
+  select(iso3c, population) |>
+  group_by(iso3c) |>
+  summarize(avg_population = mean(population))
+
+# Merge the population data with the emissions data
+ghg_total_countries <- ghg_total_countries |>
+  left_join(population_data, by = c("ISO" = "iso3c"))
+
+# Adding population data before filtering top 10 countries
+ghg_total_countries_2 <- ghg_combined |>
+  filter(ISO != "WORLD") |>
+  left_join(population_data, by = c("ISO" = "iso3c")) |>
+  group_by(ISO, Country, avg_population) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
+  mutate(Emissions_per_capita_country = Emissions / avg_population) |>
+  arrange(desc(Emissions_per_capita_country)) |>
+  slice(1:10) |>
+  select(ISO, avg_population, Emissions_per_capita_country) |>
+  left_join(ghg_total_sectors, by = "ISO") |>
+  mutate(Emissions_per_capita = Emissions / avg_population)
+
+PieDonut(
+  ghg_total_countries,
+  aes(x = Country, y = Sector, count = Emissions),
+  showPieName = FALSE,
+  labelposition = 1,
+  title = "Top 10 GHG Emitters",
+  pieLabelSize = 4,
+  donutLabelSize = 3,
+  showRatioThreshold = 0.001,
+  showRatioPie = FALSE,
+  showRatioDonut = FALSE,
+  explodeDonut = TRUE
+)
+
+# Summarize the emissions of the top 10 countries
+top_10_countries <- ghg_total_sector |>
+  group_by(Country) |>
+  summarize(Total_Emissions = sum(Emissions)) |>
+  filter(Country != "Others") |>
+  top_n(10, Total_Emissions)
+
+# Create a new data frame for the top 10 countries
+top_10_data <- ghg_total_sector |>
+  filter(Country %in% top_10_countries$Country) |>
+  group_by(Sector) |>
+  summarize(Emissions = sum(Emissions)) |>
+  mutate(Country = "Top 10")
+
+# Create a new data frame for the "Others" countries
+others_data <- ghg_total_sector |>
+  filter(!Country %in% top_10_countries$Country) |>
+  group_by(Sector) |>
+  summarize(Emissions = sum(Emissions)) |>
+  mutate(Country = "Others")
+
+# Combine the data frames
+final_data <- bind_rows(top_10_data, others_data)
+
+# Plot the final stacked bar chart
+ggplot(final_data, aes(x = Country, y = Emissions, fill = Sector)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(10, 10, 10, 10),
+    legend.position = "bottom",
+    legend.key.size = unit(0.5, "cm"),
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    subtitle = "Emissions by Sector",
+    x = "Country",
+    y = "Emissions (MtCO₂e)",
+    fill = "Sector"
+  )
+```
+:::
+
+# Further Suggestions for Interactivity
+
+To enhance user engagement and provide deeper insights, we recommend adding interactive features to the visualization. Specifically, implementing interactivity in the donut chart would allow users to hover over each segment and view detailed information about emissions by sector for each country. This interactive feature enables users to explore the data dynamically, gaining a better understanding of how emissions are distributed across different sectors and countries. Additionally, incorporating features such as tooltips, filters, and search functions can further enrich the user experience by facilitating interactive data exploration and analysis.
+
+# Conclusion
+
+We have refined the visualization of the top 10 countries with the highest greenhouse gas emissions to offer a clearer and more focused depiction of emissions by sector. By removing the "Others" category and emphasizing the leading emitters, we have improved the visualization's clarity and highlighted the primary contributors to global emissions. The inclusion of a donut chart and stacked bar chart provides a comprehensive overview of sector-specific emissions for these countries, facilitating effective comparisons across both countries and sectors. To enhance user engagement and facilitate data exploration, we recommend integrating interactive features. Visualizing greenhouse gas emissions plays a crucial role in raising awareness about climate change, advocating for sustainable practices, and informing policy decisions aimed at mitigating environmental impacts caused by human activities.
