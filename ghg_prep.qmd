@@ -692,3 +692,45 @@ ggplot(ghg_total_countries, aes(x=reorder(Country, Emissions), y=Emissions, fill
 **Advantage**: Circular Bar Chart add a little customization from the basic bar chart by making it circular but just like a bar chart, it is used for ranking. It is easy to see the ranking between each variables by looking at how long each bar is. Compared to a regular bar chart where each bar are placed side by side, circular bar chart placed each bar in a circular manner, making it a circular wide point of view to look at.
 <br>
 **Disadvantage**: It can be observed that circular bar chart looks similar to a pie chart/donut chart and if more variables are added into the chart like eg. sector of a country, it will work like a stacked pie chart/donut chart. In order to achieve the circular bar chart, the inner circle have to be removed by using `ylim`. If there are a lot of information to be displayed from a data set, the circular bar chart will look very cluttered and hard to read the information.
+
+
+Let's compare the top 10 countries with the other countries
+```{r}
+#| label: source1-line-others
+
+# Line graph of the top 10 countries vs "Others"
+
+countries_top_10 <- top_10_countries_with_iso$ISO
+ghg_top_10_vs_others <- ghg_raw |>
+  filter(ISO != "WORLD") |>
+  filter(!if_any(everything(), ~ grepl("N/A", .))) |>
+  mutate(Country = ifelse(ISO %in% countries_top_10, "Top 10", "184 Remaining Countries")) |>
+  select(-Sector, -Gas, -ISO) |>
+  mutate(across(-Country, as.numeric)) |>
+  group_by(Country) |>
+  summarize(across(everything(), \(x) sum(x, na.rm = TRUE)), .groups = "drop") |>
+  pivot_longer(cols = -Country, names_to = "Year", values_to = "Emissions")
+
+ggplot(ghg_top_10_vs_others, aes(x = Year, y = Emissions, group = Country, color = Country)) +
+  geom_line(linewidth = 2) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "bottom",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()  
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters vs Remaining 184 Countries",
+    subtitle = "Emissions Over the Years",
+    x = "Year",
+    y = "Emissions (MtCO2e)",
+    color = "Country"
+  )
+
+gt_preview(ghg_top_10_vs_others)
+```
+
