@@ -43,7 +43,7 @@
   keywords: (),
 
   // Number of columns in the poster.
-  num_columns: "2",
+  num_columns: "3",
 
   // University logo's scale (in %).
   univ_logo_scale: "50",
