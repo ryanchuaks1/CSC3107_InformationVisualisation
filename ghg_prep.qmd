@@ -31,6 +31,12 @@ library(knitr)
 library(gt)
 library(dplyr)
 
+# Map
+library(sf)
+library(tmap)
+library(patchwork)
+library(scales)
+
 # Graphical Visualization
 library(ggplot2)
 library(ggrepel)
@@ -98,6 +104,9 @@ dim(ghg_raw)
 We then group similar gases together (CO2, F-Gas, N20, CH4) and sum them up for each country
 
 ```{r}
+#| label: process-data-GHG
+#| warning: false
+
 ghg_co2_year <- ghg_raw |>
   filter(Gas %in% c("CO2")) |>
   # Pivot longer to get ISO, Country, sector, year and emissions
@@ -187,6 +196,8 @@ suppressWarnings({
     group_by(Country) |>
     summarize(Total_Emissions = sum(Emissions), .groups = "drop")
 
+  all_countries_total_emissions <- country_total_emissions
+  
   # Get the top 10 countries by total emissions
   top_10_countries <- country_total_emissions |>
     top_n(10, wt = Total_Emissions) |>
@@ -224,6 +235,14 @@ suppressWarnings({
     gt_preview(10)
 })
 ```
+
+```{r}
+#| label: all-countries-emissions
+
+all_countries_total_emissions |>
+  gt_preview(10)
+```
+
 
 
 ## Source 2 (Alternative Source) {#source2}
@@ -326,45 +345,105 @@ World Map view of the all GHG emitters
 ```{r}
 #| label: source1-worldmap
 
-world <- map_data("world")
+data(World)
 
-ghg_data <- ghg_co2 |>
-  # Filter top 10
-  # filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
+# Percentage of country/all countries total emissions
+all_countries_total_emissions <- all_countries_total_emissions |>
+  mutate(pct_total_emissions = Total_Emissions / sum(Total_Emissions) * 100)
 
-  # Combine (sum) all the emissions for each country
-  group_by(Country) |>
-  summarize(Emissions = sum(Emissions)) |>
-  # Ensure the region column matches the map data
-  mutate(region = Country)
-
-
-# Join the map data with the emissions data
-world_map <- left_join(world, ghg_data, by = c("region" = "Country"))
-
-# Plot the world map
-ggplot(world_map, aes(x = long, y = lat, group = group, fill = Emissions)) +
-  geom_polygon(color = "black") +
-  scale_fill_gradient(low = "white", high = "red", na.value = "gray") +
-  coord_fixed(1.3) +
-  theme_void() +
-  theme(
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    plot.margin = margin(20, 20, 20, 20),
-    legend.position = "right"
-  ) +
-  labs(
-    title = "Top 10 GHG Emitters",
-    subtitle = "Emissions in 2020",
-    fill = "Emissions (MtCO₂e)"
+world <-
+  World |>
+  left_join(all_countries_total_emissions, by = c("name" = "Country")) |>
+  select(name, area, iso_a3, Total_Emissions, pct_total_emissions) |>
+  mutate(
+    # Only show the top 10 based on total emissions
+    country_label = if_else(min_rank(desc(Total_Emissions)) <= 10, name, ""),
+    label_colour = if_else(min_rank(desc(Total_Emissions)) <= 10, 
+                           "white", 
+                           "transparent",
+                           missing = "transparent"
+                          ),
+    pct_country_label = if_else(min_rank(desc(pct_total_emissions)) <= 10, paste0(round(pct_total_emissions, 2), "%"), ""),
+    pct_label_color = if_else(is.na(pct_total_emissions), "transparent", "white")
   )
+world
+
 ```
+
+
+```{r}
+#| label: source1-worldmap-earthplot
+
+# Define the base earth polygon for the map background
+earth <- st_polygon(
+  x = list(
+    cbind(
+      c(rep(-180, 181), rep(180, 181), -180), c(-90:90, 90:-90, -90)
+    )
+  )
+) |>
+  st_sfc() |>
+  st_set_crs(4326) |> # Equirectangular projection
+  st_as_sf()
+```
+
+
+```{r}
+#| label: source1-worldmap-ggplot
+# Define a function for the base map plot
+gg_atm <- function(atm_title) {
+  ggplot(world) +
+    geom_sf(data = earth, fill = "aliceblue") +
+    geom_sf() +
+    labs(title = atm_title) +
+    coord_sf(crs = "ESRI:54035") +
+    theme_void() +
+    theme(
+      legend.margin = margin(5, 0, 0, 0), # Increase margin above legend
+      legend.key.width = unit(1.25, "cm"),
+      legend.frame = element_rect(), # Add a frame around the colorbar
+      legend.position = "top",
+      plot.title = element_text(face = "bold", hjust = 0.5),
+    )
+}
+```
+
+
+```{r}
+#| label: source1-worldmap-plot
+
+gg_ghg_total_emissions <- gg_atm("Top GHG Emitters") +
+  aes(fill = Total_Emissions) +
+  labs(fill = NULL, caption = "Source: World Resources Institute") +
+  scale_fill_distiller(palette = "OrRd", direction = 1)+
+  geom_sf_text(
+    aes(label = country_label, color = label_colour),
+    data = world,
+    size = 3
+  ) +
+  scale_color_identity()
+
+gg_ghg_pct <-
+  gg_atm("Percentage of Total GHG Emissions") +
+  aes(fill = pct_total_emissions) +
+  labs(fill = NULL, caption = "Source: World Resources Institute") +
+  scale_fill_distiller(palette = "Reds", direction = 1) +
+  geom_sf_text(
+    aes(label = pct_country_label, color = pct_label_color),
+    data = world,
+    size = 3
+  ) +
+  scale_color_identity()
+  
+gg_ghg_total_emissions / gg_ghg_pct
+```
+
 
 Simple Line graph with trend line
 
 ```{r}
 #| label: source1-line
+#| warning: false
 
 ghg_co2 |>
   filter(Country %in% c("China", "United States", "India", "Russia", "Japan", "Indonesia", "Iran", "Saudi Arabia", "South Korea", "Canada")) |>
@@ -455,33 +534,37 @@ ghg_total_sector |>
     y = "Emissions (MtCO₂e)",
     fill = "Sector"
   )
+```
 
-# Assuming ghg_total_sector is your original data frame
+
+```{r}
+#| label: stacked-barchart-2
+
+
 # Summarize the emissions of the top 10 countries
-top_10_countries <- ghg_total_sector %>%
-  group_by(Country) %>%
-  summarize(Total_Emissions = sum(Emissions)) %>%
-  filter(Country != "Others") %>% # Remove the "Others" category
+top_10_countries <- ghg_total_sector |>
+  group_by(Country) |>
+  summarize(Total_Emissions = sum(Emissions)) |>
+  filter(Country != "Others") |>
   top_n(10, Total_Emissions)
 
 # Create a new data frame for the top 10 countries
-top_10_data <- ghg_total_sector %>%
-  filter(Country %in% top_10_countries$Country) %>%
-  group_by(Sector) %>%
-  summarize(Emissions = sum(Emissions)) %>%
+top_10_data <- ghg_total_sector |>
+  filter(Country %in% top_10_countries$Country) |>
+  group_by(Sector) |>
+  summarize(Emissions = sum(Emissions)) |>
   mutate(Country = "Top 10")
 
 # Create a new data frame for the "Others" countries
-others_data <- ghg_total_sector %>%
-  filter(!Country %in% top_10_countries$Country) %>%
-  group_by(Sector) %>%
-  summarize(Emissions = sum(Emissions)) %>%
-  mutate(Country = "Others")
+others_data <- ghg_total_sector |>
+  filter(!Country %in% top_10_countries$Country) |>
+  group_by(Sector) |>
+  summarize(Emissions = sum(Emissions)) |>
+  mutate(Country = "Remaining 184 Countries")
 
 # Combine the data frames
 final_data <- bind_rows(top_10_data, others_data)
 
-# Plot the final stacked bar chart
 ggplot(final_data, aes(x = Country, y = Emissions, fill = Sector)) +
   geom_bar(stat = "identity") +
   theme_minimal() +
@@ -490,10 +573,11 @@ ggplot(final_data, aes(x = Country, y = Emissions, fill = Sector)) +
     plot.title = element_text(hjust = 0.5),
     plot.subtitle = element_text(hjust = 0.5),
     plot.margin = margin(20, 20, 20, 20),
-    legend.position = "bottom"
+    legend.position = c(0.2, 0.8),
+    legend.background = element_rect(fill = "white")
   ) +
   labs(
-    title = "Top 10 GHG Emitters",
+    title = "Top 10 GHG Emitters vs Remaining 184 Countries",
     subtitle = "Emissions by Sector",
     x = "Country",
     y = "Emissions (MtCO₂e)",
