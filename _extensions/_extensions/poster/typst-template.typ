@@ -89,7 +89,7 @@
     width: width,
     height: height,
     margin: 
-      (top: 1in, left: 2in, right: 2in, bottom: 2in),
+      (top: 1in, left: 1.5in, right: 1.5in, bottom: 2in),
     footer: [
       #set align(center)
       #set text(32pt, black)
