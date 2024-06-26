@@ -95,7 +95,6 @@ We used the Quarto publication framework and the R programming language, along w
 
 # Improved Visualization
 
-::: {#fig-ggplot layout-ncol=2}
 ```{r}
 #| label: fig-ggplot
 #| fig-cap: "Revised Visualization of Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
@@ -104,59 +103,31 @@ We used the Quarto publication framework and the R programming language, along w
 #| out-width: 100%
 #| warning: false
 
-# Top 3 sectors in each country by Emissions data
-ghg_total_sectors <- ghg_combined |>
-  group_by(ISO, Country, Sector) |>
-  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
-  # filter(Sector != "Energy") |> #Filter Energy
-  group_by(ISO, Country) |>
-  top_n(3, Emissions) |>
-  arrange(desc(Emissions)) |>
-  ungroup()
+#TODO: Finalise and Cleanup this block
 
-# Top 10 countries by Emissions data
-ghg_total_countries <- ghg_combined |>
-  filter(ISO != "WORLD") |>
-  group_by(ISO, Country) |>
-  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
-  arrange(desc(Emissions)) |>
-  slice(1:10) |>
-  select(ISO) |>
-  left_join(ghg_total_sectors, by = "ISO")
+# Map Here
 
-countries <- ghg_total_countries$ISO |>
-  unique()
+# gg_ghg_total_emissions_final <- gg_ghg("Top GHG Emitters (as % of World Total)") +
+#   aes(fill = Total_Emissions) +
+#   labs(fill = NULL, caption = "Source: World Resources Institute") +
+#   scale_fill_fermenter(
+#     palette = "OrRd",
+#     direction = 1,
+#     labels = label_number(
+#       scale = 1e-6,
+#       suffix = "M"
+#     )
+#   ) +
+#   geom_sf_text(
+#     aes(label = country_label, color = label_colour),
+#     data = world,
+#     size = 1.25
+#   ) +
+#   scale_color_identity()
 
-# Get the population data from the World Bank API
-population_data <- wb_data("SP.POP.TOTL", country = countries, start_date = 1990, end_date = 2021) |>
-  rename(population = SP.POP.TOTL) |>
-  select(iso3c, population) |>
-  group_by(iso3c) |>
-  summarize(avg_population = mean(population))
+# gg_ghg_total_emissions_final
 
-# Merge the population data with the emissions data
-ghg_total_countries <- ghg_total_countries |>
-  left_join(population_data, by = c("ISO" = "iso3c"))
-
-# Adding population data before filtering top 10 countries
-ghg_total_countries_2 <- ghg_combined |>
-  filter(ISO != "WORLD") |>
-  left_join(population_data, by = c("ISO" = "iso3c")) |>
-  group_by(ISO, Country, avg_population) |>
-  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
-  mutate(Emissions_per_capita_country = Emissions / avg_population) |>
-  arrange(desc(Emissions_per_capita_country)) |>
-  slice(1:10) |>
-  select(ISO, avg_population, Emissions_per_capita_country) |>
-  left_join(ghg_total_sectors, by = "ISO") |>
-  mutate(Emissions_per_capita = Emissions / avg_population)
-
-# Switch Russia Energy and Electricity/Heat rows
-# Replace "Land-Use Change and Forestry" in Sector column with "LUCF"
-# Above are done so to fit the labels into the chart
-ghg_total_countries_gg <- ghg_total_countries |>
-  slice(c(1:9, 11, 10, 12:n())) |>
-  mutate(Sector = ifelse(Sector == "Land-Use Change and Forestry", "LUCF", Sector))
+# Donut Chart Here
 
 ggPieDonut(
   ghg_total_countries_gg,
@@ -166,7 +137,9 @@ ggPieDonut(
   title = "Top 10 GHG Emitters",
   labelposition = 1
 ) +
-  geom_col(aes(x = -1, y = 0)) 
+  geom_col(aes(x = -1, y = 0))
+
+# Stacked Bar Chart Here
 
 # Summarize the emissions of the top 10 countries
 # top_10_countries <- ghg_total_sector |>
@@ -212,7 +185,6 @@ ggPieDonut(
 #     fill = "Sector"
 #   )
 ```
-:::
 
 # Further Suggestions for Interactivity
 
