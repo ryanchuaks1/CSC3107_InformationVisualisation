@@ -666,6 +666,17 @@ ghg_total_countries_pop <- ghg_combined |>
 #| label: fig-source1-donut-population
 #| warning: false
 
+donut<-
+  ggPieDonut(
+    ghg_total_countries_gg,
+    aes(pies = Country, donuts = Sector, count = Emissions),
+    showRatioPie = FALSE,
+    showRatioDonut = FALSE,
+    title = "Top 10 GHG Emitters",
+    labelposition = 1
+  ) +
+    geom_col(aes(x = -1, y = 0))
+
 PieDonut(
   ghg_total_countries_pop,
   aes(x = Country, y = Sector, count = Emissions_per_capita),
@@ -679,6 +690,8 @@ PieDonut(
   showRatioDonut = FALSE,
   explodeDonut = TRUE
 )
+
+ggsave("donut.png", donut, width=8, height=8)
 ```
 
 ```{r}
@@ -815,26 +828,39 @@ treemap(
 # Treemap with Country as the main group, by emissions, show sector for each country
 ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
   geom_treemap() +
-  geom_treemap_text(
-    aes(label = paste0(Sector, "\n", round(Emissions, 2), " MtCO2e")),
-    reflow = TRUE,
-    color = "white",
-    place = "centre",
-    grow = TRUE
-  ) +
   geom_treemap_subgroup_text(
-    place = "centre",
-    grow = TRUE
+    aes(label = Country),
+    place = "bottom",
+    #grow = TRUE,
+    padding.x = unit(2, "mm"),
+    padding.y = unit(2, "mm"),
+    bg.color = "grey80",  # Background color for the country label
+    bg.alpha = 0.5,       # Transparency for the background
+    color = "black",      # Font color for the country label
+    size = 10             # Font size for the country label
+  ) +
+  geom_treemap_text(
+    aes(label = Sector),
+    place = "topleft",
+    #grow = TRUE,
+    reflow = TRUE,
+    color = "black",      # Font color for the sector label
+    size = 5              # Font size for the sector label
   ) +
   geom_treemap_subgroup_border() +
-  scale_fill_brewer(palette = "Set3") +
+  scale_fill_brewer(palette = "Set3") +  # Choose a suitable color palette
   theme_void() +
-  theme(legend.position = "none") +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size = 8, hjust = 0.5, vjust = 1, face = "bold"),
+    plot.caption = element_text(size = 6, hjust = 0, vjust = 1),
+  ) +
   labs(
     title = "Top 10 GHG Emitters",
     fill = "Sector",
-    caption = "Source: World Resources Institute",
+    caption = "Source: World Resources Institute"
   )
+
 ```
 
 
