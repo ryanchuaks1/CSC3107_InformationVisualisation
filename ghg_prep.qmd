@@ -18,10 +18,13 @@ toc: true
 This Quarto document contains the data engineering required to reconstruct and improve the plot made by [World Resources Institute](https://www.wri.org/insights/4-charts-explain-greenhouse-gas-emissions-countries-and-sectors), shown in @fig-oldvs, showing the top 10 Green House Gases (GHG) emitters in the world.
 
 The code below requires the following packages:
+
 ```{r}
 #| label: library
 #| message: false
+#| warning: false
 
+# Data Manipulation
 library(tidyverse)
 library(readxl)
 library(knitr)
@@ -58,7 +61,7 @@ include_graphics("images/old_visualization.jpg")
 
 ## Source 1 (Main Source) {#source1}
 
-Firstly, lets take a look at the raw data provided from [climatewatchdata.org](https://www.climatewatchdata.org/ghg-emissions), this is the **original** dataset
+Firstly, lets take a look at the raw data provided from [climatewatchdata.org](https://www.climatewatchdata.org/data-explorer/historical-emissions?historical-emissions-data-sources=climate-watch&historical-emissions-gases=ch4%2Cco2%2Cn2o%2Cf-gas&historical-emissions-regions=All%20Selected&historical-emissions-sectors=building%2Cbunker-fuels%2Celectricity-heat%2Cenergy%2Cfugitive-emissions%2Cindustrial-processes%2Cland-use-change-and-forestry%2Cmanufacturing-construction%2Cother-fuel-combustion%2Ctransportation%2Cwaste%2Cagriculture&page=1&sort_col=2021&sort_dir=DESC), this is the **original** dataset
 
 ```{r}
 #| label: explore-raw
@@ -86,7 +89,7 @@ ghg_raw |>
   )
 ```
 
-Since there is only 1 distinct `Unit` type, we can drop this columns along  as it is not needed for our analysis. The unit MtCO₂e stands for "million metric tons of carbon dioxide equivalent."
+Since there is only 1 distinct `Unit` type, we can drop this column as it is not needed for our analysis. The unit MtCO₂e stands for "million metric tons of carbon dioxide equivalent." This also tells us that we do not need to scale the gas types as they are already in the same unit.
 
 ```{r}
 ghg_raw <-
@@ -94,14 +97,15 @@ ghg_raw <-
   select(-Unit, -"Data source")
 
 gt_preview(ghg_raw)
-# Print size of the dataset
+# Print size of the Data set
 dim(ghg_raw)
 ```
 
 ### Source 1 Cleaning
 
 In the following code, we will wrangle the data to achieve the following:
-- Top 10 countries by sorted by total emissions + "Others" where the rest of the countries are grouped under "Others"
+
+- Top 10 countries, sorted by total emissions + "Others" where the rest of the countries are grouped under "Others"
 - Country + Sector emissions
 - Total emissions for each country
 
@@ -162,6 +166,12 @@ ghg_total_sector <- ghg_total_sector |>
   arrange(desc(Total_Emissions), Country, desc(Emissions)) |>
   mutate(Country = factor(Country, levels = unique(Country))) |>
   select(-Total_Emissions)
+```
+
+From the above, our two outputs are `ghg_total_sector` and `all_countries_total_emissions`. The former contains the emissions for each country and sector, while the latter contains the total emissions for each country.
+
+```{r}
+#| label: emissions_across_country_and_sector_preview
 
 # Preview the result (Top 10 countries and sector)
 ghg_total_sector |>
@@ -172,10 +182,11 @@ ghg_total_sector |>
 ```{r}
 #| label: all-countries-emissions
 
+
+# Preview the result (Total GHG emissions per country)
 all_countries_total_emissions |>
   gt_preview(10)
 ```
-
 
 ## Source 2 (Alternative Source) {#source2}
 
@@ -203,9 +214,11 @@ ghg_raw2 |>
 
 Since there are more countries covered, we can potentially keep the data from this source and merge it with the first source.
 
+__Note:__ _Our final visualization in the end requires industry GHG emission data and hence, source 2 was dropped/unused_
+
 ## Source 3 (Alternative Source) {#source3}
 
-Lastly, we will take a look at the third source, where the data has more details
+Lastly, we will take a look at the third source, where the data has more details. [climatedata.imf.org](https://climatedata.imf.org/datasets/c8579761f19740dfbe4418b205654ddf/explore)
 
 ```{r}
 #| label: explore-raw3
@@ -215,7 +228,7 @@ ghg_raw3 <- read_csv("data/historical_emissions_source3.csv")
 gt_preview(ghg_raw3)
 ```
 
-From the preview we can see that there are many features, lets extract out the relevant ones to preview
+From the slightly messy preview, we can see that there are many features. Lets extract out the relevant ones to preview
 
 ```{r}
 ghg_raw3 <-
@@ -225,16 +238,21 @@ ghg_raw3 <-
 gt_preview(ghg_raw3)
 ```
 
-From this we can tell that this data source not only have the countries, but it is split by the gas type and industry
+From this we can tell that this data source not only have the countries, it contains the gas type and industry as well.
 
 ## Conclusion from exploration
 
-[Source 1](#source1) and [Source 2](#source2) have similar data, both consisting of each country's annual GHG emission. These data are suitable for a simple analysis while [Source 3](#source3) is more detailed, with the data split by industry and gas type.
+[Source 1](#source1) and [Source 3](#source3) have similar data, both consisting of each country's annual GHG emission, industry and gas type. These data are suitable for a complex analysis and the making of a beautiful chart.
 
-We can potentially merge Source 1 and 2 together to get a more complete dataset, and then explore Source 3 for more detailed analysis/different angles.
+[Source 2](#source2) on the other hand is less detailed and we would be dropping it.
 
+If source 1 is deemed insufficient for our visualization, we will be using source 3 as a backup.
 
 # Data Exploration Visualisations
+
+In this section, we will be visualizing the data from [Source 1](#source1) to understand the distribution of GHG emissions across countries and sectors. We will be using various types of visualizations such as choropleth maps, pie charts, stacked bar charts, donut charts, and line graphs to explore the data.
+
+Our goal is to find potential visualizations that can be used to represent the data more effectively compared to @fig-oldvs, discover new potential angles and insights that can be derived from the data.
 
 ## Source 1 (Main Source) {#source1_viz}
 
@@ -277,7 +295,6 @@ world <-
 world
 ```
 
-
 ```{r}
 #| label: source1-worldmap-earthplot
 
@@ -294,9 +311,9 @@ earth <- st_polygon(
   st_as_sf()
 ```
 
-
 ```{r}
 #| label: source1-worldmap-ggplot
+#| warning: false
 
 # Define a function for the base map plot
 gg_ghg <- function(atm_title) {
@@ -316,7 +333,6 @@ gg_ghg <- function(atm_title) {
     )
 }
 ```
-
 
 ```{r}
 #| label: fig-source1-worldmap-plot
@@ -357,6 +373,7 @@ gg_ghg_total_emissions
 
 ```{r}
 #| label: fig-source1-worldmap-plot-pct
+#| warning: false
 #| fig.cap: "Choropleth map of GHG emissions by country (Percentage of total emissions)."
 
 gg_ghg_pct
@@ -367,7 +384,6 @@ gg_ghg_pct
 **Advantage**: The choropleth map is an effective way to visualize the distribution of GHG emissions across countries. It provides a clear visual representation of the top emitters and their relative contributions to global emissions. The use of color gradients helps to highlight the differences in emissions levels, making it easy to identify the countries with the highest emissions.
 
 **Disadvantage**: The choropleth map may not be suitable for comparing emissions across countries with vastly different population sizes or land areas. The map does not account for population density or per capita emissions, which can provide a more accurate representation of a country's contribution to global emissions. Additionally, the map may not be as effective for visualizing changes in emissions over time, as it only shows a snapshot of emissions for a single year or the total emissions up to that year.
-
 
 ### Pie Charts
 
@@ -451,13 +467,11 @@ source_1_pie_country
 source_1_pie_sector
 ```
 
-
 The Pie Charts above show the distribution of emissions by country and sector. The top 10 countries and sectors are represented in the pie charts, with each slice of the pie corresponding to the emissions of a particular country or sector. The size of each slice is proportional to the emissions of the corresponding country or sector, allowing for easy comparison of emissions levels.
 
 **Advantage**: Pie charts are an effective way to visualize the distribution of emissions by country and sector. They provide a clear visual representation of the relative contributions of each country and sector to total emissions. The use of color coding helps to differentiate between countries and sectors, making it easy to identify the top emitters.
 
 **Disadvantage**: Pie charts may not be suitable for comparing emissions across a large number of countries or sectors, as the slices can become too small to distinguish. Additionally, pie charts do not provide a direct comparison of emissions levels between countries or sectors, as the size of each slice is relative to the total emissions. This can make it difficult to accurately assess the differences in emissions levels between countries or sectors.
-
 
 ### Stacked Bar Chart
 
@@ -488,7 +502,6 @@ plot_stacked_bar <- function(data, x_var, title, subtitle) {
 }
 ```
 
-
 ```{r}
 #| label: fig-source1-stackedbar
 #| fig.cap: "Stacked bar chart of emissions by country."
@@ -505,7 +518,6 @@ source1_stackedbar
 ```
 
 Stacked Barchart (@fig-source1-stackedbar) shows the emissions of the top 10 countries by sector. Each bar represents the total emissions of a country, with the different colors representing the emissions from different sectors. The stacked bar chart allows for easy comparison of emissions levels between countries and sectors, making it easy to identify the top emitters and the sectors contributing the most to emissions.
-
 
 ```{r}
 #| label: fig-stacked-barchart-2
@@ -559,6 +571,7 @@ Donut chart of the top 10 countries and top 3 sectors by emissions
 #| fig.cap: "Donut chart of the top 10 countries and sectors by emissions."
 #| fig.width: 9
 #| fig.height: 5
+#| warning: false
 
 # Plot the donut chart of the top 10 countries and top 3 sectors within each country
 ghg_total_countries <- ghg_total_sector |>
@@ -604,6 +617,7 @@ Taking into consideration the population of each country
 
 ```{r}
 #| label: source1-donut-with-population-data
+#| warning: false
 
 # Retrieving the top 10 countries ISO
 top_10_countries_with_iso <- top_10_countries |>
@@ -644,9 +658,9 @@ ghg_total_countries_pop <- ghg_combined |>
   mutate(Emissions_per_capita = Emissions / avg_population)
 ```
 
-
 ```{r}
 #| label: fig-source1-donut-population
+#| warning: false
 
 PieDonut(
   ghg_total_countries_pop,
@@ -662,7 +676,6 @@ PieDonut(
   explodeDonut = TRUE
 )
 ```
-
 
 ```{r}
 #| label: fig-circular_bar_chart
@@ -686,13 +699,13 @@ ggplot(ghg_total_countries, aes(x = reorder(Country, Emissions), y = Emissions, 
     fill = "Sector"
   )
 ```
-**Advantage**: Circular Bar Chart add a little customization from the basic bar chart by making it circular but just like a bar chart, it is used for ranking. It is easy to see the ranking between each variables by looking at how long each bar is. Compared to a regular bar chart where each bar are placed side by side, circular bar chart placed each bar in a circular manner, making it a circular wide point of view to look at.
-<br>
-**Disadvantage**: It can be observed that circular bar chart looks similar to a pie chart/donut chart and if more variables are added into the chart like eg. sector of a country, it will work like a stacked pie chart/donut chart. In order to achieve the circular bar chart, the inner circle have to be removed by using `ylim`. If there are a lot of information to be displayed from a data set, the circular bar chart will look very cluttered and hard to read the information.
+
+**Advantage**: Circular Bar Chart add a little customization from the basic bar chart by making it circular but just like a bar chart, it is used for ranking. It is easy to see the ranking between each variables by looking at how long each bar is. Compared to a regular bar chart where each bar are placed side by side, circular bar chart placed each bar in a circular manner, making it a circular wide point of view to look at. <br> **Disadvantage**: It can be observed that circular bar chart looks similar to a pie chart/donut chart and if more variables are added into the chart like eg. sector of a country, it will work like a stacked pie chart/donut chart. In order to achieve the circular bar chart, the inner circle have to be removed by using `ylim`. If there are a lot of information to be displayed from a data set, the circular bar chart will look very cluttered and hard to read the information.
 
 ### Line Graph
 
 Let's compare the top 10 countries with the other countries
+
 ```{r}
 #| label: fig-source1-line-others
 
@@ -732,11 +745,11 @@ ggplot(ghg_top_10_vs_others, aes(x = Year, y = Emissions, group = Country, color
 gt_preview(ghg_top_10_vs_others)
 ```
 
-
 ## Source 4
 
-Lets compare that against Energy generation type per country
-[Source](https://climatedata.imf.org/datasets/0bfab7fb7e0e4050b82bba40cd7a1bd5/explore)
+Lets compare that against Energy generation type per country [Source](https://climatedata.imf.org/datasets/0bfab7fb7e0e4050b82bba40cd7a1bd5/explore).
+
+This comparison is important because developing countries typically rely more on coal burning for energy, while developed countries have been transitioning to renewable sources like solar power.
 
 First, we format the data into each country and their energy generation per year
 
@@ -791,3 +804,39 @@ ggplot(expenditure, aes(x = Year, y = Energy, color = Country)) +
     shape = "Country"
   )
 ```
+
+Now lets compare that to the GHG emissions
+
+```{r}
+#| label: source1-line
+#| message: false
+
+ghg_combined |>
+  group_by(ISO, Country, Year) |>
+  summarize(Emissions = sum(Emissions, na.rm = TRUE), .groups = "drop") |>
+  filter(Country %in% c("China", "United States", "India")) |>
+  ggplot(aes(x = Year, y = Emissions, color = Country, shape = Country)) +
+  geom_point() + # Scatterplot
+  geom_smooth(method = "lm", se = FALSE) +
+  # scale_y_log10() +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    plot.margin = margin(20, 20, 20, 20),
+    legend.position = "bottom"
+  ) +
+  labs(
+    title = "GHG Emissions Over the Years",
+    subtitle = "For Top 3 Emitting Countries",
+    x = "Year",
+    y = "Emissions (MtCO₂e)",
+    color = "Country",
+    shape = "Country"
+  )
+```
+
+From the two charts, we can see that GHG emissions and energy generation are closely related. As countries generate more energy, their GHG emissions also increase. This highlights the importance of transitioning to cleaner energy sources to reduce emissions and combat climate change.
+
+__Note:__ _This however is not the focus of our visualization, hence we will not be using this data for our final visualization_
