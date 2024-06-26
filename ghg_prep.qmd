@@ -28,6 +28,10 @@ library(knitr)
 library(gt)
 library(dplyr)
 
+# Treemap
+library(treemap)
+library(treemapify)
+
 # Map
 library(sf)
 library(tmap)
@@ -259,20 +263,20 @@ world <-
     country_label = if_else(min_rank(desc(Total_Emissions)) <= 3,
       paste0(
         rank(desc(Total_Emissions)), ". ", iso_a3, "(", round(pct_total_emissions, 2), "%)"
-        ),
+      ),
       ""
     ),
     label_colour = if_else(min_rank(desc(Total_Emissions)) > 2, "black", "white"),
     pct_country_label = if_else(
-      min_rank(desc(pct_total_emissions)) <= 10, 
+      min_rank(desc(pct_total_emissions)) <= 10,
       paste0(round(pct_total_emissions, 2), "%"),
       ""
-      ),
+    ),
     pct_label_color = if_else(
-      !is.na(pct_total_emissions) & min_rank(desc(pct_total_emissions)) > 2, 
+      !is.na(pct_total_emissions) & min_rank(desc(pct_total_emissions)) > 2,
       "black",
       "white"
-      )
+    )
   )
 world
 ```
@@ -730,6 +734,94 @@ ggplot(ghg_top_10_vs_others, aes(x = Year, y = Emissions, group = Country, color
   )
 
 gt_preview(ghg_top_10_vs_others)
+```
+
+### Treemap
+
+```{r}
+#| label: fig-source1-treemap
+#| fig.cap: "Treemap of the top 10 countries and sectors by emissions."
+
+# Remove negative Emissions (We don't want to show negative emissions)
+treemap_data <-
+  ghg_total_sector |>
+  filter(Emissions >= 0)
+
+# Select only the top 3 sectors for each country, group the rest under "Other Sectors"
+treemap_data <-
+  treemap_data |>
+  group_by(Country) |>
+  top_n(4, Emissions) |>
+  ungroup() |>
+  mutate(Sector = if_else(row_number() == 5, "Other Sector", Sector))
+
+# Combine the emissions of the "Other Sectors" for each country
+treemap_data <-
+  treemap_data |>
+  group_by(Country, Sector) |>
+  summarize(Emissions = sum(Emissions), .groups = "drop") |>
+  ungroup() |>
+  group_by(Country) |>
+  mutate(Sector = if_else(Sector == "Other Sector", "Other Sectors", Sector)) |>
+  group_by(Country, Sector) |>
+  summarize(Emissions = sum(Emissions), .groups = "drop")
+
+treemap_data |>
+  gt_preview(10)
+
+# Treemap of the top 10 countries and sectors + Others (Showing the emissions by sector)
+treemap(
+  dtf = treemap_data,
+  index = c("Country", "Sector"),
+  vSize = "Emissions",
+  vColor = "Emissions",
+  draw = TRUE,
+  title = "Top 10 GHG Emitters",
+  fontsize.labels = c(10, 8),
+  # inflate.labels = TRUE,
+  # fontcolor.labels = c("black", "white"),
+  fontface.labels = c(2, 1),
+  fontsize.title = 3,  # Adjusted font size for title
+  align.labels = list(c("center", "center"), c("center", "center")),
+  border.col = "black",
+  border.lwds = 0.5,  # Adjusted border line width
+  aspRatio = NA,
+  type = "value",
+  palette = "Reds",
+  fontsize.legend = 5,  # Adjusted font size for legend
+  title.legend = "Emissions (MtCO2e)",  # Added legend title
+  format.legend = list(
+    # Show in million metric tons
+    big.mark = ",",
+    scientific = FALSE
+    
+  )
+)
+
+## Treemapify
+# Treemap with Country as the main group, by emissions, show sector for each country
+ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
+  geom_treemap() +
+  geom_treemap_text(
+    aes(label = paste0(Sector, "\n", round(Emissions, 2), " MtCO2e")),
+    reflow = TRUE,
+    color = "white",
+    place = "centre",
+    grow = TRUE
+  ) +
+  geom_treemap_subgroup_text(
+    place = "centre",
+    grow = TRUE
+  ) +
+  geom_treemap_subgroup_border() +
+  scale_fill_brewer(palette = "Set3") +
+  theme_void() +
+  theme(legend.position = "none") +
+  labs(
+    title = "Top 10 GHG Emitters",
+    fill = "Sector",
+    caption = "Source: World Resources Institute",
+  )
 ```
 
 
