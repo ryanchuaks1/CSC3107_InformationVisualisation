@@ -98,12 +98,62 @@ We used the Quarto publication framework and the R programming language, along w
 ```{r}
 #| label: fig-ggplot
 #| fig-cap: "Revised Visualization of Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
-#| fig-width: 3.0
+#| fig-width: 3.2
 #| fig-height: 2.3
 #| out-width: 100%
 #| warning: false
 
 #TODO: Finalise and Cleanup this block
+ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
+  geom_treemap() +
+  geom_treemap_text(
+    aes(label = paste0(Sector, "\n", round(Emissions, 2), " MtCO2e")),
+    reflow = TRUE,
+    color = "white",
+    place = "centre",
+    grow = TRUE
+  ) +
+  geom_treemap_subgroup_text(
+    place = "centre",
+    grow = TRUE
+  ) +
+  geom_treemap_subgroup_border() +
+  scale_fill_brewer(palette = "Set3") +
+  theme_void() +
+  theme(legend.position = "none") +
+  labs(
+    title = "Top 10 GHG Emitters",
+    fill = "Sector",
+    caption = "Source: World Resources Institute",
+  )
+
+# treemap(
+#   dtf = treemap_data,
+#   index = c("Country", "Sector"),
+#   vSize = "Emissions",
+#   vColor = "Emissions",
+#   draw = TRUE,
+#   title = "Top 10 GHG Emitters",
+#   fontsize.labels = c(5, 8),
+#   inflate.labels = TRUE,
+#   # fontcolor.labels = c("black", "white"),
+#   fontface.labels = c(2, 1),
+#   fontsize.title = 3,  # Adjusted font size for title
+#   align.labels = list(c("center", "center"), c("center", "center")),
+#   border.col = "black",
+#   border.lwds = 0.5,  # Adjusted border line width
+#   aspRatio = NA,
+#   type = "value",
+#   palette = "Reds",
+#   fontsize.legend = 5,  # Adjusted font size for legend
+#   title.legend = "Emissions (MtCO2e)",  # Added legend title
+#   format.legend = list(
+#     # Show in million metric tons
+#     big.mark = ",",
+#     scientific = FALSE
+#     
+#   )
+# )
 
 # Map Here
 
@@ -129,15 +179,15 @@ We used the Quarto publication framework and the R programming language, along w
 
 # Donut Chart Here
 
-ggPieDonut(
-  ghg_total_countries_gg,
-  aes(pies = Country, donuts = Sector, count = Emissions),
-  showRatioPie = FALSE,
-  showRatioDonut = FALSE,
-  title = "Top 10 GHG Emitters",
-  labelposition = 1
-) +
-  geom_col(aes(x = -1, y = 0))
+# ggPieDonut(
+#   ghg_total_countries_gg,
+#   aes(pies = Country, donuts = Sector, count = Emissions),
+#   showRatioPie = FALSE,
+#   showRatioDonut = FALSE,
+#   title = "Top 10 GHG Emitters",
+#   labelposition = 1
+# ) +
+#   geom_col(aes(x = -1, y = 0))
 
 # Stacked Bar Chart Here
 
