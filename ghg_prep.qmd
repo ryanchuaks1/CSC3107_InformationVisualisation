@@ -819,7 +819,90 @@ treemap_data <-
   group_by(Country, Sector) |>
   summarize(Emissions = sum(Emissions), .groups = "drop")
 
+# Modify the factors to order it in this order:
+# Energy, Electricity/Heat, Agriculture, Transportation, Manufacturing/Construction, Other Sectors
+treemap_data <-
+  treemap_data |>
+  mutate(
+    Sector = factor(Sector,
+      levels = c(
+        "Energy",
+        "Electricity/Heat",
+        "Agriculture",
+        "Transportation",
+        "Manufacturing/Construction",
+        "Other Sectors",
+        "Other Country"
+      ),
+      ordered = TRUE
+    )
+  )
+```
 
+```{r}
+#| label: fig-source1-treemap-plot-final
+#| fig.cap: "Treemap of the top 10 countries and sectors by emissions."
+#| warning: false
+
+ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
+  geom_treemap(color = "white", size = 0.5) +
+  geom_treemap_subgroup_border(color = "black", size = 2) +
+  geom_treemap_subgroup_text(
+    aes(label = Country),
+    place = "centre",
+    padding.x = unit(2, "mm"),
+    padding.y = unit(2, "mm"),
+    size = 10,
+    min.size = 3
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Energy" = "#beaed4",
+      "Agriculture" = "#7fc97f",
+      "Electricity/Heat" = "#fdc086",
+      "Manufacturing/Construction" = "#ff7f00",
+      "Other Sectors" = "#ffff99",
+      "Transportation" = "#386cb0",
+      "Other Country" = "grey"
+    ),
+    # Remove "Other Country
+    breaks = c(
+      "Energy",
+      "Electricity/Heat",
+      "Agriculture",
+      "Transportation",
+      "Manufacturing/Construction",
+      "Other Sectors"
+    )
+  ) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    legend.key.size = unit(0.2, "cm"),
+    legend.spacing = unit(0.1, "cm"),
+    legend.text = element_text(size = 5),
+    legend.text.size = 3,
+    legend.title.position = "left",
+    legend.title = element_text(size = 4, face = "bold"),
+    legend.key.spacing.x = unit(0.1, "cm"),
+    plot.subtitle = element_text(size = 4, vjust = 6),
+    plot.title = element_text(size = 5, face = "bold"),
+    plot.title.position = "plot",
+    plot.caption = element_text(size = 3, hjust = c(1, 0), vjust = 1)
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters account for 68% of Global Emissions",
+    subtitle = "Size of rectangles reflects total sector emissions",
+    fill = "Sector",
+    caption = c("Source: World Resources Institute", "EU27: European Union 27 countries")
+  )
+```
+
+@fig-source1-treemap-plot-final shows the distribution of emissions by country and sector in a treemap format. The size of each rectangle represents the emissions of a country or sector, with different colors representing different sectors. The treemap provides a clear visual representation of the relative contributions of each country and sector to total emissions, making it easy to identify the top emitters and the sectors contributing the most to emissions. This plot is selected to be used in the final visualization.
+
+
+```{r}
+#| label: fig-source1-treemap-plot
 # Treemap of the top 10 countries and sectors + Others (Showing the emissions by sector)
 treemap(
   dtf = treemap_data,
@@ -847,6 +930,14 @@ treemap(
     scientific = FALSE
   )
 )
+```
+
+@fig-source1-treemap-plot shows a similar treemap visualization with the `treemap` package. The size of each rectangle represents the emissions of a country or sector, with different colors representing different sectors. The treemap provides a clear visual representation of the relative contributions of each country and sector to total emissions, making it easy to identify the top emitters and the sectors contributing the most to emissions.
+
+
+```{r}
+#| label: fig-source1-treemap-plot-old-1
+#| fig.cap: "Treemap of the top 10 countries and sectors by emissions, visualised with the `treemapify` package."
 
 ## Treemapify
 # Treemap with Country as the main group, by emissions, show sector for each country
@@ -885,7 +976,12 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
     fill = "Sector",
     caption = "Source: World Resources Institute"
   )
+```
 
+
+```{r}
+#| label: fig-source1-treemap-plot-old-2
+#| fig.cap: "Treemap of the top 10 countries and sectors by emissions, visualised with the `treemapify` package."
 ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
   geom_treemap(color = "white", size = 0.5) + # Adding white borders to each box
   geom_treemap_subgroup_border(color = "grey", size = 2) + # Adding a thick border for countries
@@ -920,6 +1016,8 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
     caption = "Source: World Resources Institute"
   )
 ```
+
+@fig-source1-treemap-plot-old-1 and @fig-source1-treemap-plot-old-2 plots depict the initial treemap visualization using the `treemapify` package. The size of each rectangle represents the emissions of a country or sector, with different colors representing different sectors. The treemap provides a clear visual representation of the relative contributions of each country and sector to total emissions, making it easy to identify the top emitters and the sectors contributing the most to emissions.
 
 **Advantage**: Treemaps are an effective way to visualize hierarchical data, such as the distribution of emissions by country and sector. They provide a clear visual representation of the relative contributions of each country and sector to total emissions. The use of color coding helps to differentiate between countries and sectors, making it easy to identify the top emitters and the sectors contributing the most to emissions.
 

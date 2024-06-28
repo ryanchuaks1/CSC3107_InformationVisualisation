@@ -1,5 +1,5 @@
 ---
-title: Top 10 Countries with the Highest Greenhouse Gas Emissions
+title: Visualizing Greenhouse Gas Emitting Countries (1990-2021)
 format:
   poster-typst: 
     size: "33x23" # Approximately A1
@@ -25,13 +25,11 @@ source("ghg_prep.R")
 
 # Introduction
 
-
 Greenhouse gas (GHG) emissions from human activities such as fossil fuel combustion, deforestation, and industrial processes significantly contribute to climate change. The primary GHGs—carbon dioxide (CO$_2$), methane (CH$_4$), nitrous oxide (N$_2$O), and fluorinated gases—trap heat in the Earth's atmosphere, causing a warming effect known as the greenhouse effect. This results in rising global temperatures, disrupted weather patterns, and more frequent extreme weather events. For instance, global temperatures have increased by approximately 1.2°C since the late 19th century [^Jones1999Surface], and sea levels have risen by about 20 centimeters over the past century due to melting polar ice caps and glaciers, threatening various species' habitats. Beyond climate change, GHG emissions affect air quality and public health, leading to respiratory and cardiovascular diseases. The World Health Organization (WHO) estimates that air pollution causes around 3.3 million premature deaths annually [^Lelieveld2015The]. Additionally, the increased concentration of GHGs disrupts ecosystems and endangers biodiversity. Ocean acidification, resulting from excess CO$_2$ absorption by oceans, has risen by 30% since the Industrial Revolution [^Popattanachai2021Ocean], adversely impacting marine life, particularly coral reefs and shellfish.
 
 [^Jones1999Surface]: Jones, P. D., New, M., Parker, D. E., Martin, S., & Rigor, I. G. (1999). Surface air temperature and its changes over the past 150 years. Reviews of Geophysics, 37(2), 173–199. doi:10.1029/1999rg900002
 
-Visualizing GHG emissions is essential for understanding their distribution across countries and sectors, identifying major contributors, and informing policy decisions. The top 10 emitting countries—China, the United States, India, Russia, Japan, Germany, Iran, South Korea, Canada, and Saudi Arabia—account for a significant portion of global emissions. Major sectors contributing to these emissions include energy production, transportation, industrial processes, agriculture, and waste management. The energy sector is the largest source due to fossil fuel combustion, while the transportation sector significantly contributes through gasoline and diesel use. Highlighting these contributors underscores the need for coordinated climate action and promotes sustainable practices, renewable energy, and effective policies.
-
+Visualizing GHG emissions is essential for understanding their distribution across countries and sectors, identifying major contributors, and informing policy decisions. The top 10 emitting countries—China, the United States, India, Russia, Japan, Germany, Indonesia, European Union (EU), Canada, and Brazil—account for a significant portion of global emissions. Major sectors contributing to these emissions include energy production, transportation, industrial processes, agriculture, and waste management. The energy sector is the largest source due to fossil fuel combustion, while the transportation sector significantly contributes through gasoline and diesel use. Highlighting these contributors underscores the need for coordinated climate action and promotes sustainable practices, renewable energy, and effective policies.
 
 [^Lelieveld2015The]: Lelieveld, J., Evans, J., Fnais, M. et al. The contribution of outdoor air pollution sources to premature mortality on a global scale. Nature 525, 367–371 (2015). https://doi.org/10.1038/nature15371
 
@@ -66,11 +64,9 @@ We decided to exclude the "Others" category from the previous visualization to e
 
 # Implementation
 
-- **Data Source:** Retrieved from the World Bank Data API[^climatewatchdata], the dataset includes greenhouse gas emissions data (CO2, F-Gas, N2O, CH4) by sector for various countries, with the 'Unit' column removed as it only contained "MtCO₂e."
-- **Data Preparation:** Cleaned and transformed the data to compute total emissions by sector for each country, grouped sectors other than "Energy," "Electricity/Heat," "Agriculture," "Transportation," and "Manufacturing/Construction" under "Other Sectors," combined all sectors in the "Others" country into "Other Sectors," and filtered out negative emissions values.
-- **Sector Analysis:** Grouped data by country and sector, summed emissions, renamed "Other Sectors" for the "Others" country to "Other Country," changed "European Union (27)" to "EU27," and "Others" to "184 Remaining Countries."
-- **Visualization:** Created a treemap to visualize the top 10 countries with the highest greenhouse gas emissions by sector, with rectangle size representing emissions and color indicating sector type, providing an intuitive overview of emissions distribution.
+## Data
 
+Data was retrieved from the World Bank Data website[^climatewatchdata], encompassing greenhouse gas emissions (CO2, F-Gas, N2O, CH4) by sector for various countries. Negative values were removed to ensure accuracy, and the top 10 countries with the highest emissions were selected for analysis.
 
 [^climatewatchdata]: <https://www.climatewatchdata.org/ghg-emissions?end_year=2021&start_year=1990>
 
@@ -89,23 +85,21 @@ We used the Quarto publication framework and the R programming language, along w
 * *wbstats* for retrieving data from the World Bank Data API
 * *dplyr* for data manipulation
 
+
+
 ```{=typst}
 #v(2em)
 ```
-
-
 # Improved Visualization
 
 ```{r}
 #| label: fig-ggplot
 #| fig-cap: "Revised Visualization of Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
-#| fig-width: 2.7
-#| fig-height: 2.1
+#| fig-width: 3.1
+#| fig-height: 2.4
 #| out-width: 100%
 #| warning: false
 
-
-# Treemap Here
 # Treemap with Country as the main group, by emissions, show sector for each country
 ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
   geom_treemap(color = "white", size = 0.5) +
@@ -115,11 +109,8 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
     place = "centre",
     padding.x = unit(2, "mm"),
     padding.y = unit(2, "mm"),
-    bg.color = "grey80", # Background color for the country label
-    bg.alpha = 0.5, # Transparency for the background
-    color = "black", # Font color for the country label
-    size = 10, # Font size for the country label
-    min.size = 1
+    size = 10,
+    min.size = 3
   ) +
   scale_fill_manual(
     values = c(
@@ -133,29 +124,32 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
     ),
     # Remove "Other Country
     breaks = c(
-      "Energy", "Agriculture",
+      "Energy",
       "Electricity/Heat",
+      "Agriculture",
+      "Transportation",
       "Manufacturing/Construction",
-      "Other Sectors", "Transportation"
+      "Other Sectors"
     )
   ) +
   theme_void() +
   theme(
     legend.position = "bottom",
-    legend.key.size = unit(0.1, "cm"),
-    legend.key.width = unit(0.1, "cm"),
-    legend.key.height = unit(0.05, "cm"),
-    legend.text = element_text(size = 3),
+    legend.key.size = unit(0.2, "cm"),
+    legend.spacing = unit(0.1, "cm"),
+    legend.text = element_text(size = 5),
     legend.text.size = 3,
-    legend.title = element_text(size = 4, hjust = 0.5, vjust = 1, face = "bold"),
+    legend.title.position = "left",
+    legend.title = element_text(size = 4, face = "bold"),
     legend.key.spacing.x = unit(0.1, "cm"),
-    plot.subtitle = element_text(size = 4),
-    plot.title = element_text(size = 4, hjust = 0.5, vjust = 1, face = "bold"),
-    plot.caption = element_text(size = 5, hjust = c(1, 0), vjust = 1)
+    plot.subtitle = element_text(size = 4, vjust = 6),
+    plot.title = element_text(size = 5, face = "bold"),
+    plot.title.position = "plot",
+    plot.caption = element_text(size = 3, hjust = c(1, 0), vjust = 1)
   ) +
   labs(
-    title = "Top 10 Emitters account for 68% of Global Emissions",
-    subtitle = "Size of rectangles represents emissions by sector",
+    title = "Top 10 GHG Emitters account for 68% of Global Emissions",
+    subtitle = "Size of rectangles reflects total sector emissions",
     fill = "Sector",
     caption = c("Source: World Resources Institute", "EU27: European Union 27 countries")
   )
@@ -163,7 +157,7 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
 
 # Further Suggestions for Interactivity
 
-To enhance user engagement and provide deeper insights, we recommend adding interactive features to the treemap visualization. Specifically, implementing interactivity in the treemap can enable users to explore emissions data more effectively. Interactive features could include hover information, which displays detailed emissions, sector, and country data when hovering over specific rectangles; filtering options that allow users to filter the data by country, sector, or emission type, and highlight elements on hover to emphasize selected data; and clickable elements that provide additional context or detailed data for specific countries or sectors. These features would significantly improve the usability and informational depth of the visualization.
+To enhance user engagement and provide deeper insights, we recommend incorporating interactive features into the treemap visualization. Specifically, these features will enable users to explore emissions data more effectively. Interactive elements could include hover information to display detailed emissions data, including sector and country specifics, and percentage of world emissions. Additionally, filtering options will allow users to focus on specific countries, sectors, or emission types, with elements highlighted on hover to emphasize selected data. Clickable elements could be implemented to allow users to select the same sectors in other countries for size comparison, significantly improving the usability and informational depth of the visualization.
 
 # Conclusion
 
