@@ -99,158 +99,65 @@ We used the Quarto publication framework and the R programming language, along w
 #| label: fig-ggplot
 #| fig-cap: "Revised Visualization of Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
 #| fig-width: 2.7
-#| fig-height: 2.0
+#| fig-height: 2.1
 #| out-width: 100%
 #| warning: false
 
-#TODO: Finalise and Cleanup this block
-
-# Donut Chart Here
-include_graphics("donut.png")
-
-# ggPieDonut(
-#   ghg_total_countries_gg,
-#   aes(pies = Country, donuts = Sector, count = Emissions),
-#   showRatioPie = FALSE,
-#   showRatioDonut = FALSE,
-#   title = "Top 10 GHG Emitters",
-#   labelposition = 1
-# ) +
-#   geom_col(aes(x = -1, y = 0))
 
 # Treemap Here
-
-# ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
-#   geom_treemap() +
-#   geom_treemap_subgroup_text(
-#     aes(label = Country),
-#     place = "bottom",
-#     #grow = TRUE,
-#     padding.x = unit(2, "mm"),
-#     padding.y = unit(2, "mm"),
-#     bg.color = "grey80",  # Background color for the country label
-#     bg.alpha = 0.5,       # Transparency for the background
-#     color = "black",      # Font color for the country label
-#     size = 10             # Font size for the country label
-#   ) +
-#   geom_treemap_text(
-#     aes(label = Sector),
-#     place = "topleft",
-#     #grow = TRUE,
-#     reflow = TRUE,
-#     color = "black",      # Font color for the sector label
-#     size = 5              # Font size for the sector label
-#   ) +
-#   geom_treemap_subgroup_border() +
-#   scale_fill_brewer(palette = "Set3") +  # Choose a suitable color palette
-#   theme_void() +
-#   theme(
-#     legend.position = "none",
-#     plot.title = element_text(size = 8, hjust = 0.5, vjust = 1, face = "bold"),
-#     plot.caption = element_text(size = 6, hjust = 0, vjust = 1),
-#   ) +
-#   labs(
-#     title = "Top 10 GHG Emitters",
-#     fill = "Sector",
-#     caption = "Source: World Resources Institute"
-#   )
-
-
-# treemap(
-#   dtf = treemap_data,
-#   index = c("Country", "Sector"),
-#   vSize = "Emissions",
-#   vColor = "Emissions",
-#   draw = TRUE,
-#   title = "Top 10 GHG Emitters",
-#   fontsize.labels = c(5, 8),
-#   inflate.labels = TRUE,
-#   # fontcolor.labels = c("black", "white"),
-#   fontface.labels = c(2, 1),
-#   fontsize.title = 3,  # Adjusted font size for title
-#   align.labels = list(c("center", "center"), c("center", "center")),
-#   border.col = "black",
-#   border.lwds = 0.5,  # Adjusted border line width
-#   aspRatio = NA,
-#   type = "value",
-#   palette = "Reds",
-#   fontsize.legend = 5,  # Adjusted font size for legend
-#   title.legend = "Emissions (MtCO2e)",  # Added legend title
-#   format.legend = list(
-#     # Show in million metric tons
-#     big.mark = ",",
-#     scientific = FALSE
-#     
-#   )
-# )
-
-# Map Here
-
-# gg_ghg_total_emissions_final <- gg_ghg("Top GHG Emitters (as % of World Total)") +
-#   aes(fill = Total_Emissions) +
-#   labs(fill = NULL, caption = "Source: World Resources Institute") +
-#   scale_fill_fermenter(
-#     palette = "OrRd",
-#     direction = 1,
-#     labels = label_number( #       scale = 1e-6,
-#       suffix = "M"
-#     )
-#   ) +
-#   geom_sf_text(
-#     aes(label = country_label, color = label_colour),
-#     data = world,
-#     size = 1.25
-#   ) +
-#   scale_color_identity()
-
-# gg_ghg_total_emissions_final
-
-
-# Stacked Bar Chart Here
-
-# Summarize the emissions of the top 10 countries
-# top_10_countries <- ghg_total_sector |>
-#   group_by(Country) |>
-#   summarize(Total_Emissions = sum(Emissions)) |>
-#   filter(Country != "Others") |>
-#   top_n(10, Total_Emissions)
-
-# Create a new data frame for the top 10 countries
-# top_10_data <- ghg_total_sector |>
-#   filter(Country %in% top_10_countries$Country) |>
-#   group_by(Sector) |>
-#   summarize(Emissions = sum(Emissions)) |>
-#   mutate(Country = "Top 10")
-
-# Create a new data frame for the "Others" countries
-# others_data <- ghg_total_sector |>
-#   filter(!Country %in% top_10_countries$Country) |>
-#   group_by(Sector) |>
-#   summarize(Emissions = sum(Emissions)) |>
-#   mutate(Country = "Others")
-
-# Combine the data frames
-# final_data <- bind_rows(top_10_data, others_data)
-
-# Plot the final stacked bar chart
-# ggplot(final_data, aes(x = Emissions, y = Country, fill = Sector)) +
-#   geom_bar(stat = "identity") +
-#   theme_minimal() +
-#   theme(
-#     axis.text.x = element_text(angle = 45, hjust = 1),
-#     plot.title = element_text(hjust = 0.5),
-#     plot.subtitle = element_text(hjust = 0.5),
-#     plot.margin = margin(10, 10, 10, 10),
-#     legend.position = "bottom",
-#     legend.key.size = unit(0.5, "cm"),
-#   ) +
-#   labs(
-#     title = "Top 10 GHG Emitters",
-#     subtitle = "Emissions by Sector",
-#     x = "Country",
-#     y = "Emissions (MtCO₂e)",
-#     fill = "Sector"
-#   )
+# Treemap with Country as the main group, by emissions, show sector for each country
+ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
+  geom_treemap(color = "white", size = 0.5) +
+  geom_treemap_subgroup_border(color = "black", size = 2) +
+  geom_treemap_subgroup_text(
+    aes(label = Country),
+    place = "centre",
+    padding.x = unit(2, "mm"),
+    padding.y = unit(2, "mm"),
+    bg.color = "grey80", # Background color for the country label
+    bg.alpha = 0.5, # Transparency for the background
+    color = "black", # Font color for the country label
+    size = 10, # Font size for the country label
+    min.size = 1
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Energy" = "#beaed4",
+      "Agriculture" = "#7fc97f",
+      "Electricity/Heat" = "#fdc086",
+      "Manufacturing/Construction" = "#ff7f00",
+      "Other Sectors" = "#ffff99",
+      "Transportation" = "#386cb0",
+      "Other Country" = "grey"
+    ),
+    # Remove "Other Country
+    breaks = c(
+      "Energy", "Agriculture",
+      "Electricity/Heat",
+      "Manufacturing/Construction",
+      "Other Sectors", "Transportation"
+    )
+  ) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    legend.key.size = unit(0.1, "cm"),
+    legend.key.width = unit(0.1, "cm"),
+    legend.key.height = unit(0.05, "cm"),
+    legend.text = element_text(size = 3),
+    legend.text.size = 3,
+    legend.title = element_text(size = 4, hjust = 0.5, vjust = 1, face = "bold"),
+    legend.key.spacing.x = unit(0.1, "cm"),
+    plot.subtitle = element_text(size = 4),
+    plot.title = element_text(size = 4, hjust = 0.5, vjust = 1, face = "bold"),
+    plot.caption = element_text(size = 5, hjust = c(1, 0), vjust = 1)
+  ) +
+  labs(
+    title = "Top 10 Emitters account for 68% of Global Emissions",
+    subtitle = "Size of rectangles represents emissions by sector",
+    fill = "Sector",
+    caption = c("Source: World Resources Institute", "EU27: European Union 27 countries")
+  )
 ```
 
 # Further Suggestions for Interactivity

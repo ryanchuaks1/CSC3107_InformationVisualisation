@@ -34,6 +34,8 @@ library(dplyr)
 # Treemap
 library(treemap)
 library(treemapify)
+library(colorspace)
+library(gghighlight)
 
 # Map
 library(sf)
@@ -272,6 +274,12 @@ data(World)
 # Percentage of country/all countries total emissions
 all_countries_total_emissions <- all_countries_total_emissions |>
   mutate(pct_total_emissions = Total_Emissions / sum(Total_Emissions) * 100)
+
+# Show distinct Country names
+all_countries_total_emissions |>
+  arrange(desc(Total_Emissions)) |>
+  select(Country) |>
+  distinct()
 
 world <-
   World |>
@@ -773,15 +781,33 @@ treemap_data <-
   ghg_total_sector |>
   filter(Emissions >= 0)
 
-# Select only the top 3 sectors for each country, group the rest under "Other Sectors"
+# Select only the "Energy", Electricity/Heat, Agriculture, group the rest under "Other Sectors"
 treemap_data <-
   treemap_data |>
   group_by(Country) |>
-  top_n(4, Emissions) |>
-  ungroup() |>
-  mutate(Sector = if_else(row_number() == 5, "Other Sector", Sector))
+  mutate(Sector = if_else(Sector %in% c("Energy",
+                                        "Electricity/Heat",
+                                        "Agriculture",
+                                        "Transportation",
+                                        "Manufacturing/Construction"
+                                        ), Sector, "Other Sector")) |>
+  ungroup()
 
-# Combine the emissions of the "Other Sectors" for each country
+# Combine all sectors in "Others" Country into "Other Sectors"
+treemap_data <-
+  treemap_data |>
+  group_by(Country) |>
+  mutate(Sector = if_else(Country == "Others", "Other Sectors", Sector)) |>
+  ungroup()
+
+# Select top 3 (via rank) sectors for each country and group the rest under "Other Sectors"
+# treemap_data <-
+#   treemap_data |>
+#   group_by(Country) |>
+#   mutate(Sector = if_else(rank(-Emissions) <= 3, Sector, "Other Sector")) |>
+#   ungroup()
+
+# Combine the emissions of the "Other Sector" for each country
 treemap_data <-
   treemap_data |>
   group_by(Country, Sector) |>
@@ -792,8 +818,21 @@ treemap_data <-
   group_by(Country, Sector) |>
   summarize(Emissions = sum(Emissions), .groups = "drop")
 
-treemap_data |>
-  gt_preview(10)
+# Change the sector label of "Other Sectors" for "Others" Country to "Other Country"
+treemap_data <-
+  treemap_data |>
+  group_by(Country) |>
+  mutate(Sector = if_else(Country == "Others" & Sector == "Other Sectors", "Other Country", Sector)) |>
+  ungroup()
+  
+# Change "European Union(27)" to EU27, change "Others" to "184 Remaining Countries"
+treemap_data <-
+  treemap_data |>
+  mutate(Country = if_else(Country == "European Union (27)", "EU27", Country)) |>
+  mutate(Country = if_else(Country == "Others", "184 Remaining Countries", Country))
+
+# treemap_data |>
+#   gt_preview(10)
 
 # Treemap of the top 10 countries and sectors + Others (Showing the emissions by sector)
 treemap(
@@ -856,13 +895,50 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
     plot.caption = element_text(size = 6, hjust = 0, vjust = 1),
   ) +
   labs(
-    title = "Top 10 GHG Emitters",
+    title = "Top 10 Emitters account for 68% of Global Emissions",
+    subtitle = "Size of rectangles represents emissions by sector",
     fill = "Sector",
     caption = "Source: World Resources Institute"
   )
 
+ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
+  geom_treemap(color = "white", size = 0.5) +  # Adding white borders to each box
+  geom_treemap_subgroup_border(color = "grey", size = 2) +  # Adding a thick border for countries
+  geom_treemap_subgroup_text(
+    aes(label = Country),
+    place = "centre",
+    # padding.x = unit(2, "mm"),
+    padding.y = unit(2, "mm"),
+    alpha = 0.4,
+    colour = "white",     # Font color for the country label
+    min.size = 0.5,
+    # size = 6              # Adjusted font size for the country label
+  ) +
+  geom_treemap_text(
+    aes(label = Sector),
+    place = "topleft",
+    reflow = TRUE,
+    color = "black",      # Font color for the sector label
+    min.size = 0.5,
+    size = 6              # Adjusted font size for the sector label
+  ) +
+  scale_fill_brewer(palette = "Dark2") +  # Choose a more contrasting color palette
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(size = 6, hjust = 0.5, vjust = 1, face = "bold"),
+    plot.caption = element_text(size = 4, hjust = 0, vjust = 1)
+  ) +
+  labs(
+    title = "Top 10 GHG Emitters",
+    fill = "Sector",
+    caption = "Source: World Resources Institute"
+  )
 ```
 
+**Advantage**: Treemaps are an effective way to visualize hierarchical data, such as the distribution of emissions by country and sector. They provide a clear visual representation of the relative contributions of each country and sector to total emissions. The use of color coding helps to differentiate between countries and sectors, making it easy to identify the top emitters and the sectors contributing the most to emissions.
+
+**Disadvantage**: Treemaps may not be suitable for comparing emissions across a large number of countries or sectors, as the rectangles can become too small to distinguish. Additionally, treemaps do not provide a direct comparison of emissions levels between countries or sectors, as the size of each rectangle is relative to the total emissions. This can make it difficult to accurately assess the differences in emissions levels between countries or sectors.
 
 ## Source 4
 
