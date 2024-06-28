@@ -674,7 +674,7 @@ ghg_total_countries_pop <- ghg_combined |>
 #| label: fig-source1-donut-population
 #| warning: false
 
-donut<-
+donut <-
   ggPieDonut(
     ghg_total_countries_gg,
     aes(pies = Country, donuts = Sector, count = Emissions),
@@ -683,7 +683,7 @@ donut<-
     title = "Top 10 GHG Emitters",
     labelposition = 1
   ) +
-    geom_col(aes(x = -1, y = 0))
+  geom_col(aes(x = -1, y = 0))
 
 PieDonut(
   ghg_total_countries_pop,
@@ -699,7 +699,7 @@ PieDonut(
   explodeDonut = TRUE
 )
 
-ggsave("donut.png", donut, width=8, height=8)
+ggsave("donut.png", donut, width = 8, height = 8)
 ```
 
 ```{r}
@@ -781,58 +781,44 @@ treemap_data <-
   ghg_total_sector |>
   filter(Emissions >= 0)
 
-# Select only the "Energy", Electricity/Heat, Agriculture, group the rest under "Other Sectors"
+# Select only the specified sectors and group the rest under "Other Sectors"
 treemap_data <-
   treemap_data |>
   group_by(Country) |>
-  mutate(Sector = if_else(Sector %in% c("Energy",
-                                        "Electricity/Heat",
-                                        "Agriculture",
-                                        "Transportation",
-                                        "Manufacturing/Construction"
-                                        ), Sector, "Other Sector")) |>
+  mutate(Sector = if_else(
+    Sector %in% c("Energy", "Electricity/Heat", "Agriculture", "Transportation", "Manufacturing/Construction"),
+    Sector,
+    "Other Sectors"
+  )) |>
   ungroup()
 
 # Combine all sectors in "Others" Country into "Other Sectors"
 treemap_data <-
   treemap_data |>
-  group_by(Country) |>
-  mutate(Sector = if_else(Country == "Others", "Other Sectors", Sector)) |>
-  ungroup()
+  mutate(Sector = if_else(Country == "Others", "Other Sectors", Sector))
 
-# Select top 3 (via rank) sectors for each country and group the rest under "Other Sectors"
-# treemap_data <-
-#   treemap_data |>
-#   group_by(Country) |>
-#   mutate(Sector = if_else(rank(-Emissions) <= 3, Sector, "Other Sector")) |>
-#   ungroup()
-
-# Combine the emissions of the "Other Sector" for each country
+# Combine the emissions of the "Other Sector" for each country and rename sectors appropriately
 treemap_data <-
   treemap_data |>
   group_by(Country, Sector) |>
   summarize(Emissions = sum(Emissions), .groups = "drop") |>
-  ungroup() |>
-  group_by(Country) |>
-  mutate(Sector = if_else(Sector == "Other Sector", "Other Sectors", Sector)) |>
+  mutate(Sector = if_else(Country == "Others" & Sector == "Other Sectors", "Other Country", Sector))
+
+# Rename "European Union (27)" to "EU27" and "Others" to "184 Remaining Countries"
+treemap_data <-
+  treemap_data |>
+  mutate(Country = case_when(
+    Country == "European Union (27)" ~ "EU27",
+    Country == "Others" ~ "184 Remaining Countries",
+    TRUE ~ Country
+  ))
+
+# Re-group and re-summarize to ensure data consistency
+treemap_data <-
+  treemap_data |>
   group_by(Country, Sector) |>
   summarize(Emissions = sum(Emissions), .groups = "drop")
 
-# Change the sector label of "Other Sectors" for "Others" Country to "Other Country"
-treemap_data <-
-  treemap_data |>
-  group_by(Country) |>
-  mutate(Sector = if_else(Country == "Others" & Sector == "Other Sectors", "Other Country", Sector)) |>
-  ungroup()
-  
-# Change "European Union(27)" to EU27, change "Others" to "184 Remaining Countries"
-treemap_data <-
-  treemap_data |>
-  mutate(Country = if_else(Country == "European Union (27)", "EU27", Country)) |>
-  mutate(Country = if_else(Country == "Others", "184 Remaining Countries", Country))
-
-# treemap_data |>
-#   gt_preview(10)
 
 # Treemap of the top 10 countries and sectors + Others (Showing the emissions by sector)
 treemap(
@@ -846,20 +832,19 @@ treemap(
   # inflate.labels = TRUE,
   # fontcolor.labels = c("black", "white"),
   fontface.labels = c(2, 1),
-  fontsize.title = 3,  # Adjusted font size for title
+  fontsize.title = 3, # Adjusted font size for title
   align.labels = list(c("center", "center"), c("center", "center")),
   border.col = "black",
-  border.lwds = 0.5,  # Adjusted border line width
+  border.lwds = 0.5, # Adjusted border line width
   aspRatio = NA,
   type = "value",
   palette = "Reds",
-  fontsize.legend = 5,  # Adjusted font size for legend
-  title.legend = "Emissions (MtCO2e)",  # Added legend title
+  fontsize.legend = 5, # Adjusted font size for legend
+  title.legend = "Emissions (MtCO2e)", # Added legend title
   format.legend = list(
     # Show in million metric tons
     big.mark = ",",
     scientific = FALSE
-    
   )
 )
 
@@ -870,24 +855,24 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
   geom_treemap_subgroup_text(
     aes(label = Country),
     place = "bottom",
-    #grow = TRUE,
+    # grow = TRUE,
     padding.x = unit(2, "mm"),
     padding.y = unit(2, "mm"),
-    bg.color = "grey80",  # Background color for the country label
-    bg.alpha = 0.5,       # Transparency for the background
-    color = "black",      # Font color for the country label
-    size = 10             # Font size for the country label
+    bg.color = "grey80", # Background color for the country label
+    bg.alpha = 0.5, # Transparency for the background
+    color = "black", # Font color for the country label
+    size = 10 # Font size for the country label
   ) +
   geom_treemap_text(
     aes(label = Sector),
     place = "topleft",
-    #grow = TRUE,
+    # grow = TRUE,
     reflow = TRUE,
-    color = "black",      # Font color for the sector label
-    size = 5              # Font size for the sector label
+    color = "black", # Font color for the sector label
+    size = 5 # Font size for the sector label
   ) +
   geom_treemap_subgroup_border() +
-  scale_fill_brewer(palette = "Set3") +  # Choose a suitable color palette
+  scale_fill_brewer(palette = "Set3") + # Choose a suitable color palette
   theme_void() +
   theme(
     legend.position = "none",
@@ -902,15 +887,15 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
   )
 
 ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
-  geom_treemap(color = "white", size = 0.5) +  # Adding white borders to each box
-  geom_treemap_subgroup_border(color = "grey", size = 2) +  # Adding a thick border for countries
+  geom_treemap(color = "white", size = 0.5) + # Adding white borders to each box
+  geom_treemap_subgroup_border(color = "grey", size = 2) + # Adding a thick border for countries
   geom_treemap_subgroup_text(
     aes(label = Country),
     place = "centre",
     # padding.x = unit(2, "mm"),
     padding.y = unit(2, "mm"),
     alpha = 0.4,
-    colour = "white",     # Font color for the country label
+    colour = "white", # Font color for the country label
     min.size = 0.5,
     # size = 6              # Adjusted font size for the country label
   ) +
@@ -918,11 +903,11 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
     aes(label = Sector),
     place = "topleft",
     reflow = TRUE,
-    color = "black",      # Font color for the sector label
+    color = "black", # Font color for the sector label
     min.size = 0.5,
-    size = 6              # Adjusted font size for the sector label
+    size = 6 # Adjusted font size for the sector label
   ) +
-  scale_fill_brewer(palette = "Dark2") +  # Choose a more contrasting color palette
+  scale_fill_brewer(palette = "Dark2") + # Choose a more contrasting color palette
   theme_void() +
   theme(
     legend.position = "bottom",

@@ -53,6 +53,7 @@ include_graphics("images/old_visualization.jpg")
 - **Contextual Information**: The visualization depicts the sectors emitting the greenhouse gases per country.
 
 # Suggested Improvements
+<!-- TODO: Modify according to Treemap Plot -->
 
 We decided to exclude the "Others" category from the previous visualization to enhance clarity and focus on the top 10 countries with the highest greenhouse gas emissions. This adjustment allows for a more straightforward comparison of emissions across these leading countries and their respective sectors. Additionally, we included a stacked bar chart to display the emissions by sector for these top 10 countries in comparison to the rest of the world. This approach provides a clearer understanding of the major contributors to global emissions and highlights the differences between the top emitters and other countries.
 
@@ -65,11 +66,11 @@ We decided to exclude the "Others" category from the previous visualization to e
 
 # Implementation
 
-## Data
+- **Data Source:** Retrieved from the World Bank Data API[^climatewatchdata], the dataset includes greenhouse gas emissions data (CO2, F-Gas, N2O, CH4) by sector for various countries, with the 'Unit' column removed as it only contained "MtCO₂e."
+- **Data Preparation:** Cleaned and transformed the data to compute total emissions by sector for each country, grouped sectors other than "Energy," "Electricity/Heat," "Agriculture," "Transportation," and "Manufacturing/Construction" under "Other Sectors," combined all sectors in the "Others" country into "Other Sectors," and filtered out negative emissions values.
+- **Sector Analysis:** Grouped data by country and sector, summed emissions, renamed "Other Sectors" for the "Others" country to "Other Country," changed "European Union (27)" to "EU27," and "Others" to "184 Remaining Countries."
+- **Visualization:** Created a treemap to visualize the top 10 countries with the highest greenhouse gas emissions by sector, with rectangle size representing emissions and color indicating sector type, providing an intuitive overview of emissions distribution.
 
-- **Data Source:** The dataset used for this visualization was retrieved from the World Bank Data API [^climatewatchdata]. It includes greenhouse gas emissions data (CO2, F-Gas, N2O, CH4) by sector for various countries. We removed the 'Unit' column as it contained only one distinct value, "MtCO₂e," representing million metric tons of carbon dioxide equivalent.
-- **Data Preparation:** We cleaned and transformed the dataset to compute total emissions by sector for each country and to identify the top 10 countries with the highest greenhouse gas emissions.
-- **Sector Analysis:** Data was grouped by country and sector to determine the top three emitting sectors per country. Additionally, we calculated emissions per capita for the top 10 countries to provide further insights into emission trends.
 
 [^climatewatchdata]: <https://www.climatewatchdata.org/ghg-emissions?end_year=2021&start_year=1990>
 
@@ -78,7 +79,7 @@ We decided to exclude the "Others" category from the previous visualization to e
 
 We used the Quarto publication framework and the R programming language, along with the following third-party packages:
 
-<!-- To be updated -->
+<!-- TODO: Modify according to Treemap Plot -->
 
 * *readxl* for data import
 * *tidyverse* for data transformation, including *ggplot2* for visualization
@@ -162,8 +163,9 @@ ggplot(treemap_data, aes(area = Emissions, fill = Sector, subgroup = Country)) +
 
 # Further Suggestions for Interactivity
 
-To enhance user engagement and provide deeper insights, we recommend adding interactive features to the visualization. Specifically, implementing interactivity in the donut chart would allow users to hover over each segment and view detailed information about emissions by sector for each country. This interactive feature enables users to explore the data dynamically, gaining a better understanding of how emissions are distributed across different sectors and countries. Additionally, incorporating features such as tooltips, filters, and search functions can further enrich the user experience by facilitating interactive data exploration and analysis.
+To enhance user engagement and provide deeper insights, we recommend adding interactive features to the treemap visualization. Specifically, implementing interactivity in the treemap can enable users to explore emissions data more effectively. Interactive features could include hover information, which displays detailed emissions, sector, and country data when hovering over specific rectangles; filtering options that allow users to filter the data by country, sector, or emission type, and highlight elements on hover to emphasize selected data; and clickable elements that provide additional context or detailed data for specific countries or sectors. These features would significantly improve the usability and informational depth of the visualization.
 
 # Conclusion
 
+<!-- TODO: Modify according to Treemap Plot -->
 We have refined the visualization of the top 10 countries with the highest greenhouse gas emissions to offer a clearer and more focused depiction of emissions by sector. By removing the "Others" category and emphasizing the leading emitters, we have improved the visualization's clarity and highlighted the primary contributors to global emissions. The inclusion of a donut chart and stacked bar chart provides a comprehensive overview of sector-specific emissions for these countries, facilitating effective comparisons across both countries and sectors. To enhance user engagement and facilitate data exploration, we recommend integrating interactive features. Visualizing greenhouse gas emissions plays a crucial role in raising awareness about climate change, advocating for sustainable practices, and informing policy decisions aimed at mitigating environmental impacts caused by human activities.
