@@ -53,13 +53,20 @@ include_graphics("images/old_visualization.jpg")
 # Suggested Improvements
 <!-- TODO: Modify according to Treemap Plot -->
 
-We decided to exclude the "Others" category from the previous visualization to enhance clarity and focus on the top 10 countries with the highest greenhouse gas emissions. This adjustment allows for a more straightforward comparison of emissions across these leading countries and their respective sectors. Additionally, we included a stacked bar chart to display the emissions by sector for these top 10 countries in comparison to the rest of the world. This approach provides a clearer understanding of the major contributors to global emissions and highlights the differences between the top emitters and other countries.
+To remove the clustering of information in the original visualization, we changed the visualization used, from a stacked donut chart to a treemap. At the same time, we have decided to choose 5 common sectors and categorize the remaining to be "Other Sectors". The message of the original visualization is still retained in our treemap which shows that the top 10 countries contributes 2/3 of the global emissions. The adjustments made provide a clearer and non-clustered visualization.
 
-1. **Removed "Others" category:** Enhanced clarity by focusing on the top 10 countries with the highest greenhouse gas emissions.
-2. **Donut chart:** Visualized the top 10 countries and their emission sectors, allowing for straightforward comparison.
-3. **Stacked bar chart:** Added to show emissions by sector for the top 10 countries compared to the rest of the world.
-4. **Enhanced comparison:** Improved understanding of major contributors to global emissions.
-5. **Clear visualization:** Highlighted differences between top emitters and other countries.
+<!-- We decided to exclude the "Others" category from the previous visualization to enhance clarity and focus on the top 10 countries with the highest greenhouse gas emissions. This adjustment allows for a more straightforward comparison of emissions across these leading countries and their respective sectors. Additionally, we included a stacked bar chart to display the emissions by sector for these top 10 countries in comparison to the rest of the world. This approach provides a clearer understanding of the major contributors to global emissions and highlights the differences between the top emitters and other countries. -->
+
+<!-- 1. **Removed "Others" category:** Enhanced clarity by focusing on the top 10 countries with the highest greenhouse gas emissions. -->
+<!-- 2. **Donut chart:** Visualized the top 10 countries and their emission sectors, allowing for straightforward comparison. -->
+<!-- 3. **Stacked bar chart:** Added to show emissions by sector for the top 10 countries compared to the rest of the world. -->
+<!-- 4. **Enhanced comparison:** Improved understanding of major contributors to global emissions. -->
+<!-- 5. **Clear visualization:** Highlighted differences between top emitters and other countries. -->
+
+1. **Treemap:** Visualized the top 10 countries and their emissions sectors covering 2/3 of the chart, allowing for clearer comparison.
+2. **Picked common sectors:** Selected 5 common sectors and categorized the rest as "Other Sectors" for a more focused visualization.
+3. **Colored legends:** Provided color-coded legends for easy identification of sectors.
+4. **Grey area:** The remaining 184 countries are greyed out to emphasize the top 10 countries.
 
 
 # Implementation
@@ -84,6 +91,7 @@ We used the Quarto publication framework and the R programming language, along w
 * *gt* for creating tables
 * *wbstats* for retrieving data from the World Bank Data API
 * *dplyr* for data manipulation
+* *treemapify* for creating treemaps
 
 
 
@@ -162,4 +170,6 @@ To enhance user engagement and provide deeper insights, we recommend incorporati
 # Conclusion
 
 <!-- TODO: Modify according to Treemap Plot -->
-We have refined the visualization of the top 10 countries with the highest greenhouse gas emissions to offer a clearer and more focused depiction of emissions by sector. By removing the "Others" category and emphasizing the leading emitters, we have improved the visualization's clarity and highlighted the primary contributors to global emissions. The inclusion of a donut chart and stacked bar chart provides a comprehensive overview of sector-specific emissions for these countries, facilitating effective comparisons across both countries and sectors. To enhance user engagement and facilitate data exploration, we recommend integrating interactive features. Visualizing greenhouse gas emissions plays a crucial role in raising awareness about climate change, advocating for sustainable practices, and informing policy decisions aimed at mitigating environmental impacts caused by human activities.
+<!-- We have refined the visualization of the top 10 countries with the highest greenhouse gas emissions to offer a clearer and more focused depiction of emissions by sector. By removing the "Others" category and emphasizing the leading emitters, we have improved the visualization's clarity and highlighted the primary contributors to global emissions. The inclusion of a donut chart and stacked bar chart provides a comprehensive overview of sector-specific emissions for these countries, facilitating effective comparisons across both countries and sectors. To enhance user engagement and facilitate data exploration, we recommend integrating interactive features. Visualizing greenhouse gas emissions plays a crucial role in raising awareness about climate change, advocating for sustainable practices, and informing policy decisions aimed at mitigating environmental impacts caused by human activities. -->
+
+We have refined the visualization of the top 10 countries with the highest greenhouse gas emissions that contributes two-third of the global emissions. By using a treemap, we have provided a non-clustered and clearer visualization without swaying away from the message of the original visualization. By picking the 5 common sectors and categorizing the remaing as one, contributes to a non-clustered visualization. Color-coded legends are provided for easy identification of sectors. The remaining 184 countries are greyed out to emphasize that the top 10 countries contributed two-third of the global emissions. To enhance user engagement and facilitate data exploration, we recommend integrating interactive features. To end it off, visualizing greenhouse gas emissions plays a crucial role in raising awareness about climate change, advocating for sustainable practices, and informing policy decisions aimed at mitigating environmental impacts caused by human activities.
