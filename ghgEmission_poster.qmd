@@ -37,25 +37,24 @@ Visualizing GHG emissions is essential for understanding their distribution acro
 
 
 # Previous Visualization
-```{r}
-#| label: fig-previous-vis
-#| fig-cap: "Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
-#| out-width: 60%
 
-include_graphics("images/old_visualization.jpg")
-```
+![Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector](images/old_visualization.jpg){width=60%}
 
 # Strengths
-- **Clear Ranking**: The visualization clearly ranks the countries based on their emissions. (Size)
-- **Color Coding**: The color coding helps differentiate between countries.
-- **Contextual Information**: The visualization depicts the sectors emitting the greenhouse gases per country.
+- The visualization effectively ranks countries based on their emissions, providing a clear comparative framework.
+- Distinct color coding aids in differentiating between countries, enhancing visual clarity.
+- The plot includes contextual information by illustrating the sectors contributing to emissions for each country, enriching the analysis.
+- The central focus on the top 10 emitters highlights their significant share of global emissions, emphasizing their impact.
+- The use of a donut chart allows for an organized and layered presentation of data, facilitating easier interpretation.
+
 
 # Suggested Improvements
 <!-- TODO: Modify according to Treemap Plot -->
 
-To remove the clustering of information in the original visualization, we changed the visualization used, from a stacked donut chart to a treemap. At the same time, we have decided to choose 5 common sectors and categorize the remaining to be "Other Sectors". The message of the original visualization is still retained in our treemap which shows that the top 10 countries contributes 2/3 of the global emissions. The adjustments made provide a clearer and non-clustered visualization.
-
 <!-- We decided to exclude the "Others" category from the previous visualization to enhance clarity and focus on the top 10 countries with the highest greenhouse gas emissions. This adjustment allows for a more straightforward comparison of emissions across these leading countries and their respective sectors. Additionally, we included a stacked bar chart to display the emissions by sector for these top 10 countries in comparison to the rest of the world. This approach provides a clearer understanding of the major contributors to global emissions and highlights the differences between the top emitters and other countries. -->
+
+<!-- To remove the clustering of information in the original visualization, we changed the visualization used, from a stacked donut chart to a treemap. At the same time, we have decided to choose 5 common sectors and categorize the remaining to be "Other Sectors". The message of the original visualization is still retained in our treemap which shows that the top 10 countries contributes 2/3 of the global emissions. The adjustments made provide a clearer and non-clustered visualization. -->
+
 
 <!-- 1. **Removed "Others" category:** Enhanced clarity by focusing on the top 10 countries with the highest greenhouse gas emissions. -->
 <!-- 2. **Donut chart:** Visualized the top 10 countries and their emission sectors, allowing for straightforward comparison. -->
@@ -63,11 +62,20 @@ To remove the clustering of information in the original visualization, we change
 <!-- 4. **Enhanced comparison:** Improved understanding of major contributors to global emissions. -->
 <!-- 5. **Clear visualization:** Highlighted differences between top emitters and other countries. -->
 
-1. **Treemap:** Visualized the top 10 countries and their emissions sectors covering 2/3 of the chart, allowing for clearer comparison.
-2. **Picked common sectors:** Selected 5 common sectors and categorized the rest as "Other Sectors" for a more focused visualization.
-3. **Colored legends:** Provided color-coded legends for easy identification of sectors.
-4. **Grey area:** The remaining 184 countries are greyed out to emphasize the top 10 countries.
+<!-- 1. **Treemap:** Visualized the top 10 countries and their emissions sectors covering 2/3 of the chart, allowing for clearer comparison. -->
+<!-- 2. **Picked common sectors:** Selected 5 common sectors and categorized the rest as "Other Sectors" for a more focused visualization. -->
+<!-- 3. **Colored legends:** Provided color-coded legends for easy identification of sectors. -->
+<!-- 4. **Grey area:** The remaining 184 countries are greyed out to emphasize the top 10 countries. -->
 
+1. *Transitioned to a treemap* from a stacked donut chart to address the clustering of information.
+2. Selected five common sectors, *categorizing the remaining* as "Other Sectors," resulting in a clearer visualization and focused comparison of emissions.
+3. The treemap illustrates the top 10 countries and their emission sectors, *emphasizing that they contribute two-thirds* of global emissions.
+4. *Color-coded legends* were provided for easy sector identification.
+5. The remaining 184 countries are *greyed out*, highlighting the top 10 countries.
+6. Used Color Brewer's Set2 for sectors to *enhance visual distinction and comprehension*.
+7. Applied *black outer borders* to differentiate countries clearly.
+8. Used *white inner borders* to separate sectors distinctly within each country.
+9. Included *subtitles and legends* to aid reader understanding of the plot.
 
 # Implementation
 
@@ -76,7 +84,6 @@ To remove the clustering of information in the original visualization, we change
 Data was retrieved from the World Bank Data website[^climatewatchdata], encompassing greenhouse gas emissions (CO2, F-Gas, N2O, CH4) by sector for various countries. Negative values were removed to ensure accuracy, and the top 10 countries with the highest emissions were selected for analysis.
 
 [^climatewatchdata]: <https://www.climatewatchdata.org/ghg-emissions?end_year=2021&start_year=1990>
-
 
 ## Software
 
@@ -94,17 +101,17 @@ We used the Quarto publication framework and the R programming language, along w
 * *treemapify* for creating treemaps
 
 
-
 ```{=typst}
-#v(2em)
+#v(18em)
 ```
+
 # Improved Visualization
 
 ```{r}
 #| label: fig-ggplot
 #| fig-cap: "Revised Visualization of Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
 #| fig-width: 3.1
-#| fig-height: 2.4
+#| fig-height: 2.1
 #| out-width: 100%
 #| warning: false
 

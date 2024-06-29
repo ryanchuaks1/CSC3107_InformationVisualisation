@@ -34,8 +34,6 @@ library(dplyr)
 # Treemap
 library(treemap)
 library(treemapify)
-library(colorspace)
-library(gghighlight)
 
 # Map
 library(sf)
