@@ -72,7 +72,7 @@ Visualizing GHG emissions is essential for understanding their distribution acro
 3. The treemap illustrates the top 10 countries and their emission sectors, *emphasizing that they contribute two-thirds* of global emissions.
 4. *Color-coded legends* were provided for easy sector identification.
 5. The remaining 184 countries are *greyed out*, highlighting the top 10 countries.
-6. Used Color Brewer's Set2 for sectors to *enhance visual distinction and comprehension*.
+6. Used Color Brewer's *Accent* for sectors to *enhance visual distinction and comprehension*.
 7. Applied *black outer borders* to differentiate countries clearly.
 8. Used *white inner borders* to separate sectors distinctly within each country.
 9. Included *subtitles and legends* to aid reader understanding of the plot.
