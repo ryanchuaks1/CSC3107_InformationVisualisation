@@ -33,7 +33,6 @@ library(gt)
 library(dplyr)
 
 # Treemap
-library(treemap)
 library(treemapify)
 ```
 
@@ -83,9 +82,14 @@ ghg_raw <-
   select(-Unit, -"Data source")
 
 gt_preview(ghg_raw)
+
 # Print size of the Data set
 dim(ghg_raw)
 ```
+
+## Conclusion from exploration
+
+[Source 1](#source1) consists of each country's annual GHG emission, industry and gas type. These data are suitable for a complex analysis and the making of a beautiful chart. However, the data is not suitable for a treemap visualization as it contains too many sectors and countries. We have processed the data to group the sectors and countries into more manageable categories for the treemap visualization.
 
 # Data Cleaning and Preparation for Visualization
 
@@ -244,10 +248,14 @@ In this block, we prepare the data for treemap visualization:
 
 This processed dataset `treemap_data` is now ready for creating a treemap visualization, displaying emissions by country and sector.
 
+# Conclusion
 
+The objective of this preparation was to identify effective visualizations for representing greenhouse gas emissions data and to uncover new insights through visual analysis, while improving on the original visualization depicted in @fig-oldvs. We chose to employ a treemap visualization to illustrate the distribution of greenhouse gas emissions by country and sector.
 
-# Conclusion from exploration
+Throughout the data preparation process, we successfully processed and grouped the countries and sectors into manageable categories suitable for treemap visualization. The final dataset, `treemap_data`, is now ready for visualization.
 
-[Source 1](#source1) consists of each country's annual GHG emission, industry and gas type. These data are suitable for a complex analysis and the making of a beautiful chart. However, the data is not suitable for a treemap visualization as it contains too many sectors and countries. We have processed the data to group the sectors and countries into more manageable categories for the treemap visualization.
+## Rationale for Using Treemaps
 
-Our goal is to find potential visualizations that can be used to represent the data more effectively compared to @fig-oldvs, discover new potential angles and insights that can be derived from the data.
+As described by @vliegen_visualizing_2006, treemaps are a space-efficient visualization technique for hierarchical data, utilizing nested rectangles to represent the proportion of each category. This method is particularly well-suited for displaying hierarchical datasets with multiple levels, such as the greenhouse gas emissions data. Treemaps offer an advantage over pie charts and bar charts by effectively displaying a larger number of categories within a limited space, thereby providing a more comprehensive view of the data.
+
+The preparation of our dataset has laid a solid foundation for the subsequent visualization phase, enabling us to accurately and effectively represent the distribution of greenhouse gas emissions across different countries and sectors.

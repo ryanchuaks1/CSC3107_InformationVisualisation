@@ -11,7 +11,6 @@ library(gt)
 library(dplyr)
 
 # Treemap
-library(treemap)
 library(treemapify)
 
 
@@ -53,6 +52,7 @@ ghg_raw <-
   select(-Unit, -"Data source")
 
 gt_preview(ghg_raw)
+
 # Print size of the Data set
 dim(ghg_raw)
 
