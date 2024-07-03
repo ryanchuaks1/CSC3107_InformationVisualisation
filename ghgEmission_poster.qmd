@@ -107,12 +107,6 @@ We used the Quarto publication framework and the R programming language, along w
 
 # Improved Visualization
 ```{r}
-library(RColorBrewer)
-brewer.pal(n = 12, name = "Set3")
-```
-
-
-```{r}
 #| label: fig-ggplot
 #| fig-cap: "Revised Visualization of Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector"
 #| fig-width: 3.1
