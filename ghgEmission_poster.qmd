@@ -38,7 +38,7 @@ Visualizing GHG emissions is essential for understanding their distribution acro
 
 # Previous Visualization
 
-![Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector](images/old_visualization.jpg){width=60%}
+![Top 10 Countries with the Highest Greenhouse Gas Emissions by Sector](images/old_visualization.jpg){width=57%}
 
 # Strengths
 - The visualization effectively ranks countries based on their emissions, providing a clear comparative framework.
